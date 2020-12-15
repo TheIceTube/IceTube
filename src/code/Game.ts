@@ -18,7 +18,7 @@ export default class Game
 
         if (this.spawnCooldown-- <= 0)
         {
-            this.spawnCooldown = 10;
+            this.spawnCooldown = 1;
             this.arena.addPenguin();
         }
 

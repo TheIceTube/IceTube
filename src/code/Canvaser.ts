@@ -24,6 +24,16 @@ export default class Canvaser
         return this._ctx;
     }
 
+    public get width (): number
+    {
+        return this.canvas.width;
+    }
+
+    public get height (): number
+    {
+        return this.canvas.height;
+    }
+
     public drawImage (image: HTMLImageElement, x: number, y: number)
     {
         this.ctx.drawImage(image, x, y);

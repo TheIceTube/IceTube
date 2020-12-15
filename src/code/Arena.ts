@@ -9,9 +9,9 @@ export default class Arena
     public constructor()
     {
         this.canvaser = new Canvaser(
-            'arenaCavnas',
-            800,
-            800,
+            'canvas-arena',
+            window.innerWidth,
+            400,
         );
     }
 
@@ -30,6 +30,10 @@ export default class Arena
     public draw ()
     {
         this.canvaser.clear();
+        this.penguins.sort((p1, p2) =>
+        { 
+            return (p1.y - p2.y);
+        });
         this.penguins.forEach(penguin => {
             penguin.draw();
         });
