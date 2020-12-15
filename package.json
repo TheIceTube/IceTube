@@ -1,0 +1,20 @@
+{
+  "name": "IceTube-Client",
+  "version": "1.0.0",
+  "description": "The client of the IceTube game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheIceTube/IceTube-Client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheIceTube/IceTube-Client/issues"
+  },
+  "homepage": "https://github.com/TheIceTube/IceTube-Client#readme"
+}
