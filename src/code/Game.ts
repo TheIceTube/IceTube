@@ -12,12 +12,6 @@ export default class Game
         this.good = document.getElementById('good');
         this.bad = document.getElementById('bad');
         this.arena = new Arena();
-        requestAnimationFrame(this.loop);
-    }
-
-    private loop =  () =>
-    {
-        requestAnimationFrame(this.loop);
 
         this.bad.addEventListener("click", () =>{
             console.log("Bad");            
@@ -26,6 +20,13 @@ export default class Game
         this.good.addEventListener("click", () =>{
             console.log("Good");            
         })
+        
+        requestAnimationFrame(this.loop);
+    }
+
+    private loop =  () =>
+    {
+        requestAnimationFrame(this.loop);
 
         if (this.spawnCooldown-- <= 0)
         {

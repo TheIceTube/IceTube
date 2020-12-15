@@ -57,6 +57,10 @@ button {
 
 button:active {
 	outline: none;
-	box-shadow: none;
+	box-shadow: 0 0px #dcdcdc;
 	transform: translateY(8px);
+}
+
+button:focus {
+    outline: none;
 }
