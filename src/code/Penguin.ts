@@ -34,8 +34,8 @@ export default class Penguin
 
     public move ()
     {
-        this.x += this.randomSign(1);
-        this.y += this.randomSign(1);
+        this.x += this.randomSign(this.randomInRange(0, 1));
+        this.y += this.randomSign(this.randomInRange(0, 1));
     }
 
     public draw (drawShadow: boolean)
