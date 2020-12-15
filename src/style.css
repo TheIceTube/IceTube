@@ -1,65 +1,62 @@
 @import 'normalize.css';
 
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #CA80FF;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100vh;
+	background-color: #ca80ff;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #canvas-arena {
-    position: absolute;
-    bottom: 0;
-    box-shadow: 0px -8px 16px -2px rgba(255, 217, 45, 0.4);
-    background-color: rgb(159, 233, 159);
+	position: absolute;
+	bottom: 0;
+	box-shadow: 0px -8px 16px -2px rgba(255, 217, 45, 0.4);
+	background-color: rgb(159, 233, 159);
 }
 
 #gameUI {
-    margin-top: 5%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: 100%;
+	margin-top: 5%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
 }
 
 #good {
-    margin-top: 100%;
+	margin-top: 100%;
 }
 
-#bad{
-    margin-top: 100%;
+#bad {
+	margin-top: 100%;
 }
 
 button {
-    cursor: pointer;
-    user-select: none;
-    margin: 0 16px;
-    font-size: 50px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border-style: none;
-    border-radius: 8px;
-    padding: 16px 24px;
-    text-transform: uppercase;
-    background-color: white;
-    text-shadow: 0 2px #dcdcdc;
-    box-shadow: 0 8px #dcdcdc;
-      /* box-shadow: 0 8px #dcdcdc, 16px 8px 0px #0000001a,
-      0px 8px 0px 1px rgba(0, 0, 0, 0.1); */
-    -webkit-tap-highlight-color: transparent;
-    transition: all 0.1s ease;
+	cursor: pointer;
+	user-select: none;
+	margin: 0 16px;
+	font-size: 50px;
+	font-weight: bold;
+	letter-spacing: 1px;
+	border-style: none;
+	border-radius: 8px;
+	padding: 16px 24px;
+	text-transform: uppercase;
+	background-color: white;
+	text-shadow: 0 2px #dcdcdc;
+	box-shadow: 0 8px #dcdcdc;
+	transition: all 0.1s ease;
+	-webkit-tap-highlight-color: transparent;
 }
 
 button:active {
-    outline: none;
-    box-shadow: none;
-    transform: translateY(8px);
-  }
-  
+	outline: none;
+	box-shadow: none;
+	transform: translateY(8px);
+}
