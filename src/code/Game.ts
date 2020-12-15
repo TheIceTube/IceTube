@@ -3,11 +3,14 @@ import Arena from './Arena';
 export default class Game
 {
     private arena: Arena;
-
+    private good: HTMLElement;
+    private bad: HTMLElement;
     private spawnCooldown: number = 0;
 
     constructor()
-    {
+    {   
+        this.good = document.getElementById('good');
+        this.bad = document.getElementById('bad');
         this.arena = new Arena();
         requestAnimationFrame(this.loop);
     }
@@ -15,6 +18,14 @@ export default class Game
     private loop =  () =>
     {
         requestAnimationFrame(this.loop);
+
+        this.bad.addEventListener("click", () =>{
+            console.log("Bad");            
+        })
+
+        this.good.addEventListener("click", () =>{
+            console.log("Good");            
+        })
 
         if (this.spawnCooldown-- <= 0)
         {
