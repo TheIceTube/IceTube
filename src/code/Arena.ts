@@ -6,6 +6,8 @@ export default class Arena
     private penguins: Penguin[] = [];
     private canvaser: Canvaser;
 
+    public drawShadow: boolean = false;
+
     private sortCooldown: number = 0;
 
     public constructor()
@@ -15,7 +17,14 @@ export default class Arena
             window.innerWidth,
             400,
         );
+
+        window.addEventListener('click', () =>
+        { 
+            this.drawShadow = !this.drawShadow;
+        });
+        
     }
+    
 
     public addPenguin ()
     {
@@ -43,7 +52,9 @@ export default class Arena
         }
         
         this.penguins.forEach(penguin => {
-            penguin.draw();
+            penguin.draw(this.drawShadow);
         });
+
+        console.log(this.penguins.length);
     }
 }

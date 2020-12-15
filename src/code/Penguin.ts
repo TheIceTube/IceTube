@@ -1,6 +1,7 @@
 import Canvaser from "./Canvaser";
 import PenguinImage1 from '../penguin.png'
 import PenguinImage2 from '../penguinuk.png'
+import PenguinImage3 from '../peng3.png'
 
 enum PenguinState
 {
@@ -21,7 +22,7 @@ export default class Penguin
 
     constructor(canvaser: Canvaser)
     {
-        this.image = Canvaser.loadHTMLImage(this.randomInArray([PenguinImage1, PenguinImage2]));
+        this.image = Canvaser.loadHTMLImage(this.randomInArray([PenguinImage1, PenguinImage2, PenguinImage3]));
         this.canvaser = canvaser;
 
         //this.x = this.randomInArray([-64, this.canvaser.width]) + 100;
@@ -37,14 +38,18 @@ export default class Penguin
         this.y += this.randomSign(1);
     }
 
-    public draw ()
+    public draw (drawShadow: boolean)
     {
         let ctx = this.canvaser.ctx;
         ctx.save();
-        ctx.shadowBlur = 5;
-        ctx.shadowOffsetY = 5;
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)'
+        if (drawShadow)
+        {
+            ctx.shadowBlur = 5;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)'
+        }
         this.canvaser.drawImage(this.image, this.x, this.y);
+        ctx.restore();
     }
 
 
