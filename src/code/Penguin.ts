@@ -37,14 +37,18 @@ export default class Penguin
         this.y += this.randomSign(1);
     }
 
-    public draw ()
+    public draw (drawShadow: boolean)
     {
         let ctx = this.canvaser.ctx;
         ctx.save();
-        ctx.shadowBlur = 5;
-        ctx.shadowOffsetY = 5;
-        ctx.shadowColor = 'rgba(0, 0, 0, 0.8)'
+        if (drawShadow)
+        {
+            ctx.shadowBlur = 5;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.8)'
+        }
         this.canvaser.drawImage(this.image, this.x, this.y);
+        ctx.restore();
     }
 
 
