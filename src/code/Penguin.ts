@@ -1,6 +1,7 @@
 import Canvaser from "./Canvaser";
 import PenguinImage1 from '../penguin.png'
 import PenguinImage2 from '../penguinuk.png'
+import PenguinImage3 from '../peng3.png'
 
 enum PenguinState
 {
@@ -21,7 +22,7 @@ export default class Penguin
 
     constructor(canvaser: Canvaser)
     {
-        this.image = Canvaser.loadHTMLImage(this.randomInArray([PenguinImage1, PenguinImage2]));
+        this.image = Canvaser.loadHTMLImage(this.randomInArray([PenguinImage1, PenguinImage2, PenguinImage3]));
         this.canvaser = canvaser;
 
         //this.x = this.randomInArray([-64, this.canvaser.width]) + 100;
