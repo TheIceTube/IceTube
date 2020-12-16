@@ -18,6 +18,7 @@ const spriteRight = loadImage(penguinImageRight);
 
 // Penguin structure
 interface Penguin {
+    fixOnMouse: boolean;
     frame: number;
     x: number;
     y: number;
@@ -27,24 +28,35 @@ interface Penguin {
 }
 
 let penguins: Penguin[] = [];
-const perspective = 300;
+let perspective = 600;
 
 // Spawn penguins
 for (let i = 0; i < 100; i++) {
     const direction = randomInteger(0, 1) ? 'left' : 'right';
     const x = randomInteger(0, stage.width);
-    const y = randomInteger(perspective, stage.height);
+    const y = randomInteger(0, stage.height - 50);
     spawnPenguin(x, y, direction);
 }
 
+// Spawn locked to moues penguin
+penguins.push({
+    x: 500,
+    y: 500,
+    direction: 'left',
+    frame: 0,
+    height: 95,
+    width: 70,
+    fixOnMouse: true,
+});
+
 // Spawn penguins army! 
-// for (let j = 0; j < 10; j++) {
-//     for (let i = 0; i < 20; i++) {
-//         const x = 300 + (i * 10) + (j * 40);
-//         const y = stage.height / 2 + (i * 4);
-//         spawnPenguin(x, y, 'right', i);
-//     }
-// }
+for (let j = 0; j < 10; j++) {
+    for (let i = 0; i < 20; i++) {
+        const x = 300 + (i * 10) + (j * 40);
+        const y = stage.height / 2 + (i * 4) - (j * 8);
+        spawnPenguin(x, y, 'right', (i % 4) + i);
+    }
+}
 
 // Main loop
 function loop() {
@@ -58,6 +70,12 @@ function update() {
     for (let i = 0; i < penguins.length; i++) {
         const penguin = penguins[i];
         
+        if (penguin.fixOnMouse) {
+            penguin.x = mouseX;
+            penguin.y = convertRange(mouseY, { min: perspective, max: stage.height }, { min: 0 , max: stage.height });
+            continue;
+        }
+
         penguin.frame += 1;
         if (penguin.frame > 20) penguin.frame = 0;
 
@@ -70,13 +88,12 @@ function update() {
         insertionSort(penguins, 'y');
         
         if (penguin.direction === 'left') {
-            penguin.x -= convertRange(penguin.y - perspective, { min: 0, max: stage.height }, { min: 0.5, max: 3 });
+            penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.1, max: 3 });
         } else {
-            penguin.x += convertRange(penguin.y - perspective, { min: 0, max: stage.height }, { min: 0.5, max: 3 });
+            penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.1, max: 3 });
         }
 
         if (penguin.x >= (stage.width + 100)) penguin.x = 0;
-
         if (penguin.x <= -100) penguin.x = stage.width;
     }
 }
@@ -88,14 +105,17 @@ function draw() {
     for (let i = 0; i < penguins.length; i++) {
         const { x, y, width, height, direction } = penguins[i];
 
+        // if (y < 0) continue;
+
         const sprite = direction === 'left' ? spriteLeft : spriteRight;
-        const size = convertRange(y - perspective, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
+        const size = convertRange(y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
+        const posY = convertRange(y, { min: 0, max: stage.height }, { min: perspective , max: stage.height });
         
         ctx.save(); 
-        ctx.translate(x, y);
-
+        ctx.translate(x, posY);
         ctx.scale(size, size);
-        ctx.drawImage(sprite, -(70 / 2), - (height + 16), width, height);
+
+        ctx.drawImage(sprite, -(width / 2), -height + 16, width, height);
         ctx.restore();
     }
 }
@@ -108,7 +128,8 @@ function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: 
         direction: direction,
         frame: frame,
         height: 95,
-        width: 70
+        width: 70,
+        fixOnMouse: false,
     });
 }
 
@@ -126,3 +147,13 @@ document.getElementById('newVideo').addEventListener('click', () => {
         document.getElementById('overlay').className = 'hidden';
     }
 });
+
+
+let mouseX = 0;
+let mouseY = 0;
+
+stage.addEventListener('mousemove', (event) => {
+    const rect = stage.getBoundingClientRect();
+    mouseX = (event.clientX - rect.left) / (rect.right - rect.left) * stage.width;
+    mouseY = (event.clientY - rect.top) / (rect.bottom - rect.top) * stage.height;
+})
