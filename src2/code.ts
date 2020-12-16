@@ -1,3 +1,5 @@
+import Stats from 'stats.js';
+
 import penguinImageLeft from './penguin-left.png';
 import penguinImageRight from './penguin-right.png';
 
@@ -26,6 +28,11 @@ interface Penguin {
     width: number;
     direction: 'left' | 'right';
 }
+
+// Stats setup
+const stats = Stats();
+stats.showPanel(0);
+document.body.appendChild( stats.dom );
 
 let penguins: Penguin[] = [];
 let perspective = 600;
@@ -60,8 +67,12 @@ for (let j = 0; j < 10; j++) {
 
 // Main loop
 function loop() {
+    stats.begin();
+
     update();
     draw();
+
+    stats.end()
     requestAnimationFrame(loop);
 }
 
@@ -88,9 +99,9 @@ function update() {
         insertionSort(penguins, 'y');
         
         if (penguin.direction === 'left') {
-            penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.1, max: 3 });
+            penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
         } else {
-            penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.1, max: 3 });
+            penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
         }
 
         if (penguin.x >= (stage.width + 100)) penguin.x = 0;
@@ -105,12 +116,12 @@ function draw() {
     for (let i = 0; i < penguins.length; i++) {
         const { x, y, width, height, direction } = penguins[i];
 
-        // if (y < 0) continue;
-
         const sprite = direction === 'left' ? spriteLeft : spriteRight;
         const size = convertRange(y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
         const posY = convertRange(y, { min: 0, max: stage.height }, { min: perspective , max: stage.height });
         
+        if (size < 0) continue;
+
         ctx.save(); 
         ctx.translate(x, posY);
         ctx.scale(size, size);
