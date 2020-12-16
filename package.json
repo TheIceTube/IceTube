@@ -5,6 +5,7 @@
   "main": "./src/index.html",
   "scripts": {
     "dev": "parcel ./src/index.html",
+    "dev2": "parcel ./src2/index.html",
     "build": "parcel build ./src/index.html"
   },
   "keywords": [],
