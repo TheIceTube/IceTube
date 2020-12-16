@@ -36,7 +36,7 @@ interface Penguin {
 }
 
 // Stats setup
-const stats = Stats();
+const stats = new Stats();
 stats.showPanel(0);
 document.body.appendChild(stats.dom);
 
@@ -192,7 +192,7 @@ document.getElementById('noButton').addEventListener('click', () => {
 
 function isChanging(bad: boolean) {
 	if (!bad) {
-		if (!bad && document.getElementById('video').innerText === `0`) {
+		if (!bad && document.getElementById('video').innerText === `bad`) {
 			let removedPenguins = 0;
             const penguinsToRemove = Math.floor(penguins.length / 10);
             
@@ -204,7 +204,7 @@ function isChanging(bad: boolean) {
                 removedPenguins++;
             }
 
-		} else if (!bad && document.getElementById('video').innerText === `1`) {
+		} else if (!bad && document.getElementById('video').innerText === `good`) {
 			//Spawning penguins
 			const penguinToAdd = Math.floor(penguins.length / 10);
 
@@ -216,11 +216,19 @@ function isChanging(bad: boolean) {
 			}
 		}
 
-		document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
+		document.getElementById('video').innerText = `${goodOrBad(randomInteger(0, 1))}`;
 
 		console.log('pressed gud');
 	} else {
-		document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
+		document.getElementById('video').innerText = `${goodOrBad(randomInteger(0, 1))}`;
 		console.log('pressed bad');
+	}
+}
+
+function goodOrBad(number: number) {
+	if (number === 1) {
+		return "good"
+	} else {
+		return "bad"
 	}
 }

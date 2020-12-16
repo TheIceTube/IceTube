@@ -59,6 +59,8 @@ main {
     height: 100%;
     margin-bottom: 16px;
     background-color: grey;
+    font-size: 100px;
+    text-align: center;
 }
 
 #buttons {
