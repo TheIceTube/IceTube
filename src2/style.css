@@ -90,12 +90,6 @@ button {
 	-webkit-tap-highlight-color: transparent;
 }
 
-button:active {
-	outline: none;
-	box-shadow: 0 0px !important;
-	transform: translateY(16px);
-}
-
 button:focus {
     outline: none;    
 }
@@ -103,11 +97,23 @@ button:focus {
 #yesButton {
     margin-right: 8px;
     background-color: #5b6caf;
-	box-shadow: 0 16px #424966;
+    box-shadow: 0 16px #424966;
+}
+
+#yesButton:active {
+	outline: none;
+	box-shadow: 0 0px #424966;
+	transform: translateY(16px);
 }
 
 #noButton {
     margin-left: 8px;
     background-color: #af5e5b;
 	box-shadow: 0 16px #664248;
+}
+
+#yesButton:active {
+	outline: none;
+	box-shadow: 0 0px #664248;
+	transform: translateY(16px);
 }
