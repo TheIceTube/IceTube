@@ -55,6 +55,6 @@ export default class Arena
             penguin.draw(this.drawShadow);
         });
 
-        console.log(this.penguins.length);
+        // console.log(this.penguins.length);
     }
 }

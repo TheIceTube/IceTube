@@ -1,26 +1,16 @@
 import Arena from './Arena';
+import Eventlistener from './Eventlistener'
 
 export default class Game
 {
     private arena: Arena;
-    private good: HTMLElement;
-    private bad: HTMLElement;
+    private event: Eventlistener;
     private spawnCooldown: number = 0;
 
     constructor()
     {   
-        this.good = document.getElementById('good');
-        this.bad = document.getElementById('bad');
         this.arena = new Arena();
-
-        this.bad.addEventListener("click", () =>{
-            console.log("Bad");            
-        })
-
-        this.good.addEventListener("click", () =>{
-            console.log("Good");            
-        })
-        
+        this.event = new Eventlistener();
         requestAnimationFrame(this.loop);
     }
 
