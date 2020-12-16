@@ -27,6 +27,7 @@ const spriteRight = loadImage(penguinImageRight);
 
 // Penguin structure
 interface Penguin {
+    isSpawing:boolean;
     isDying: boolean;
     fixOnMouse: boolean;
     frame: number;
@@ -55,6 +56,7 @@ for (let i = 0; i < 50; i++) {
 
 // Spawn locked to moues penguin
 penguins.push({
+    isSpawing: false,
     isDying: false,
     x: 500,
     y: 500,
@@ -77,6 +79,7 @@ function loop() {
 }
 
 // Update game state
+// TODO spawning animation 
 function update() {
     for (let i = 0; i < penguins.length; i++) {
         const penguin = penguins[i];
@@ -84,10 +87,12 @@ function update() {
         penguin.frame += 1;
         if (penguin.frame > 20) penguin.frame = 0;
 
+        if(!penguin.isDying){
         if (penguin.frame >= 10) {
             penguin.height = lerp(penguin.height, 75, 0.3);
         } else {
             penguin.height = lerp(penguin.height, 95, 0.3);
+        }
         }
 
         insertionSort(penguins, 'y');
@@ -106,9 +111,12 @@ function update() {
         }
 
         if (penguin.isDying) {
+
             penguin.height = lerp(penguin.height, 0, 0.1);
 
             if (penguin.height <= 0.1) {
+                console.log("hey");
+                
                 penguins.splice(i, 1);
             }
         }
@@ -143,6 +151,7 @@ function draw() {
 // Spawn new penguin
 function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: number = randomInteger(0, 20)) {
     penguins.push({
+        isSpawing:false,
         isDying: false,
         x: x,
         y: y,
@@ -167,3 +176,53 @@ stage.addEventListener('mousemove', (event) => {
     mouseX = (event.clientX - rect.left) / (rect.right - rect.left) * stage.width;
     mouseY = (event.clientY - rect.top) / (rect.bottom - rect.top) * stage.height;
 })
+
+
+
+document.getElementById('yesButton').addEventListener('click', () =>{
+    // console.log("yes");
+    isChanging(false);
+});
+
+document.getElementById('noButton').addEventListener('click', () =>{
+    // console.log("no");
+    isChanging(true);
+});
+
+
+function isChanging(bad:boolean){
+    if (bad) {
+        document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
+        console.log("pressed bad");
+
+        const penguinToRemove = Math.floor((penguins.length/10));
+
+        console.log(penguins.length);
+        
+        for (let i = 0; i < penguinToRemove; i++){
+            console.log('1');
+            penguins[i].isDying = true;  
+        }
+
+        console.log(penguins.length);
+
+
+    } else {
+        document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
+
+        console.log("pressed gud");
+
+        console.log(penguins.length);
+
+        const penguinToAdd = Math.floor((penguins.length/10));
+
+        for (let i = 0; i < penguinToAdd; i++) {
+            const direction = randomInteger(0, 1) ? 'left' : 'right';
+            const x = randomInteger(0, stage.width);
+            const y = randomInteger(0, stage.height - 50);
+            spawnPenguin(x, y, direction);
+        }
+
+        console.log(penguins.length);
+    }
+}
