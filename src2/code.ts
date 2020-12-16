@@ -191,38 +191,32 @@ document.getElementById('noButton').addEventListener('click', () =>{
 
 
 function isChanging(bad:boolean){
-    if (bad) {
-        document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
-        console.log("pressed bad");
-
-        const penguinToRemove = Math.floor((penguins.length/10));
-
-        console.log(penguins.length);
-        
-        for (let i = 0; i < penguinToRemove; i++){
+    if (!bad) {
+        if (!bad && document.getElementById('video').innerText === `0`) {
+            //deleting penguins
+            const penguinToRemove = Math.floor((penguins.length/10));
+            for (let i = 0; i < penguinToRemove; i++){
             console.log('1');
             penguins[i].isDying = true;  
+            }
+        } else if (!bad && document.getElementById('video').innerText === `1`) {
+            //Spawning penguins
+            const penguinToAdd = Math.floor((penguins.length/10));
+
+            for (let i = 0; i < penguinToAdd; i++) {
+                const direction = randomInteger(0, 1) ? 'left' : 'right';
+                const x = randomInteger(0, stage.width);
+                const y = randomInteger(0, stage.height - 50);
+                spawnPenguin(x, y, direction);
+            }
         }
-
-        console.log(penguins.length);
-
-
-    } else {
+        
         document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
 
         console.log("pressed gud");
 
-        console.log(penguins.length);
-
-        const penguinToAdd = Math.floor((penguins.length/10));
-
-        for (let i = 0; i < penguinToAdd; i++) {
-            const direction = randomInteger(0, 1) ? 'left' : 'right';
-            const x = randomInteger(0, stage.width);
-            const y = randomInteger(0, stage.height - 50);
-            spawnPenguin(x, y, direction);
-        }
-
-        console.log(penguins.length);
+    } else {
+        document.getElementById('video').innerText = `${randomInteger(0, 1)}`;
+        console.log("pressed bad");
     }
 }
