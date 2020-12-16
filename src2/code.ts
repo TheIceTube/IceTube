@@ -10,9 +10,16 @@ const stage = document.getElementById('stage') as HTMLCanvasElement;
 const ctx = stage.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 
+console.log(stage.clientHeight);
+
 // Setup canvas size
-stage.width = window.innerWidth * window.devicePixelRatio;
-stage.height = window.innerHeight * window.devicePixelRatio;
+stage.width = stage.clientWidth * window.devicePixelRatio;
+stage.height = stage.clientHeight * window.devicePixelRatio;
+
+window.addEventListener('resize', () => {
+    stage.width = stage.clientWidth * window.devicePixelRatio;
+    stage.height = stage.clientHeight * window.devicePixelRatio;    
+});
 
 // Load sprites
 const spriteLeft = loadImage(penguinImageLeft);
@@ -20,6 +27,7 @@ const spriteRight = loadImage(penguinImageRight);
 
 // Penguin structure
 interface Penguin {
+    isDying: boolean;
     fixOnMouse: boolean;
     frame: number;
     x: number;
@@ -35,10 +43,10 @@ stats.showPanel(0);
 document.body.appendChild( stats.dom );
 
 let penguins: Penguin[] = [];
-let perspective = 600;
+let perspective = 400;
 
 // Spawn penguins
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 50; i++) {
     const direction = randomInteger(0, 1) ? 'left' : 'right';
     const x = randomInteger(0, stage.width);
     const y = randomInteger(0, stage.height - 50);
@@ -47,6 +55,7 @@ for (let i = 0; i < 100; i++) {
 
 // Spawn locked to moues penguin
 penguins.push({
+    isDying: false,
     x: 500,
     y: 500,
     direction: 'left',
@@ -55,15 +64,6 @@ penguins.push({
     width: 70,
     fixOnMouse: true,
 });
-
-// Spawn penguins army! 
-for (let j = 0; j < 10; j++) {
-    for (let i = 0; i < 20; i++) {
-        const x = 300 + (i * 10) + (j * 40);
-        const y = stage.height / 2 + (i * 4) - (j * 8);
-        spawnPenguin(x, y, 'right', (i % 4) + i);
-    }
-}
 
 // Main loop
 function loop() {
@@ -80,12 +80,6 @@ function loop() {
 function update() {
     for (let i = 0; i < penguins.length; i++) {
         const penguin = penguins[i];
-        
-        if (penguin.fixOnMouse) {
-            penguin.x = mouseX;
-            penguin.y = convertRange(mouseY, { min: perspective, max: stage.height }, { min: 0 , max: stage.height });
-            continue;
-        }
 
         penguin.frame += 1;
         if (penguin.frame > 20) penguin.frame = 0;
@@ -98,10 +92,25 @@ function update() {
 
         insertionSort(penguins, 'y');
         
+        if (penguin.fixOnMouse) {
+            penguin.frame += 2;
+            penguin.x = mouseX;
+            penguin.y = convertRange(mouseY, { min: perspective, max: stage.height }, { min: 0 , max: stage.height });
+            continue;
+        }
+
         if (penguin.direction === 'left') {
             penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
         } else {
             penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0.5, max: 1.5 });
+        }
+
+        if (penguin.isDying) {
+            penguin.height = lerp(penguin.height, 0, 0.1);
+
+            if (penguin.height <= 0.1) {
+                penguins.splice(i, 1);
+            }
         }
 
         if (penguin.x >= (stage.width + 100)) penguin.x = 0;
@@ -134,6 +143,7 @@ function draw() {
 // Spawn new penguin
 function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: number = randomInteger(0, 20)) {
     penguins.push({
+        isDying: false,
         x: x,
         y: y,
         direction: direction,
@@ -147,22 +157,11 @@ function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: 
 // Start game
 loop();
 
-// TODO
-let visible = false;
-document.getElementById('newVideo').addEventListener('click', () => {
-    visible = !visible;
-
-    if (visible) {
-        document.getElementById('overlay').className = '';
-    } else {
-        document.getElementById('overlay').className = 'hidden';
-    }
-});
-
-
+// Mouse position
 let mouseX = 0;
 let mouseY = 0;
 
+// Mouse position calculation
 stage.addEventListener('mousemove', (event) => {
     const rect = stage.getBoundingClientRect();
     mouseX = (event.clientX - rect.left) / (rect.right - rect.left) * stage.width;
