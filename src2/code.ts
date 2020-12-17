@@ -10,7 +10,6 @@ const stage = document.getElementById('stage') as HTMLCanvasElement;
 const ctx = stage.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 
-
 // Setup canvas size
 stage.width = stage.clientWidth * window.devicePixelRatio;
 stage.height = stage.clientHeight * window.devicePixelRatio;
@@ -18,7 +17,12 @@ stage.height = stage.clientHeight * window.devicePixelRatio;
 window.addEventListener('resize', () => {
 	stage.width = stage.clientWidth * window.devicePixelRatio;
 	stage.height = stage.clientHeight * window.devicePixelRatio;
+	skyline = stage.height / 5;
 });
+
+// Game state
+let penguins: Penguin[] = [];
+let skyline = stage.height / 5;
 
 // Load sprites
 const spriteLeft = loadImage(penguinImageLeft);
@@ -40,14 +44,11 @@ const stats = new Stats();
 stats.showPanel(0);
 document.body.appendChild(stats.dom);
 
-let penguins: Penguin[] = [];
-let skyline = 400;
-
 // Spawn penguins
 for (let i = 0; i < 50; i++) {
 	const direction = randomInteger(0, 1) ? 'left' : 'right';
 	const x = randomInteger(0, stage.width);
-	const y = randomInteger(skyline, stage.height - 50);
+	const y = randomInteger(stage.height / 5, stage.height - 50);
 	spawnPenguin(x, y, direction);
 }
 
@@ -103,9 +104,9 @@ function update() {
 			}
 
 			if (penguin.direction === 'left') {
-				penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0, max: 1.5 });
+				penguin.x -= convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0, max: 2 });
 			} else {
-				penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0, max: 1.5 });
+				penguin.x += convertRange(penguin.y, { min: 0, max: stage.height }, { min: 0, max: 2 });
 			}
 
 			if (penguin.x >= stage.width + 100) penguin.x = 0;
@@ -194,7 +195,7 @@ function isChanging(bad: boolean) {
 	if (!bad) {
 		if (!bad && document.getElementById('video').innerText === `BAD`) {
 			let removedPenguins = 0;
-            const penguinsToRemove = Math.floor(penguins.length / 10);
+            const penguinsToRemove = Math.floor(penguins.length / 5) + 1;
             
             while(removedPenguins <= penguinsToRemove) {
                 const index = randomInteger(0, penguins.length);
@@ -206,12 +207,12 @@ function isChanging(bad: boolean) {
 
 		} else if (!bad && document.getElementById('video').innerText === `GOOD`) {
 			//Spawning penguins
-			const penguinToAdd = Math.floor(penguins.length / 10);
+			const penguinToAdd = Math.floor(penguins.length / 5);
 
 			for (let i = 0; i < penguinToAdd; i++) {
 				const direction = randomInteger(0, 1) ? 'left' : 'right';
 				const x = randomInteger(0, stage.width);
-				const y = randomInteger(skyline, stage.height - 50);
+				const y = randomInteger(stage.height / 5, stage.height - 50);
 				spawnPenguin(x, y, direction);
 			}
 		}
