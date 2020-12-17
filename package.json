@@ -7,7 +7,7 @@
     "dev": "parcel ./src/index.html",
     "dev2": "parcel ./src2/index.html",
     "dev3": "parcel ./src3/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src2/index.html"
   },
   "keywords": [],
   "author": "",
