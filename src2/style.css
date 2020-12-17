@@ -44,6 +44,11 @@ main {
     height: 100%;
     margin-bottom: 16px;
     background-color: red;
+    font-size: 32px;
+    color: white;
+    letter-spacing: 8px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 #stats {
@@ -51,7 +56,11 @@ main {
     height: 128px;
     padding: 8px;
     margin-bottom: 16px;
-
+    font-size: 32px;
+    color: white;
+    letter-spacing: 8px;
+    text-align: center;
+    text-transform: uppercase;
     background-color: blue;
 }
 
@@ -65,10 +74,8 @@ main {
     background-color: grey;
     text-align: center;
     text-transform: uppercase;
-    letter-spacing: 8px;
     color: white;
     text-align: center;
-    vertical-align: top;
     font-size: 32px;
 }
 

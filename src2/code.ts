@@ -192,7 +192,7 @@ document.getElementById('noButton').addEventListener('click', () => {
 
 function isChanging(bad: boolean) {
 	if (!bad) {
-		if (!bad && document.getElementById('video').innerText === `bad`) {
+		if (!bad && document.getElementById('video').innerText === `BAD`) {
 			let removedPenguins = 0;
             const penguinsToRemove = Math.floor(penguins.length / 10);
             
@@ -204,7 +204,7 @@ function isChanging(bad: boolean) {
                 removedPenguins++;
             }
 
-		} else if (!bad && document.getElementById('video').innerText === `good`) {
+		} else if (!bad && document.getElementById('video').innerText === `GOOD`) {
 			//Spawning penguins
 			const penguinToAdd = Math.floor(penguins.length / 10);
 
@@ -227,8 +227,8 @@ function isChanging(bad: boolean) {
 
 function goodOrBad(number: number) {
 	if (number === 1) {
-		return "good"
+		return "GOOD"
 	} else {
-		return "bad"
+		return "BAD"
 	}
 }
