@@ -28,7 +28,7 @@ main {
 	background-color: #ff8e24;
 }
 
-#newPost {
+button {
 	z-index: 9999;
 	cursor: pointer;
 	top: 16px;
@@ -48,14 +48,27 @@ main {
 	transition: all 0.1s ease;
 }
 
-#newPost:active {
+button:active {
 	box-shadow: 0 0px black;
 	transform: translateX(-50%) translateY(8px);
 }
 
-#newPost:active,
-#newPost:focus {
+button:active,
+button:focus {
 	outline: none;
+}
+
+#overlay {
+	z-index: 99999;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	transition: opacity 0.2s linear;
+	backdrop-filter: blur(12px);
+	background-color: rgba(255, 255, 255, 0.2);
 }
 
 #modal {
@@ -75,19 +88,6 @@ main {
 	transform: translate(-50%, -50%);
 }
 
-#overlay {
-	z-index: 99999;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: block;
-	transition: opacity 0.2s linear;
-	backdrop-filter: blur(12px);
-	background-color: rgba(255, 255, 255, 0.2);
-}
-
 label {
     user-select: none;
     color: #969696;
@@ -97,6 +97,45 @@ label {
     letter-spacing: 1px;
     padding-bottom: 4px;
 }
+
+.label {
+    user-select: none;
+    color: #000000;
+    display: inline-block;
+	font-weight: bold;
+	padding: 3px 3px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-bottom: 4px;
+}
+.buttonOrg {
+	margin-bottom: 20px;
+}
+
+
+.button {
+	width: 22px;
+	height: 22px;
+    display: inline-block;
+	color: black;
+	background-color: white;
+	transform: translateX(-50%);
+	box-shadow: 0 4px black;
+	transition: all 0.1s ease;
+	border-radius: 8px;
+	margin-left:10px;
+}
+
+.button:active {
+	box-shadow: 0 0px black;
+	transform: translateX(-50%) translateY(4px);
+}
+
+.button:active,
+.button:focus {
+	outline: none;
+}
+
 
 .slider {
     border-radius: 4px;
@@ -125,6 +164,10 @@ label {
 	height: 32px;
 	background: black;
 	cursor: pointer;
+}
+
+#pauseMenu {
+	left: 5%;
 }
 
 #news {
@@ -168,3 +211,22 @@ label {
 .content:hover {
     transform: translateX(-32px);
 }
+
+#menu {
+	z-index: 999999;
+	position: fixed;
+	top: 45%;
+    left: -150%;
+    width: 400px;
+	padding: 64px;
+	padding-top: 48px;
+	letter-spacing: 1px;
+	border-radius: 16px;
+	background-color: white;
+	transition: top 0.4s ease;
+	box-shadow: 0 12px black;
+	border: solid 4px black;
+	transform: translate(-50%, -50%);
+}
+
+

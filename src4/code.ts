@@ -1,8 +1,8 @@
 import Stats from 'stats.js';
 
 import billboardImage from './sprites/billboard.png';
-import penguinImageLeft from './sprites/penguin-left.png';
-import penguinImageRight from './sprites/penguin-right.png';
+import penguinImageLeft from './sprites/penguin-left-v3.png';
+import penguinImageRight from './sprites/penguin-right-v3.png';
 
 import { insertionSort, lerp, loadImage, randomInteger, convertRange } from './utils';
 
@@ -226,9 +226,14 @@ function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: 
 // Start game
 loop();
 
+
 const newPost = document.getElementById('newPost');
 const overlay = document.getElementById('overlay');
+
 const modal = document.getElementById('modal');
+const menu = document.getElementById(`menu`);
+
+const pause = document.getElementById(`pauseMenu`);
 
 // UI
 newPost.addEventListener('click', () => {
@@ -239,6 +244,14 @@ newPost.addEventListener('click', () => {
 
 overlay.addEventListener('click', () => {
 	modal.style.top = '150%';
+	menu.style.left = '-150%';
 	overlay.style.opacity = '0';
 	overlay.style.pointerEvents = 'none';
 });	
+
+pause.addEventListener('click', ()=> {
+	menu.style.left = '50%';
+	overlay.style.opacity = '1';
+	overlay.style.pointerEvents = 'auto';
+});
+
