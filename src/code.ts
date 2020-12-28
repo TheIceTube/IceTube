@@ -240,13 +240,16 @@ newPost.addEventListener('click', () => {
 	modal.style.top = '45%';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
+	stage.style.transform = 'scale(2) translateY(64px)';
 });	
 
 overlay.addEventListener('click', () => {
-	modal.style.top = '150%';
 	menu.style.left = '-150%';
+
+	modal.style.top = '150%';
 	overlay.style.opacity = '0';
 	overlay.style.pointerEvents = 'none';
+	stage.style.transform = 'scale(1)';
 });	
 
 pause.addEventListener('click', ()=> {
