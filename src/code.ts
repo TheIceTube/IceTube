@@ -1,8 +1,8 @@
 import Stats from 'stats.js';
 
 import billboardImage from './sprites/billboard.png';
-import penguinImageLeft from './sprites/penguin-left-v3.png';
-import penguinImageRight from './sprites/penguin-right-v3.png';
+import penguinImageLeft from './sprites/junkie-left.png';
+import penguinImageRight from './sprites/junkie-right.png';
 
 import { insertionSort, lerp, loadImage, randomInteger, convertRange } from './utils';
 
@@ -76,7 +76,7 @@ stats.showPanel(0);
 document.body.appendChild(stats.dom);
 
 // Spawn penguins
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 500; i++) {
 	const direction = randomInteger(0, 1) ? 'left' : 'right';
 	const x = randomInteger(0, stage.width);
 	const y = randomInteger(stage.height / 5, stage.height - 50);
@@ -136,7 +136,7 @@ function update() {
 	
 			if (entity.state === 'walking') {
 				entity.height = (entity.frame >= 10) 
-					? lerp(entity.height, 75, 0.3)
+					? lerp(entity.height, 20, 0.3)
 					: lerp(entity.height, 95, 0.3);
 	
 				if (entity.direction === 'left') {
@@ -196,7 +196,7 @@ function draw() {
 		// Drawing billboard
 		if (entity.type === 'billboard') {
 			const { x, y, width, height } = entity;
-				const size = convertRange(y, { min: 0, max: stage.height }, { min: 0, max: 2 });
+			const size = convertRange(y, { min: 0, max: stage.height }, { min: 0, max: 2 });
 			const posY = convertRange(y, { min: 0, max: stage.height }, { min: skyline, max: stage.height });
 	
 			ctx.save();
@@ -210,7 +210,7 @@ function draw() {
 }
 
 // Spawn new penguin
-function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: number = randomInteger(0, 20)) {
+function spawnPenguin(x: number, y: number, direction: 'left' | 'right', frame: number = randomInteger(0, 1)) {
 	entities.push({
 		type: 'penguin',
 		state: 'spawning',
