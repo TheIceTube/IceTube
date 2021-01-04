@@ -3,6 +3,7 @@ import { State, GameState } from './state';
 // Get state
 const GAME: GameState = State<GameState>();
 
+// Elements
 const news = document.getElementById('news');
 const newPost = document.getElementById('newPost');
 const overlay = document.getElementById('overlay');
@@ -16,7 +17,7 @@ newPost.addEventListener('click', () => {
 	modal.style.top = '45%';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
-	GAME.stage.style.transform = 'scale(2) translateY(64px)';
+	GAME.stage.style.transform = 'scale(2) translateY(-32px)';
 });
 
 overlay.addEventListener('click', () => {
@@ -38,5 +39,5 @@ setInterval(() => {
 
 	setTimeout(() => {
 		news.classList.remove('updating');
-	}, 1000);
+	}, 1500);
 }, 20000)

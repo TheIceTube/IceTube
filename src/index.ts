@@ -21,8 +21,17 @@ const GAME: GameState = State<GameState>({
 	mouseY: 0,
 	mouseDown: false,
     skyline: stage.height / 5,
-    allNews: shuffle(news),
-	entities: []
+	allNews: shuffle(news),
+	entities: [],
+	crowdControll: 1,
+	worldState: {
+		gaming: 0,
+		films: 0,
+		music: 0,
+		news: 0,
+		sport: 0,
+		educational: 0
+	}
 });
 
 // Input module
@@ -33,3 +42,6 @@ import './ui';
 
 // Main game code
 import './game';
+
+// Timings
+import './timer';
