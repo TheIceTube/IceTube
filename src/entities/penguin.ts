@@ -54,7 +54,7 @@ export class Penguin {
         GAME.ctx.translate(this.x, posY);
         GAME.ctx.scale(size, size);
 
-        GAME.ctx.drawImage(sprite, -(this.width / 2), -this.height + 16, this.width, this.height);
+        GAME.ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
         GAME.ctx.restore();
     }
 
@@ -69,17 +69,19 @@ export class Penguin {
         this.frame += 1;
         if (this.frame > 20) this.frame = 0;
 
+        // If fixed to mouse
         if (this.state === 'fixed') {
+            this.height = this.spriteHeight;
             this.x = GAME.mouseX;
             this.y = convertRange(GAME.mouseY, { min: GAME.skyline, max: height }, { min: 0, max: height });
             return;
         }
 
-
+        // If walking
         if (this.state === 'walking') {
             this.height = (this.frame >= 10) 
-                ? lerp(this.height, this.spriteHeight - 16, 0.3)
-                : lerp(this.height, this.spriteHeight, 0.3);
+                ? lerp(this.height, this.spriteHeight - 24, 0.3)
+                : lerp(this.height, this.spriteHeight + 4, 0.3);
 
             if (this.direction === 'left') {
                 this.x -= convertRange(this.y, { min: 0, max: height }, { min: 0, max: 2 });
@@ -94,14 +96,14 @@ export class Penguin {
 
         // Spawning penguin
         if (this.state === 'spawning') {
-            this.height = lerp(this.height, this.spriteHeight, 0.1);
-            if (this.height >= this.spriteHeight - 8) this.state = 'walking';
+            this.height = lerp(this.height, this.spriteHeight, 0.1) + 0.1;
+            if (this.height >= this.spriteHeight) this.state = 'walking';
         }
 
         // Removing penguin
         if (this.state === 'leaving') {
-            this.height = lerp(this.height, 0, 0.1);
-            // if (this.height <= 0.1) GAME.entities.splice(i, 1);
+            this.height = lerp(this.height, 0, 0.1) - 0.1;
         }
     }
 }
+

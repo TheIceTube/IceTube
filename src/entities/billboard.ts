@@ -18,14 +18,14 @@ export class Billboard {
     public width: number;
     public height: number;
 
+    public views: number = 0;
+
     /**
      * Billboard initialization
-     * @param x X position
-     * @param y Y position
      */
-    constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
+    constructor() {
+        this.x = GAME.stage.width / 2;
+        this.y = GAME.stage.height / 1.5;
 
         this.width = 400;
         this.height = 400;
@@ -46,13 +46,19 @@ export class Billboard {
 
         ctx.drawImage(billboard, -(this.width / 2), -this.height + 32, this.width, this.height);
         ctx.restore();
+
+        ctx.font = 'italic 32px Segoe UI';
+        ctx.textAlign = 'center';
+        ctx.fillText(`Views: ${this.views}`, this.x, this.y - 270)
     }
 
     /**
      * Update billboard state
      */
     public update(): void {
-        // Nothing for now
+        this.x = GAME.stage.width / 2;
+        this.y = GAME.stage.height / 1.5;
+        this.views += 1;
     }
 
 }

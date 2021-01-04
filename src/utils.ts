@@ -68,3 +68,25 @@ export function randomInteger(min: number, max: number): number {
 export function convertRange(value: number, oldRange: { min: number; max: number }, newRange: { min: number; max: number }) {
 	return ((value - oldRange.min) * (newRange.max - newRange.min)) / (oldRange.max - oldRange.min) + newRange.min;
 }
+
+/**
+ * Shuffle array
+ * Taken from https://stackoverflow.com/a/2450976/7442791
+ * @param array Array to shuffle
+ */
+export function shuffle(array: any[]): any[] {
+	let currentIndex: number = array.length;
+	let temporaryValue: number;
+	let randomIndex: number;
+
+	while (0 !== currentIndex) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		temporaryValue = array[currentIndex];
+		array[currentIndex] = array[randomIndex];
+		array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+}

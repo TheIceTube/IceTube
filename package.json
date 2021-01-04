@@ -1,14 +1,12 @@
 {
-  "name": "icetube-client",
-  "version": "1.0.0",
-  "description": "The client of the IceTube game",
+  "name": "icetube",
+  "version": "0.0.1",
+  "description": "IceTube game",
   "main": "./src/index.html",
   "scripts": {
     "dev": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT",
   "devDependencies": {
     "@types/stats.js": "^0.17.0",

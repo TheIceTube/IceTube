@@ -1,7 +1,8 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { insertionSort, lerp, loadImage, randomInteger, convertRange } from './utils';
+import { insertionSort, randomInteger, shuffle } from './utils';
 
+// Entities
 import { Penguin } from './entities/penguin';
 import { Billboard } from './entities/billboard';
 
@@ -19,77 +20,45 @@ for (let i = 0; i < 50; i++) {
 	const y = randomInteger(GAME.stage.height / 3, GAME.stage.height - 64);
 	const penguin = new Penguin(x, y);
 
+	// Fixed penguin
+	if (i === 0) penguin.state = 'fixed';
+
 	GAME.entities.push(penguin);
 }
 
-const x = GAME.stage.width / 2;
-const y = GAME.stage.height / 2 + (GAME.stage.height / 10);
-
-const billboard = new Billboard(x, y);
+// Spawn billboard
+const billboard = new Billboard();
 GAME.entities.push(billboard);
 
 // Main loop
 function loop() {
 	stats.begin();
 
-	update();
-	draw();
+	// Sort entities for 3d effect
+	insertionSort(GAME.entities, 'y');
+
+	// Update entities
+	for (let i = 0; i < GAME.entities.length; i++) {
+		GAME.entities[i].update();
+	}
+
+	// Clean screen
+	GAME.ctx.clearRect(0, 0, GAME.stage.width, GAME.stage.height);
+
+	// Draw entities
+	for (let i = 0; i < GAME.entities.length; i++) {
+		GAME.entities[i].draw();
+	}
+
+	// Remove entities that height 
+	GAME.entities = GAME.entities.filter(entity => {
+		if (entity.type === 'penguin') return entity.height > 0;
+		return true;
+	});
 
 	stats.end();
 	requestAnimationFrame(loop);
 }
 
-// Update game state
-function update() {
-	// Sort entities for 3d effect
-	insertionSort(GAME.entities, 'y');
-
-	for (let i = 0; i < GAME.entities.length; i++) {
-		const entity = GAME.entities[i];
-		entity.update();
-	}
-}
-
-// Render game state
-function draw() {
-	GAME.ctx.clearRect(0, 0, GAME.stage.width, GAME.stage.height);
-
-	for (let i = 0; i < GAME.entities.length; i++) {
-		const entity = GAME.entities[i];
-		entity.draw();
-	}
-}
-
 // Start game
 loop();
-
-const newPost = document.getElementById('newPost');
-const overlay = document.getElementById('overlay');
-
-const modal = document.getElementById('modal');
-const menu = document.getElementById(`menu`);
-
-const pause = document.getElementById(`pauseMenu`);
-
-// UI
-newPost.addEventListener('click', () => {
-	modal.style.top = '45%';
-	overlay.style.opacity = '1';
-	overlay.style.pointerEvents = 'auto';
-	GAME.stage.style.transform = 'scale(2) translateY(64px)';
-});
-
-overlay.addEventListener('click', () => {
-	menu.style.left = '-150%';
-
-	modal.style.top = '150%';
-	overlay.style.opacity = '0';
-	overlay.style.pointerEvents = 'none';
-	GAME.stage.style.transform = 'scale(1)';
-});
-
-pause.addEventListener('click', () => {
-	menu.style.left = '50%';
-	overlay.style.opacity = '1';
-	overlay.style.pointerEvents = 'auto';
-});

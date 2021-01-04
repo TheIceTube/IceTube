@@ -1,5 +1,8 @@
-import Stats from 'stats.js';
 import { State, GameState } from './state';
+import { shuffle } from './utils';
+
+// Array of news
+import { news } from './content.json';
 
 // Setup canvas element
 const stage = document.getElementById('stage') as HTMLCanvasElement;
@@ -17,12 +20,16 @@ const GAME: GameState = State<GameState>({
 	mouseX: 0,
 	mouseY: 0,
 	mouseDown: false,
-	skyline: stage.height / 5,
+    skyline: stage.height / 5,
+    allNews: shuffle(news),
 	entities: []
 });
 
 // Input module
 import './input';
+
+// Game UI
+import './ui';
 
 // Main game code
 import './game';

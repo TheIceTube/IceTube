@@ -2,6 +2,20 @@ import { Penguin } from './entities/penguin';
 import { Billboard } from './entities/billboard';
 
 /**
+ * Sctructure of the news post
+ */
+interface NewsPost {
+    title: string;
+    content: string;
+    gaming: number;
+    music: number;
+    films: number;
+    sport: number;
+    news: number;
+    educational: number;
+}
+
+/**
  * State of the game
  */
 export interface GameState {
@@ -9,8 +23,9 @@ export interface GameState {
 	ctx: CanvasRenderingContext2D;
 	mouseX: number;
 	mouseY: number;
-	mouseDown: boolean;
     skyline: number;
+    mouseDown: boolean;
+    allNews: NewsPost[];
 	entities: Array<Penguin | Billboard>;
 }
 
