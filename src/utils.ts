@@ -90,3 +90,11 @@ export function shuffle(array: any[]): any[] {
 
 	return array;
 }
+
+/**
+ * Get index of random value from array.
+ * @param array Array to take from.
+ */
+export function randomFromArray(array: any[]): number {
+	return Math.floor(Math.random() * array.length);
+}

@@ -3,6 +3,8 @@ import { State, GameState } from './state';
 // Get state
 const GAME: GameState = State<GameState>();
 
+const news = document.getElementById('news');
+
 const newPost = document.getElementById('newPost');
 const overlay = document.getElementById('overlay');
 
@@ -33,3 +35,14 @@ pause.addEventListener('click', () => {
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
 });
+
+
+setInterval(() => {
+	news.classList.add('updating');
+
+	
+
+	setTimeout(() => {
+		news.classList.remove('updating');
+	}, 1000);
+}, 20000)

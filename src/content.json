@@ -3,12 +3,12 @@
         { 
             "title": "U.S. Elections!",
             "content": "In a week we will know who will be the new president of the United States",
-            "gaming": 5,
-            "music": 5,
-            "films": 5,
-            "sport": 5,
+            "gaming": 1,
+            "music": 1,
+            "films": 3,
+            "sport": 2,
             "news": 10,
-            "educational": 5
+            "educational": 6
         }
     ]
 }

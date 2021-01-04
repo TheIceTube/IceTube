@@ -102,7 +102,7 @@ export class Penguin {
 
         // Removing penguin
         if (this.state === 'leaving') {
-            this.height = lerp(this.height, 0, 0.1) - 0.1;
+            this.height = lerp(this.height, 0, 0.1) - 0.05;
         }
     }
 }

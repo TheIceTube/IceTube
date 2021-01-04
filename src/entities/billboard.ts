@@ -47,7 +47,7 @@ export class Billboard {
         ctx.drawImage(billboard, -(this.width / 2), -this.height + 32, this.width, this.height);
         ctx.restore();
 
-        ctx.font = 'italic 32px Segoe UI';
+        ctx.font = 'italic 24px Segoe UI';
         ctx.textAlign = 'center';
         ctx.fillText(`Views: ${this.views}`, this.x, this.y - 270)
     }

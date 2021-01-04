@@ -1,6 +1,6 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { insertionSort, randomInteger, shuffle } from './utils';
+import { insertionSort, randomInteger, randomFromArray } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -29,6 +29,7 @@ for (let i = 0; i < 50; i++) {
 // Spawn billboard
 const billboard = new Billboard();
 GAME.entities.push(billboard);
+
 
 // Main loop
 function loop() {
@@ -59,6 +60,16 @@ function loop() {
 	stats.end();
 	requestAnimationFrame(loop);
 }
+
+// Remove penguin from array each seccond
+setInterval(() => {
+	const index = randomFromArray(GAME.entities);
+	const entity = GAME.entities[index];
+
+	if (entity.type === 'penguin') {
+		entity.state = 'leaving';
+	}
+}, 1000);
 
 // Start game
 loop();
