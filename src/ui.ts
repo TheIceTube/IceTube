@@ -4,10 +4,8 @@ import { State, GameState } from './state';
 const GAME: GameState = State<GameState>();
 
 const news = document.getElementById('news');
-
 const newPost = document.getElementById('newPost');
 const overlay = document.getElementById('overlay');
-
 const modal = document.getElementById('modal');
 const menu = document.getElementById(`menu`);
 
@@ -23,7 +21,6 @@ newPost.addEventListener('click', () => {
 
 overlay.addEventListener('click', () => {
 	menu.style.left = '-150%';
-
 	modal.style.top = '150%';
 	overlay.style.opacity = '0';
 	overlay.style.pointerEvents = 'none';
@@ -36,11 +33,8 @@ pause.addEventListener('click', () => {
 	overlay.style.pointerEvents = 'auto';
 });
 
-
 setInterval(() => {
 	news.classList.add('updating');
-
-	
 
 	setTimeout(() => {
 		news.classList.remove('updating');

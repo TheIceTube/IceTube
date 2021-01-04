@@ -49,7 +49,10 @@ export class Billboard {
 
         ctx.font = 'italic 24px Segoe UI';
         ctx.textAlign = 'center';
+
         ctx.fillText(`Views: ${this.views}`, this.x, this.y - 270)
+        ctx.fillText(`Penguins: ${GAME.entities.length - 1}`, this.x, this.y - 240)
+
     }
 
     /**
