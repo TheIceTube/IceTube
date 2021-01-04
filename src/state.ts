@@ -15,6 +15,15 @@ interface NewsPost {
     educational: number;
 }
 
+interface WorldState {
+    gaming: number;
+    music: number;
+    films: number;
+    sport: number;
+    news: number;
+    educational: number;
+}
+
 /**
  * State of the game
  */
@@ -26,7 +35,9 @@ export interface GameState {
     skyline: number;
     mouseDown: boolean;
     allNews: NewsPost[];
-	entities: Array<Penguin | Billboard>;
+    worldState: WorldState;
+    entities: Array<Penguin | Billboard>;
+    crowdControll: number;
 }
 
 /**

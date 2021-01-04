@@ -19,10 +19,6 @@ for (let i = 0; i < 50; i++) {
 	const x = randomInteger(0, GAME.stage.width);
 	const y = randomInteger(GAME.stage.height / 3, GAME.stage.height - 64);
 	const penguin = new Penguin(x, y);
-
-	// Fixed penguin
-	if (i === 0) penguin.state = 'fixed';
-
 	GAME.entities.push(penguin);
 }
 
