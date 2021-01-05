@@ -22,6 +22,7 @@ State<GameState>({
 	mouseY: 0,
 	mouseDown: false,
 	entities: [],
+	maximumPenguins: 50,
 	newsBlocks: shuffle(all_news),
 	lastNewsBlock: 0,
 	relevance : 1,
@@ -29,8 +30,8 @@ State<GameState>({
 		gaming: 5,
 		films: 5,
 		music: 5,
-		news: 5,
 		sport: 5,
+		politics: 5,
 		educational: 5
 	}
 });
@@ -43,3 +44,6 @@ import './core/gui';
 
 // Main game code
 import './core/main';
+
+// Game logic timers
+import './core/timers';

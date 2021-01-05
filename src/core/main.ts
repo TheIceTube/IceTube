@@ -61,15 +61,5 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
-// Remove penguin from array each seccond
-requestInterval(() => {
-	if (GAME.paused) return;
-
-	const index = randomFromArray(GAME.entities);
-	const entity = GAME.entities[index];
-
-	if (entity.type === 'penguin') entity.state = 'leaving';
-}, 1000);
-
 // Start game
 loop();

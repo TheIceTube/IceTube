@@ -7,38 +7,38 @@
             "music": 1,
             "films": 3,
             "sport": 2,
-            "news": 10,
+            "politics": 10,
             "educational": 6
         }, 
         { 
             "title": "Cyberpunk 2077 released!",
             "content": "One of the best upcoming games has been finaly released.",
-            "gaming": 1,
-            "music": 1,
-            "films": 3,
-            "sport": 2,
-            "news": 10,
-            "educational": 6
+            "gaming": 10,
+            "music": 2,
+            "films": 2,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
         }, 
         { 
             "title": "Lil Pump has made new song!",
             "content": "The new song is titled Adidas Gang",
             "gaming": 1,
-            "music": 1,
-            "films": 3,
-            "sport": 2,
-            "news": 10,
-            "educational": 6
+            "music": 10,
+            "films": 1,
+            "sport": 1,
+            "politics": 2,
+            "educational": 2
         },
         { 
             "title": "Minecraft 2 confirmed!",
             "content": "Markus Person confirmed that Minecraft 2 already in development",
-            "gaming": 1,
-            "music": 1,
-            "films": 3,
-            "sport": 2,
-            "news": 10,
-            "educational": 6
+            "gaming": 9,
+            "music": 2,
+            "films": 2,
+            "sport": 1,
+            "politics": 1,
+            "educational": 3
         }
     ]
 }

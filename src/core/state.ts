@@ -11,7 +11,7 @@ interface NewsBlock {
     music: number;
     films: number;
     sport: number;
-    news: number;
+    politics: number;
     educational: number;
 }
 
@@ -23,7 +23,7 @@ interface Interest {
     music: number;
     films: number;
     sport: number;
-    news: number;
+    politics: number;
     educational: number;
 }
 
@@ -38,9 +38,9 @@ export interface GameState {
 	mouseY: number;
     mouseDown: boolean;
     interest: Interest;
+    maximumPenguins: number;
     entities: Array<Penguin | Billboard>;
     relevance: number;
-
     newsBlocks: NewsBlock[];
     lastNewsBlock: number;
 }
