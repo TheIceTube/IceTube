@@ -1,6 +1,6 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { insertionSort, randomInteger, randomFromArray } from './utils';
+import { insertionSort, randomInteger, randomFromArray, requestInterval } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -9,15 +9,15 @@ import { Billboard } from './entities/billboard';
 // Stats setup
 const stats = new Stats();
 stats.showPanel(0);
-document.body.appendChild(stats.dom);
+if (process.env.NODE_ENV === 'development') document.body.appendChild(stats.dom);
 
 // Get state
 const GAME: GameState = State<GameState>();
 
 // Spawn penguins
 for (let i = 0; i < 50; i++) {
-	const x = randomInteger(0, GAME.stage.width);
-	const y = randomInteger(GAME.stage.height / 3, GAME.stage.height - 64);
+	const x = randomInteger(0, GAME.element.width);
+	const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 	const penguin = new Penguin(x, y);
 	GAME.entities.push(penguin);
 }
@@ -26,9 +26,14 @@ for (let i = 0; i < 50; i++) {
 const billboard = new Billboard();
 GAME.entities.push(billboard);
 
-
 // Main loop
 function loop() {
+	// If game paused
+	if (GAME.paused) {
+		window.requestAnimationFrame(loop);
+		return;
+	}
+
 	stats.begin();
 
 	// Sort entities for 3d effect
@@ -40,31 +45,30 @@ function loop() {
 	}
 
 	// Clean screen
-	GAME.ctx.clearRect(0, 0, GAME.stage.width, GAME.stage.height);
+	GAME.ctx.clearRect(0, 0, GAME.element.width, GAME.element.height);
 
 	// Draw entities
 	for (let i = 0; i < GAME.entities.length; i++) {
 		GAME.entities[i].draw();
 	}
 
-	// Remove entities that height 
+	// Remove all deleted entities
 	GAME.entities = GAME.entities.filter(entity => {
-		if (entity.type === 'penguin') return entity.height > 0;
-		return true;
+		return entity.exists;
 	});
 
 	stats.end();
-	requestAnimationFrame(loop);
+	window.requestAnimationFrame(loop);
 }
 
 // Remove penguin from array each seccond
-setInterval(() => {
+requestInterval(() => {
+	if (GAME.paused) return;
+
 	const index = randomFromArray(GAME.entities);
 	const entity = GAME.entities[index];
 
-	if (entity.type === 'penguin') {
-		entity.state = 'leaving';
-	}
+	if (entity.type === 'penguin') entity.state = 'leaving';
 }, 1000);
 
 // Start game

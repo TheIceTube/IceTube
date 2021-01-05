@@ -4,7 +4,7 @@ import { Billboard } from './entities/billboard';
 /**
  * Sctructure of the news post
  */
-interface NewsPost {
+interface NewsBlock {
     title: string;
     content: string;
     gaming: number;
@@ -15,7 +15,10 @@ interface NewsPost {
     educational: number;
 }
 
-interface WorldState {
+/**
+ * World state
+ */
+interface Interest {
     gaming: number;
     music: number;
     films: number;
@@ -28,16 +31,18 @@ interface WorldState {
  * State of the game
  */
 export interface GameState {
-	stage: HTMLCanvasElement;
+    paused: boolean;
+	element: HTMLCanvasElement;
 	ctx: CanvasRenderingContext2D;
 	mouseX: number;
 	mouseY: number;
-    skyline: number;
     mouseDown: boolean;
-    allNews: NewsPost[];
-    worldState: WorldState;
+    interest: Interest;
     entities: Array<Penguin | Billboard>;
-    crowdControll: number;
+    relevance: number;
+
+    newsBlocks: NewsBlock[];
+    lastNewsBlock: number;
 }
 
 /**

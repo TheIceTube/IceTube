@@ -2,7 +2,7 @@ import { State, GameState } from '../state';
 import { convertRange, loadImage } from '../utils';
 
 // Sprites
-import billboardImage from '../sprites/billboard.png';
+import billboardImage from '../../sprites/billboard.png';
 
 // Preload images
 const billboard = loadImage(billboardImage);
@@ -13,6 +13,8 @@ const GAME: GameState = State<GameState>();
 export class Billboard {
     public readonly type: 'billboard';
 
+    public exists: boolean;
+    
     public x: number;
     public y: number;
     public width: number;
@@ -24,11 +26,11 @@ export class Billboard {
      * Billboard initialization
      */
     constructor() {
-        this.x = GAME.stage.width / 2;
-        this.y = GAME.stage.height / 1.5;
-
+        this.x = GAME.element.width / 2;
+        this.y = GAME.element.height / 1.5
         this.width = 400;
         this.height = 400;
+        this.exists = true;
     }
 
     /**
@@ -37,8 +39,8 @@ export class Billboard {
     public draw(): void {
         const ctx = GAME.ctx;
 
-        const size = convertRange(this.y, { min: 0, max: GAME.stage.height }, { min: 0, max: 2 });
-        const posY = convertRange(this.y, { min: 0, max: GAME.stage.height }, { min: GAME.skyline, max: GAME.stage.height });
+        const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
+        const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
 
         ctx.save();
         ctx.translate(this.x, posY);
@@ -59,8 +61,8 @@ export class Billboard {
      * Update billboard state
      */
     public update(): void {
-        this.x = GAME.stage.width / 2;
-        this.y = GAME.stage.height / 1.5;
+        this.x = GAME.element.width / 2;
+        this.y = GAME.element.height / 1.5;
         this.views += 1;
     }
 

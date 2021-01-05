@@ -1,8 +1,8 @@
-import { State, GameState } from './state';
-import { shuffle } from './utils';
+import { State, GameState } from './core/state';
+import { shuffle } from './core/utils';
 
 // Array of news
-import { news } from './content.json';
+import { all_news } from './content.json';
 
 // Setup canvas element
 const stage = document.getElementById('stage') as HTMLCanvasElement;
@@ -14,34 +14,32 @@ const ctx = stage.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 
 // State initialization
-const GAME: GameState = State<GameState>({
-	stage: stage,
+State<GameState>({
+	paused: false,
+	element: stage,
 	ctx: ctx,
 	mouseX: 0,
 	mouseY: 0,
 	mouseDown: false,
-    skyline: stage.height / 5,
-	allNews: shuffle(news),
 	entities: [],
-	crowdControll: 1,
-	worldState: {
-		gaming: 0,
-		films: 0,
-		music: 0,
-		news: 0,
-		sport: 0,
-		educational: 0
+	newsBlocks: shuffle(all_news),
+	lastNewsBlock: 0,
+	relevance : 1,
+	interest: {
+		gaming: 5,
+		films: 5,
+		music: 5,
+		news: 5,
+		sport: 5,
+		educational: 5
 	}
 });
 
 // Input module
-import './input';
+import './core/input';
 
 // Game UI
-import './ui';
+import './core/gui';
 
 // Main game code
-import './game';
-
-// Timings
-import './timer';
+import './core/main';

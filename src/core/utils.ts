@@ -98,3 +98,63 @@ export function shuffle(array: any[]): any[] {
 export function randomFromArray(array: any[]): number {
 	return Math.floor(Math.random() * array.length);
 }
+
+/**
+ * Alternative to `setInterval`, but using request animation frame
+ * @param callback Callback that will be executed after delay
+ * @param delay Delay before executing
+ */
+export function requestInterval(callback: () => void, delay: number): () => void {
+	let start = Date.now();
+	let canceled = false;
+
+	function loop() {
+		if (canceled) return;
+
+		let current = Date.now();
+		let delta = current - start;
+			
+		if(delta >= delay) {
+			callback();
+			start = Date.now();
+		}
+
+		window.requestAnimationFrame(loop);
+	}
+
+	loop();
+
+	return () => {
+		canceled = true;
+	};
+}
+
+/**
+ * Alternative to `setTimeout`, but using request animation frame
+ * @param callback Callback that will be executed after delay
+ * @param delay Delay before executing
+ */
+export function requestTimeout(callback: () => void, delay: number): () => void {
+	let start = Date.now();
+	let canceled = false;
+
+	function loop() {
+		if (canceled) return;
+
+		let current = Date.now();
+		let delta = current - start;
+			
+		if(delta >= delay) {
+			callback();
+			return;
+		}
+
+		window.requestAnimationFrame(loop);
+	}
+
+	loop();
+
+	return () => {
+		canceled = true;
+	};
+}
