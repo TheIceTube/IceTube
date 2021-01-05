@@ -99,5 +99,6 @@ export class Penguin {
             this.height = lerp(this.height, 0, 0.1) - 0.05;
             if (this.height <= 0) this.exists = false;
 		}
+
 	}
 }

@@ -1,5 +1,5 @@
 import { State, GameState } from './state';
-import { shuffle, requestInterval, requestTimeout } from './utils';
+import { requestInterval } from './utils';
 
 // Get state
 const GAME: GameState = State<GameState>();
@@ -37,17 +37,19 @@ pause.addEventListener('click', () => {
 	overlay.style.pointerEvents = 'auto';
 });
 
-function initNewsBlocks() {
-	GAME.lastNewsBlock = 2;
-	news.innerHTML = '';
 
-	for (let i = 0; i < 4; i++) {
+function initNewsBlocks() {
+	const elements = ['one', 'two', 'last'];
+
+	GAME.lastNewsBlock = 3;
+	news.innerHTML = '';
+	
+	for (let i = 0; i < elements.length; i++) {
 		const block = GAME.newsBlocks[i];
-		const blockType = i === 3 ? 'next' : i + 1;
 
 		// Create next post
 		const newsPostNext = document.createElement('div');
-		newsPostNext.className = `news-post post-${blockType}`;
+		newsPostNext.className = `news-block ${elements[i]}`;
 
 		// Title
 		const title = document.createElement('h3');
@@ -67,27 +69,14 @@ function nextNewsBlock() {
 	const index = GAME.lastNewsBlock;
 	const block = GAME.newsBlocks[index];
 
-	// Remove old post
-	const postOld = news.querySelector('.post-old');
-	if (postOld) postOld.remove();
-
-	// Move all posts
-	const post1 = news.querySelector('.post-1');
-	if (post1) post1.className = 'news-post post-old';
-
-	const post2 = news.querySelector('.post-2');
-	if (post2) post2.className = 'news-post post-1';
-
-	const post3 = news.querySelector('.post-3');
-	if (post3) post3.className = 'news-post post-2';
-
-	const postNext = news.querySelector('.post-next');
-	if (postNext) postNext.className = 'news-post post-3';
+	// Remove old news block
+	const oldBlock = news.querySelector('.old');
+	if (oldBlock) oldBlock.remove();
 
 	// Create next post
-	const newsPostNext = document.createElement('div');
-	newsPostNext.className = 'news-post post-next';
-
+	const nextBlock = document.createElement('div');
+	nextBlock.className = 'news-block next';
+	
 	// Title
 	const title = document.createElement('h3');
 	title.innerText = block.title;
@@ -96,9 +85,25 @@ function nextNewsBlock() {
 	const content = document.createElement('p');
 	content.innerText = block.content;
 
-	newsPostNext.appendChild(title);
-	newsPostNext.appendChild(content);
-	news.appendChild(newsPostNext);
+	// Build element
+	nextBlock.appendChild(title);
+	nextBlock.appendChild(content);
+	news.appendChild(nextBlock);
+
+	// Move all blocks
+	const blockOne = news.querySelector('.news-block.one');
+	if (blockOne) blockOne.className = 'news-block old';
+
+	const blockTwo = news.querySelector('.news-block.two');
+	if (blockTwo) blockTwo.className = 'news-block one';
+
+	const blockLast = news.querySelector('.news-block.last');
+	if (blockLast) blockLast.className = 'news-block two';
+
+	setTimeout(() => {
+		const lastBlock = news.querySelector('.next');
+		if (lastBlock) lastBlock.className = 'news-block last';
+	});
 
 	// Update interests
 	GAME.interest.gaming = Math.floor((GAME.interest.gaming + block.gaming) / 2);
@@ -108,6 +113,8 @@ function nextNewsBlock() {
 	GAME.interest.sport = Math.floor((GAME.interest.sport + block.sport) / 2);
 	GAME.interest.educational = Math.floor((GAME.interest.educational + block.educational) / 2);
 
+	console.log(GAME.interest);
+
 	GAME.lastNewsBlock += 1;
 	if (GAME.lastNewsBlock >= GAME.newsBlocks.length) GAME.lastNewsBlock = 0;
 }
@@ -116,5 +123,10 @@ requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
 }, 5000);
+
+requestInterval(() => {
+	if (GAME.paused) return;
+	nextNewsBlock();
+}, 2000);
 
 initNewsBlocks();

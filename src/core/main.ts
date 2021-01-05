@@ -1,6 +1,6 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { insertionSort, randomInteger, randomFromArray, requestInterval } from './utils';
+import { insertionSort, randomInteger, randomFromArray, requestInterval, convertRange } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';

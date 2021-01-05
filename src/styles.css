@@ -27,7 +27,9 @@ main {
 	max-width: 100%;
 	max-height: 100%;
 	margin-right: 16px;
-	background-color: #ff8e24;
+	background: linear-gradient(0deg, #ff9a03, #ff2448);
+	/* background: linear-gradient(0deg, #39a372, #97c54c); */
+	/* background: linear-gradient(180deg, #5039a3, #4c8fc5); */
 	transition: transform 1s ease;
 }
 
@@ -189,19 +191,19 @@ label {
 	z-index: 9999;
 }
 
-.news-post {
+.news-block {
 	overflow: hidden;
 	position: fixed;
 	display: block;
 	width: 400px;
 	height: 128px;
-	padding: 32px;
+	padding: 32px 24px;
 	border: solid 4px black;
 	background-color: white;
-	transition: 1s top ease-out, 0.9s right ease, transform 0.9s ease;
+	transition: 0.8s top ease-out, 0.9s right ease, transform 1s ease;
 }
 
-.news-post > h3 {
+.news-block > h3 {
 	margin: 0;
 	margin-bottom: 4px;
 	padding-bottom: 2px;
@@ -211,35 +213,36 @@ label {
 	letter-spacing: 1px;
 	border-bottom: dashed 2px black;
 }
-.news-post > p {
+
+.news-block > p {
 	margin: 0;
 	font-size: 12px;
 }
 
-.news-post.post-old {
-	transform: rotate(10deg);
+.news-block.old {
+	transform: rotate(10deg) scale(0.75);
 	top: -200px;
 	right: 16px;
 }
 
-.news-post.post-1 {
+.news-block.one {
 	top: 16px;
 	right: 16px;
 }
 
-.news-post.post-2 {
+.news-block.two {
 	top: 152px; 
 	right: 16px;
 }
 
-.news-post.post-3 {
+.news-block.last {
 	top: 288px;
 	right: 16px;
 }
 
-.news-post.post-next {
-	transform: rotate(-10deg);
-	top: 256px;
+.news-block.next {
+	transform: rotate(-10deg) scale(1.5) skewY(-5deg);
+	top: 288px;
 	right: -600px;
 }
 
@@ -261,15 +264,15 @@ label {
 }
 
 @media (max-width: 1130px) {
-	.news-post {
+	.news-block {
 		width: 300px;
 	}
 
-	.news-post > h3 {
+	.news-block > h3 {
 		font-size: 14px;
 		letter-spacing: normal;
 	}
-	.news-post > p {
+	.news-block > p {
 		font-size: 14px;
 	}
 }
