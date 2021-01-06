@@ -68,5 +68,10 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
+
+document.getElementById('start-button').onclick = () => {
+	loop();
+	document.getElementById('start-menu').remove();
+}
+
 // Start game
-loop();

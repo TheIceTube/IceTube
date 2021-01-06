@@ -69,9 +69,9 @@ export class Penguin {
 		ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
 		ctx.restore();
 		
-        // ctx.font = '11px Segoe UI';
-        // ctx.textAlign = 'center';
-        // ctx.fillText(this.involvement.toFixed(2), this.x, posY);
+        ctx.font = '11px Segoe UI';
+        ctx.textAlign = 'center';
+        ctx.fillText(this.involvement.toFixed(2), this.x, posY);
 	}
 
 	/**

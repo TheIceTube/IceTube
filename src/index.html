@@ -10,7 +10,13 @@
 
 <body>
     <main>
-        
+
+        <!-- Start menu -->
+        <div id="start-menu">
+            <a id="start-button">Start!</a>
+            <p>Game about love, life and shrek</p>
+        </div>
+
         <!-- News -->
         <div id="news"></div>
 
@@ -20,20 +26,33 @@
 
             <label for="montage">Theme</label>
 
-            <div class="buttonOrg">
-                <button type="submit"  class="selc-button" id = "game">G</button>
-                <button type="submit"  class="selc-button" id = "book">E</button>
+            <div class="theme-picker"> 
+                <div class="row">
+                    <button type="submit" id="game"></button>
+                    <button type="submit" id="book"></button>    
+                    <button type="submit" id="politics"></button>
+                </div>
+                <div class="row">
+                    <button type="submit" id="movie"></button>
+                    <button type="submit" id="music"></button>
+                    <button type="submit" id="sports"></button>    
+                </div>
+            </div>
+
+            <!-- <div class="buttonOrg">
+                <button type="submit" class="selc-button" id="game">G</button>
+                <button type="submit" class="selc-button" id="book">E</button>
             </div>
 
             <div class="buttonOrg">
-                <button type="submit"  class="selc-button" id = "politics">P</button>
-                <button type="submit"  class="selc-button" id = "movie">F</button>
+                <button type="submit" class="selc-button" id="politics">P</button>
+                <button type="submit" class="selc-button" id="movie">F</button>
             </div>
 
             <div class="buttonOrg">
-                <button type="submit"  class="selc-button" id = "music">M</button>
-                <button type="submit"  class="selc-button" id = "sports">S</button>
-            </div>
+                <button type="submit" class="selc-button" id="music">M</button>
+                <button type="submit" class="selc-button" id="sports">S</button>
+            </div> -->
 
             <label for="montage">Emotionality</label>
             <input type="range" min="0" max="10" value="5" class="slider" id="emotionality">
@@ -46,7 +65,7 @@
 
             <label for="montage">Advertisment</label>
             <input type="range" min="0" max="10" value="5" class="slider" id="montage">
-            
+
             <button type="submit" id="post" class="cool-button">Post Video</button>
         </div>
 
@@ -57,7 +76,7 @@
                 <h1>PAUSE MENU</h1>
                 <label>To resume click outsidse the window.</labe>
 
-                <label>Must add HELP for INFO</labe>
+                    <label>Must add HELP for INFO</labe>
 
             </div>
         </div>
