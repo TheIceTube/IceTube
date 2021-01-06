@@ -1,6 +1,6 @@
 import { Penguin } from './entities/penguin';
 import { State, GameState } from './state';
-import { randomInteger, requestInterval, randomFromArray } from './utils';
+import { randomInteger, requestInterval, insertionSort, lerp } from './utils';
 
 // Get state
 const GAME: GameState = State();
@@ -13,32 +13,40 @@ requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
 	console.log(GAME.interests);
-}, 5000);
+}, 10000);
+
 
 // Relevance update
 requestInterval(() => {
 	if (GAME.paused) return;
 
-	GAME.relevance -= 0.1;
+	GAME.relevance -= 0.05;
+	if (GAME.relevance > 1.1) GAME.relevance -= 0.05;
+	
 	if (GAME.relevance < 0) GAME.relevance = 0;
 	if (GAME.relevance > 2) GAME.relevance = 2;
-}, 1000);
+}, 2000);
 
-//
 // TODO: Optimize Penguins view, increase penguins number without creating more entities
-//
+// TODO:  
 
 // Spawn penguins
 requestInterval(() => {
 	if (GAME.paused) return;
-	const toSpawn = Math.floor((GAME.entities.length / 2) * GAME.relevance) - GAME.entities.length / 2;
-	
+	const spawnCoefficent = 5;
+	const penguinMultiplier = GAME.entities.length / spawnCoefficent;
+
+	let toSpawn = Math.floor(penguinMultiplier * GAME.relevance) - penguinMultiplier;
+	if (GAME.relevance > 1) toSpawn += 1;
+
 	for (let i = 0; i < toSpawn; i++) {
 		const x = randomInteger(0, GAME.element.width);
 		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 		const penguin = new Penguin(x, y);
 		GAME.entities.push(penguin);
 	}
+
+	insertionSort(GAME.entities, 'y');
 }, 1000);
 
 /**
@@ -149,5 +157,5 @@ function nextNewsBlock() {
 }
 
 // Initialize news
-initNewsBlocks();
+// initNewsBlocks();
 		

@@ -43,9 +43,6 @@ function loop() {
 
 	stats.begin();
 
-	// Sort entities for 3d effect
-	if (!GAME.optimize) insertionSort(GAME.entities, 'y');
-
 	// Update entities
 	for (let i = 0; i < GAME.entities.length; i++) {
 		GAME.entities[i].update();
@@ -71,7 +68,9 @@ function loop() {
 
 document.getElementById('start-button').onclick = () => {
 	loop();
+	GAME.paused = false;
 	document.getElementById('start-menu').remove();
 }
 
-// Start game
+GAME.paused = true;
+

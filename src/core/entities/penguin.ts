@@ -69,9 +69,9 @@ export class Penguin {
 		ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
 		ctx.restore();
 		
-        ctx.font = '11px Segoe UI';
-        ctx.textAlign = 'center';
-        ctx.fillText(this.involvement.toFixed(2), this.x, posY);
+        // ctx.font = '16px Segoe UI';
+        // ctx.textAlign = 'center';
+        // ctx.fillText(this.involvement.toFixed(2), this.x, posY);
 	}
 
 	/**
@@ -88,7 +88,10 @@ export class Penguin {
 		this.involvement -= 0.05;
 
 		// Lower involvement one more time
-		if (GAME.relevance >= 1.5 || GAME.relevance <= 0.5) this.involvement -= 0.05;
+		if (GAME.relevance <= 0.5) this.involvement -= 0.05;
+		
+		// 
+		if (GAME.relevance >= 1) this.involvement += 0.02;
 
 		// If penguin is not involved
 		if (this.involvement <= 0) {

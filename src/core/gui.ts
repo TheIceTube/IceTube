@@ -6,62 +6,47 @@ const GAME: GameState = State();
 
 // Elements
 const newPost = document.getElementById('newPost');
-
 const overlay = document.getElementById('overlay');
-
 const modal = document.getElementById('modal');
-
 const menu = document.getElementById(`menu`);
-
-const postBut = document.getElementById('post')
-
+const postBut = document.getElementById('post');
 const pause = document.getElementById(`pauseMenu`);
 
-const gameButt = document.getElementById('game');
-let gameButtPress = false;
-
-const bookButt = document.getElementById('book');
-let bookButtPress = false;
-
-
+const gameButt = document.getElementById('gaming');
+const bookButt = document.getElementById('educational');
 const poliButt = document.getElementById('politics');
-let poliButtPress = false;
-
-const filmButt = document.getElementById('movie');
-let filmButtPress = false;
-
-
+const filmButt = document.getElementById('films');
 const musicButt = document.getElementById('music');
-let musicButtPress = false;
-
-const sportsButt = document.getElementById('book');
-let sportsButtPress = false;
-
-
-
+const sportsButt = document.getElementById('sport');
 
 // UI
 newPost.addEventListener('click', () => {
-	GAME.relevance += 1;
 	modal.style.top = '45%';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
-	// GAME.element.style.transform = 'scale(2) translateY(-32px)';
+	GAME.element.style.transform = 'scale(2) translateY(-32px)';
+	GAME.paused = true;
 });
 
-postBut.addEventListener ('click', () => {
-	modal.style.top = '150%';
-	overlay.style.opacity = '0';
-	overlay.style.pointerEvents = 'none';
-});
-
-overlay.addEventListener('click', () => {
-	menu.style.left = '-150%';
+postBut.addEventListener('click', () => {
 	modal.style.top = '150%';
 	overlay.style.opacity = '0';
 	overlay.style.pointerEvents = 'none';
 	GAME.element.style.transform = 'scale(1)';
 	GAME.paused = false;
+
+	createPost();
+	unpressButtons();
+});
+
+overlay.addEventListener('click', () => {
+	menu.style.left = '-150%';
+	modal.style.top = '200%';
+	overlay.style.opacity = '0';
+	overlay.style.pointerEvents = 'none';
+	GAME.element.style.transform = 'scale(1)';
+	GAME.paused = false;
+	unpressButtons();
 });
 
 pause.addEventListener('click', () => {
@@ -73,68 +58,88 @@ pause.addEventListener('click', () => {
 
 //Buttons for the new post thingy
 gameButt.addEventListener('click', () => {
-	if (!gameButtPress) {
-		gameButt.style.backgroundColor = "grey";
-		gameButtPress = true;
+	if (!gameButt.classList.contains('active')) {
+		unpressButtons();
+		gameButt.classList.add('active');
 	} else {
-		gameButt.style.backgroundColor = "white";	
-		gameButtPress = false;
+		gameButt.classList.remove('active');
 	}
-
 });
 
 bookButt.addEventListener('click', () => {
-	if (!bookButtPress) {
-		bookButt.style.backgroundColor = "grey";
-		bookButtPress = true;
+	if (!bookButt.classList.contains('active')) {
+		unpressButtons();
+		bookButt.classList.add('active');
 	} else {
-		bookButt.style.backgroundColor = "white";	
-		bookButtPress = false;
+		bookButt.classList.remove('active');
 	}
 });
 
 //Buttons for the new post thingy
 filmButt.addEventListener('click', () => {
-	if (!filmButtPress) {
-		filmButt.style.backgroundColor = "grey";
-		filmButtPress = true;
+	if (!filmButt.classList.contains('active')) {
+		unpressButtons();
+		filmButt.classList.add('active');
 	} else {
-		filmButt.style.backgroundColor = "white";	
-		filmButtPress = false;
+		filmButt.classList.remove('active');
 	}
-
 });
 
 poliButt.addEventListener('click', () => {
-	if (!poliButtPress) {
-		poliButt.style.backgroundColor = "grey";
-		poliButtPress = true;
+	if (!poliButt.classList.contains('active')) {
+		unpressButtons();
+		poliButt.classList.add('active');
 	} else {
-		poliButt.style.backgroundColor = "white";	
-		poliButtPress = false;
+		poliButt.classList.remove('active');
 	}
 });
 
 //Buttons for the new post thingy
 musicButt.addEventListener('click', () => {
-	if (!musicButtPress) {
-		musicButt.style.backgroundColor = "grey";
-		musicButtPress = true;
+	if (!musicButt.classList.contains('active')) {
+		unpressButtons();
+		musicButt.classList.add('active');
 	} else {
-		musicButt.style.backgroundColor = "white";	
-		musicButtPress = false;
+		musicButt.classList.remove('active');
 	}
-
 });
 
 sportsButt.addEventListener('click', () => {
-	if (!sportsButtPress) {
-		sportsButt.style.backgroundColor = "grey";
-		sportsButtPress = true;
+	if (!sportsButt.classList.contains('active')) {
+		unpressButtons();
+		sportsButt.classList.add('active');
 	} else {
-		sportsButt.style.backgroundColor = "white";	
-		sportsButtPress = false;
+		sportsButt.classList.remove('active');
 	}
 });
 
+function unpressButtons(): void {
+	gameButt.classList.remove('active');
+	bookButt.classList.remove('active');
+	filmButt.classList.remove('active');
+	poliButt.classList.remove('active');
+	musicButt.classList.remove('active');
+	sportsButt.classList.remove('active');
+}
 
+function createPost() {
+	let topTheme = 'gaming';
+	let highestInterest = 0;
+
+	for(const key in GAME.interests) {
+		const interest = GAME.interests[key];
+		
+		if (interest >= highestInterest) {
+			topTheme = key;
+			highestInterest = interest;
+		}
+	}
+
+	let selectedTheme = document.querySelector('button.active');
+	if (selectedTheme === null) return;
+
+	console.log(selectedTheme.id, topTheme);
+
+	// TODO: Build this value from multiple factors
+	if (selectedTheme.id === topTheme) GAME.relevance += 0.5;
+}

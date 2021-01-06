@@ -39,6 +39,7 @@ export class Billboard {
 
         const views = numberWithCommas(Math.floor(GAME.views));
         const penguins = numberWithCommas(GAME.entities.length - 1);
+        const relevance = GAME.relevance.toFixed(2);
 
         const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
         const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
@@ -53,6 +54,8 @@ export class Billboard {
         ctx.font = 'italic 24px Segoe UI';
         ctx.textAlign = 'center';
 
+        
+        ctx.fillText(`Relevance: ${relevance}`, this.x, this.y - 300);
         ctx.fillText(`Views: ${views}`, this.x, this.y - 270);
         ctx.fillText(`Penguins: ${penguins}`, this.x, this.y - 240);
     }
