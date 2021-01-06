@@ -2,11 +2,60 @@
     "all_news": [
         { 
             "title": "U.S. Elections!",
-            "content": "In a week we will know who will be the new president of the United States",
+            "content": "In a week we will know who will be the new president of the United States!",
             "gaming": 1,
             "music": 1,
-            "films": 3,
-            "sport": 2,
+            "films": 1,
+            "sport": 1,
+            "politics": 10,
+            "educational": 5
+        }, 
+        { 
+            "title": "President elected",
+            "content": "After recent president election, the winner take position",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 10,
+            "educational": 5
+        }, 
+        { 
+            "title": "New President rules",
+            "content": "New Statement from president came out!",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 10,
+            "educational": 2
+        }, { 
+            "title": "Britain post Brexit",
+            "content": "What has been effected by it?",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 10,
+            "educational": 5
+        }, 
+        { 
+            "title": "Migrant stuck in Bosnia",
+            "content": "What created such incident?",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 10,
+            "educational": 6
+        }, 
+        { 
+            "title": "President - Vaccines have arrive!",
+            "content": "What you should know about them?",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
             "politics": 10,
             "educational": 6
         }, 
@@ -14,12 +63,61 @@
             "title": "Cyberpunk 2077 released!",
             "content": "One of the best upcoming games has been finaly released.",
             "gaming": 10,
-            "music": 2,
-            "films": 2,
+            "music": 1,
+            "films": 1,
             "sport": 1,
             "politics": 1,
-            "educational": 2
+            "educational": 1
         }, 
+        { 
+            "title": "Steam winter sale ends soon",
+            "content": "Quick grab some game on cheap price!",
+            "gaming": 10,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 5
+        },
+        { 
+            "title": "Minecraft 2 confirmed!",
+            "content": "Markus Person confirmed that Minecraft 2 already in development",
+            "gaming": 10,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 5
+        }, { 
+            "title": "New Fallout game to be released!",
+            "content": "Will franchise rise again after the 76 massive fail?",
+            "gaming": 10,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 1
+        }, 
+        { 
+            "title": "Club Penguin 2 in making! ",
+            "content": "Creators confirm, its real!",
+            "gaming": 10,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 5
+        },
+        { 
+            "title": "New Minecraft update soon.",
+            "content": "What changes will there be?",
+            "gaming": 10,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 5
+        },
         { 
             "title": "Lil Pump has made new song!",
             "content": "The new song is titled Adidas Gang",
@@ -27,18 +125,159 @@
             "music": 10,
             "films": 1,
             "sport": 1,
-            "politics": 2,
+            "politics": 1,
             "educational": 2
         },
         { 
-            "title": "Minecraft 2 confirmed!",
-            "content": "Markus Person confirmed that Minecraft 2 already in development",
-            "gaming": 9,
-            "music": 2,
+            "title": "Grammys delayed due Covid-19",
+            "content": "Due to Covid-19 pandemic, grammy awards are delayed!",
+            "gaming": 1,
+            "music": 10,
+            "films": 1,
+            "sport": 1,
+            "politics": 4,
+            "educational": 1
+        },
+        { 
+            "title": "New James Bond music is top  class.",
+            "content": "Song titled NO.TIME.TO.DIE brings new light into Jame bond films!.",
+            "gaming": 1,
+            "music": 10,
+            "films": 5,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        ,
+        { 
+            "title": "All I want for christmas - best song of generation?",
+            "content": "Will there ever be end to it?",
+            "gaming": 1,
+            "music": 10,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "Dr. Dre in Hospital!",
+            "content": "What happened and should you be woried?",
+            "gaming": 1,
+            "music": 10,
+            "films": 1,
+            "sport": 1,
+            "politics": 5,
+            "educational": 1
+        },
+        { 
+            "title": "New Ed Sheeran album released",
+            "content": "What now he has to offer?",
+            "gaming": 1,
+            "music": 10,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "New Avengers movies to come soon!",
+            "content": "Marvel announced that Avengers cast will return soon",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "New Star Wars movies announced!",
+            "content": "Will they be as bad as last 3?",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "Petions made to ban Musicals in movies",
+            "content": "More then 100 000 000 sigantures have been colected",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "New DC movies annouced!",
+            "content": "Will it ever be as popular as Marvels films?",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "New documentary about WW2, has been released!",
+            "content": "What new insights to be found?",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 8
+        },
+        { 
+            "title": "Latvian movie recieves oscar!!",
+            "content": "Shock? What? How?",
+            "gaming": 1,
+            "music": 1,
+            "films": 10,
+            "sport": 1,
+            "politics": 1,
+            "educational": 2
+        },
+        { 
+            "title": "Scientist found new large Meteor.",
+            "content": "What can we learn about it?",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 1,
+            "politics": 1,
+            "educational": 10
+        },
+        { 
+            "title": "How to study and concentrate better in School",
+            "content": "Tip and Tricks!",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 4,
+            "politics": 1,
+            "educational": 10
+        },
+        { 
+            "title": "DIY Hacks for Daily life",
+            "content": "Top 10 Hacks that you ...",
+            "gaming": 1,
+            "music": 1,
             "films": 2,
             "sport": 1,
             "politics": 1,
-            "educational": 3
+            "educational": 2
+        },
+        { 
+            "title": "Maximum speed of human?",
+            "content": "Scientist doing reasearch of how fast can human run.",
+            "gaming": 1,
+            "music": 1,
+            "films": 1,
+            "sport": 6,
+            "politics": 1,
+            "educational": 10
         }
     ]
 }
