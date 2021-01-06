@@ -145,3 +145,4 @@ function nextNewsBlock() {
 
 // Initialize news
 initNewsBlocks();
+		

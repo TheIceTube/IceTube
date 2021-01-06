@@ -27,8 +27,8 @@ main {
 	max-width: 100%;
 	max-height: 100%;
 	margin-right: 16px;
-	/* background: linear-gradient(0deg, #ff9a03, #ff2448); */
-	background: linear-gradient(-25deg, #39a372, #e8ff66);
+	background: linear-gradient(0deg, #ff9a03, #ff2448);
+	/* background: linear-gradient(-25deg, #39a372, #e8ff66); */
 	transition: transform 1s ease;
 }
 
@@ -66,6 +66,7 @@ main {
 
 .cool-button:active {
 	box-shadow: 0 0px black;
+	background-color: rgb(164, 164, 164);
 	transform: translateY(8px);
 }
 
@@ -126,6 +127,7 @@ label {
 }
 .buttonOrg {
 	margin-bottom: 20px;
+
 }
 
 .button {
@@ -143,6 +145,7 @@ label {
 
 .button:active {
 	box-shadow: 0 0px black;
+	background-color: rgb(164, 164, 164);
 	transform: translateX(-50%) translateY(4px);
 }
 
@@ -274,4 +277,28 @@ label {
 	.news-block > p {
 		font-size: 14px;
 	}
+}
+
+.selc-button {
+	cursor: pointer;
+	color: black;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 15px 15px;
+	border-radius: 8px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	box-shadow: 0 8px black;
+	border: solid 3px black;
+	transition: all 0.1s ease;
+}
+
+.selc-button:active {
+	box-shadow: 0 0px black;
+	transform: translateY(8px);
+}
+
+.selc-button:active,
+.selc-button:focus {
+	outline: none;
 }
