@@ -148,7 +148,6 @@
             "politics": 1,
             "educational": 2
         },
-        ,
         { 
             "title": "All I want for christmas - best song of generation?",
             "content": "Will there ever be end to it?",
@@ -267,7 +266,7 @@
             "films": 2,
             "sport": 1,
             "politics": 1,
-            "educational": 2
+            "educational": 10
         },
         { 
             "title": "Maximum speed of human?",

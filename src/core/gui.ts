@@ -24,11 +24,25 @@ const bookButt = document.getElementById('book');
 let bookButtPress = false;
 
 
+const poliButt = document.getElementById('politics');
+let poliButtPress = false;
+
+const filmButt = document.getElementById('movie');
+let filmButtPress = false;
+
+
+const musicButt = document.getElementById('music');
+let musicButtPress = false;
+
+const sportsButt = document.getElementById('book');
+let sportsButtPress = false;
+
+
 
 
 // UI
 newPost.addEventListener('click', () => {
-	// GAME.relevance += 1;
+	GAME.relevance += 1;
 	modal.style.top = '45%';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
@@ -78,4 +92,49 @@ bookButt.addEventListener('click', () => {
 		bookButtPress = false;
 	}
 });
+
+//Buttons for the new post thingy
+filmButt.addEventListener('click', () => {
+	if (!filmButtPress) {
+		filmButt.style.backgroundColor = "grey";
+		filmButtPress = true;
+	} else {
+		filmButt.style.backgroundColor = "white";	
+		filmButtPress = false;
+	}
+
+});
+
+poliButt.addEventListener('click', () => {
+	if (!poliButtPress) {
+		poliButt.style.backgroundColor = "grey";
+		poliButtPress = true;
+	} else {
+		poliButt.style.backgroundColor = "white";	
+		poliButtPress = false;
+	}
+});
+
+//Buttons for the new post thingy
+musicButt.addEventListener('click', () => {
+	if (!musicButtPress) {
+		musicButt.style.backgroundColor = "grey";
+		musicButtPress = true;
+	} else {
+		musicButt.style.backgroundColor = "white";	
+		musicButtPress = false;
+	}
+
+});
+
+sportsButt.addEventListener('click', () => {
+	if (!sportsButtPress) {
+		sportsButt.style.backgroundColor = "grey";
+		sportsButtPress = true;
+	} else {
+		sportsButt.style.backgroundColor = "white";	
+		sportsButtPress = false;
+	}
+});
+
 

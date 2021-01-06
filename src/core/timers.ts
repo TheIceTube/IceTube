@@ -75,8 +75,13 @@ function initNewsBlocks() {
  * Next news block
  */
 function nextNewsBlock() {
+
 	const index = GAME.newsIndex;
 	const block = GAME.news[index];
+
+	console.log(index, block);
+
+	
 
 	// Remove old news block
 	const oldBlock = news.querySelector('.old');
