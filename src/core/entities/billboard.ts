@@ -38,7 +38,7 @@ export class Billboard {
         const ctx = GAME.ctx;
 
         const views = numberWithCommas(Math.floor(GAME.views));
-        const penguins = numberWithCommas(GAME.entities.length - 1);
+        const penguins = GAME.started ? numberWithCommas(GAME.entities.length - 1) : 0;
         const relevance = GAME.relevance.toFixed(2);
 
         const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });

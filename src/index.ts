@@ -25,7 +25,7 @@ State({
 	mouseDown: false,
 
 	entities: [],
-	
+	started: false,
 	views: 0,
 	relevance: 1,
 	interests: {

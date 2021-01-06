@@ -55,6 +55,8 @@ export class Penguin {
 		// Remove if its unmounted
 		if (!this.exists || !this.visible) return;
 
+		if (!GAME.started) return;
+
 		const sprite = this.direction === 'left' ? penguinLeft : penguinRight;
 		const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
 		const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
@@ -80,6 +82,8 @@ export class Penguin {
 	public update(): void {
 		const width: number = GAME.element.width;
 		const height: number = GAME.element.height;
+
+		if (!GAME.started) return;
 
 		// Remove if its unmounted
 		if (!this.exists) return;

@@ -126,6 +126,8 @@ function createPost() {
 	let topTheme = 'gaming';
 	let highestInterest = 0;
 
+	GAME.started = true;
+	
 	for(const key in GAME.interests) {
 		const interest = GAME.interests[key];
 		

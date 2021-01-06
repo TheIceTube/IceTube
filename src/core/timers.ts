@@ -12,27 +12,29 @@ const news = document.getElementById('news');
 requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
+
 	console.log(GAME.interests);
 }, 10000);
-
 
 // Relevance update
 requestInterval(() => {
 	if (GAME.paused) return;
+	if (!GAME.started) return;
 
-	GAME.relevance -= 0.05;
-	if (GAME.relevance > 1.1) GAME.relevance -= 0.05;
+	GAME.relevance -= 0.02;
+	if (GAME.relevance > 1.1) GAME.relevance -= 0.01;
 	
 	if (GAME.relevance < 0) GAME.relevance = 0;
 	if (GAME.relevance > 2) GAME.relevance = 2;
-}, 2000);
+}, 1000);
 
 // TODO: Optimize Penguins view, increase penguins number without creating more entities
-// TODO:  
 
 // Spawn penguins
 requestInterval(() => {
 	if (GAME.paused) return;
+	if (!GAME.started) return;
+
 	const spawnCoefficent = 5;
 	const penguinMultiplier = GAME.entities.length / spawnCoefficent;
 
