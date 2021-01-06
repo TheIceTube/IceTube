@@ -3,9 +3,43 @@ import { State, GameState } from './state';
 import { randomInteger, requestInterval, randomFromArray } from './utils';
 
 // Get state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
+// Elements
 const news = document.getElementById('news');
+
+// Show news blocks
+requestInterval(() => {
+	if (GAME.paused) return;
+	nextNewsBlock();
+	console.log(GAME.interests);
+}, 5000);
+
+// Relevance update
+requestInterval(() => {
+	if (GAME.paused) return;
+
+	GAME.relevance -= 0.1;
+	if (GAME.relevance < 0) GAME.relevance = 0;
+	if (GAME.relevance > 2) GAME.relevance = 2;
+}, 1000);
+
+//
+// TODO: Optimize Penguins view, increase penguins number without creating more entities
+//
+
+// Spawn penguins
+requestInterval(() => {
+	if (GAME.paused) return;
+	const toSpawn = Math.floor((GAME.entities.length / 2) * GAME.relevance) - GAME.entities.length / 2;
+	
+	for (let i = 0; i < toSpawn; i++) {
+		const x = randomInteger(0, GAME.element.width);
+		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
+		const penguin = new Penguin(x, y);
+		GAME.entities.push(penguin);
+	}
+}, 1000);
 
 /**
  * Init news blocks
@@ -13,11 +47,11 @@ const news = document.getElementById('news');
 function initNewsBlocks() {
 	const elements = ['one', 'two', 'last'];
 
-	GAME.lastNewsBlock = 3;
+	GAME.newsIndex = 3;
 	news.innerHTML = '';
-	
+
 	for (let i = 0; i < elements.length; i++) {
-		const block = GAME.newsBlocks[i];
+		const block = GAME.news[i];
 
 		// Create next post
 		const newsPostNext = document.createElement('div');
@@ -41,8 +75,8 @@ function initNewsBlocks() {
  * Next news block
  */
 function nextNewsBlock() {
-	const index = GAME.lastNewsBlock;
-	const block = GAME.newsBlocks[index];
+	const index = GAME.newsIndex;
+	const block = GAME.news[index];
 
 	// Remove old news block
 	const oldBlock = news.querySelector('.old');
@@ -51,7 +85,7 @@ function nextNewsBlock() {
 	// Create next post
 	const nextBlock = document.createElement('div');
 	nextBlock.className = 'news-block next';
-	
+
 	// Title
 	const title = document.createElement('h3');
 	title.innerText = block.title;
@@ -80,79 +114,34 @@ function nextNewsBlock() {
 		if (lastBlock) lastBlock.className = 'news-block last';
 	});
 
+	const interests = GAME.interests;
 	// Update interests
-	GAME.interest.gaming = Math.floor((GAME.interest.gaming + block.gaming) / 2);
-	GAME.interest.films = Math.floor((GAME.interest.films + block.films) / 2);
-	GAME.interest.music = Math.floor((GAME.interest.music + block.music) / 2);
-	GAME.interest.sport = Math.floor((GAME.interest.sport + block.sport) / 2);
-	GAME.interest.politics = Math.floor((GAME.interest.politics + block.politics) / 2);
-	GAME.interest.educational = Math.floor((GAME.interest.educational + block.educational) / 2);
+	interests.gaming = Math.floor((interests.gaming + block.gaming) / 2);
+	interests.films = Math.floor((interests.films + block.films) / 2);
+	interests.music = Math.floor((interests.music + block.music) / 2);
+	interests.sport = Math.floor((interests.sport + block.sport) / 2);
+	interests.politics = Math.floor((interests.politics + block.politics) / 2);
+	interests.educational = Math.floor((interests.educational + block.educational) / 2);
 
-    // Clamp down
-    if (GAME.interest.gaming < 0) GAME.interest.gaming = 0;
-    if (GAME.interest.films < 0) GAME.interest.films = 0;
-    if (GAME.interest.music < 0) GAME.interest.music = 0;
-    if (GAME.interest.sport < 0) GAME.interest.sport = 0;
-    if (GAME.interest.politics < 0) GAME.interest.politics = 0;
-    if (GAME.interest.educational < 0) GAME.interest.educational = 0;
+	// Clamp down
+	if (interests.gaming < 0) interests.gaming = 0;
+	if (interests.films < 0) interests.films = 0;
+	if (interests.music < 0) interests.music = 0;
+	if (interests.sport < 0) interests.sport = 0;
+	if (interests.politics < 0) interests.politics = 0;
+	if (interests.educational < 0) interests.educational = 0;
 
-    // Clamp up
-    if (GAME.interest.gaming > 10) GAME.interest.gaming = 10;
-    if (GAME.interest.films > 10) GAME.interest.films = 10;
-    if (GAME.interest.music > 10) GAME.interest.music = 10;
-    if (GAME.interest.sport > 10) GAME.interest.sport = 10;
-    if (GAME.interest.politics > 10) GAME.interest.politics = 10;
-    if (GAME.interest.educational > 10) GAME.interest.educational = 10;
+	// Clamp up
+	if (interests.gaming > 10) interests.gaming = 10;
+	if (interests.films > 10) interests.films = 10;
+	if (interests.music > 10) interests.music = 10;
+	if (interests.sport > 10) interests.sport = 10;
+	if (interests.politics > 10) interests.politics = 10;
+	if (interests.educational > 10) interests.educational = 10;
 
-	GAME.lastNewsBlock += 1;
-	if (GAME.lastNewsBlock >= GAME.newsBlocks.length) GAME.lastNewsBlock = 0;
+	GAME.newsIndex += 1;
+	if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
 }
 
-// New news
-requestInterval(() => {
-	if (GAME.paused) return;
-    nextNewsBlock();
-    console.log(GAME.interest);
-}, 5000);
-
-// Relevance update
-requestInterval(() => {
-	if (GAME.paused) return;
-    
-    GAME.relevance -= 0.1;
-    if (GAME.relevance < 0) GAME.relevance = 0;
-    if (GAME.relevance > 2) GAME.relevance = 2;
-}, 1000);
-
-// Remove penguin from array each seccond
-requestInterval(() => {
-	if (GAME.paused) return;
-
-    const chance = randomInteger(0, 2);
-
-    if (chance >= GAME.relevance) {
-        removePenguin();
-    } else {
-        addPenguin();
-    }
- }, 100);
-
+// Initialize news
 initNewsBlocks();
-
-
-function removePenguin() {
-    const index = randomFromArray(GAME.entities);
-    const entity = GAME.entities[index];
-    if (entity.type === 'penguin') entity.state = 'leaving';    
-
-    if (GAME.entities.length === 1) {
-        GAME.paused = true;
-    }
-}
-
-function addPenguin() {
-    const x = randomInteger(0, GAME.element.width);
-    const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
-    const penguin = new Penguin(x, y);
-    GAME.entities.push(penguin); 
-}

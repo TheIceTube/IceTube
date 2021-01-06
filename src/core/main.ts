@@ -12,10 +12,10 @@ stats.showPanel(0);
 if (process.env.NODE_ENV === 'development') document.body.appendChild(stats.dom);
 
 // Get state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
 // Spawn penguins
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 20; i++) {
 	const x = randomInteger(0, GAME.element.width);
 	const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 	const penguin = new Penguin(x, y);
@@ -34,15 +34,27 @@ function loop() {
 		return;
 	}
 
+	// Enable optimizations for many entities
+	if (GAME.entities.length > 1000) {
+		GAME.optimize = true;
+	} else {
+		GAME.optimize = false;
+	}
+
 	stats.begin();
 
 	// Sort entities for 3d effect
-	insertionSort(GAME.entities, 'y');
+	if (!GAME.optimize) insertionSort(GAME.entities, 'y');
 
 	// Update entities
 	for (let i = 0; i < GAME.entities.length; i++) {
 		GAME.entities[i].update();
 	}
+
+	// Remove all deleted entities
+	GAME.entities = GAME.entities.filter(entity => {
+		return entity.exists;
+	});
 
 	// Clean screen
 	GAME.ctx.clearRect(0, 0, GAME.element.width, GAME.element.height);
@@ -51,11 +63,6 @@ function loop() {
 	for (let i = 0; i < GAME.entities.length; i++) {
 		GAME.entities[i].draw();
 	}
-
-	// Remove all deleted entities
-	GAME.entities = GAME.entities.filter(entity => {
-		return entity.exists;
-	});
 
 	stats.end();
 	window.requestAnimationFrame(loop);

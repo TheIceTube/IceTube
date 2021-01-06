@@ -1,7 +1,7 @@
 import { State, GameState } from './state';
 
 // Get game state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
 // On window resize
 window.addEventListener('resize', () => {

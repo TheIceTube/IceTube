@@ -28,7 +28,7 @@ main {
 	max-height: 100%;
 	margin-right: 16px;
 	/* background: linear-gradient(0deg, #ff9a03, #ff2448); */
-	background: linear-gradient(0deg, #39a372, #97c54c);
+	background: linear-gradient(-25deg, #39a372, #e8ff66);
 	transition: transform 1s ease;
 }
 

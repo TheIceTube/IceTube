@@ -1,4 +1,4 @@
-import { State, GameState } from './core/state';
+import { State } from './core/state';
 import { shuffle } from './core/utils';
 
 // Array of news
@@ -14,26 +14,31 @@ const ctx = stage.getContext('2d');
 ctx.imageSmoothingEnabled = false;
 
 // State initialization
-State<GameState>({
+State({
 	paused: false,
 	element: stage,
 	ctx: ctx,
+	optimize: false,
+
 	mouseX: 0,
 	mouseY: 0,
 	mouseDown: false,
+
 	entities: [],
-	maximumPenguins: 50,
-	newsBlocks: shuffle(all_news),
-	lastNewsBlock: 0,
-	relevance : 1,
-	interest: {
+	
+	views: 0,
+	relevance: 1,
+	interests: {
 		gaming: 5,
 		films: 5,
 		music: 5,
 		sport: 5,
 		politics: 5,
-		educational: 5
-	}
+		educational: 5,
+	},
+
+	news: shuffle(all_news),
+	newsIndex: 0,
 });
 
 // Input module

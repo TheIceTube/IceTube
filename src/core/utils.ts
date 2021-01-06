@@ -158,3 +158,11 @@ export function requestTimeout(callback: () => void, delay: number): () => void 
 		canceled = true;
 	};
 }
+
+/**
+ * Add commas to number
+ * @param number Number to add commas to
+ */
+export function numberWithCommas(num: number): string {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

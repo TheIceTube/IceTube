@@ -1,5 +1,5 @@
 import { State, GameState } from '../state';
-import { convertRange, loadImage } from '../utils';
+import { convertRange, loadImage, numberWithCommas } from '../utils';
 
 // Sprites
 import billboardImage from '../../sprites/billboard.png';
@@ -8,7 +8,7 @@ import billboardImage from '../../sprites/billboard.png';
 const billboard = loadImage(billboardImage);
 
 // Global game state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
 export class Billboard {
     public readonly type: 'billboard';
@@ -19,8 +19,6 @@ export class Billboard {
     public y: number;
     public width: number;
     public height: number;
-
-    public views: number = 0;
 
     /**
      * Billboard initialization
@@ -39,6 +37,9 @@ export class Billboard {
     public draw(): void {
         const ctx = GAME.ctx;
 
+        const views = numberWithCommas(Math.floor(GAME.views));
+        const penguins = numberWithCommas(GAME.entities.length - 1);
+
         const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
         const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
 
@@ -52,9 +53,8 @@ export class Billboard {
         ctx.font = 'italic 24px Segoe UI';
         ctx.textAlign = 'center';
 
-        ctx.fillText(`Views: ${this.views}`, this.x, this.y - 270)
-        ctx.fillText(`Penguins: ${GAME.entities.length - 1}`, this.x, this.y - 240)
-
+        ctx.fillText(`Views: ${views}`, this.x, this.y - 270);
+        ctx.fillText(`Penguins: ${penguins}`, this.x, this.y - 240);
     }
 
     /**
@@ -63,7 +63,6 @@ export class Billboard {
     public update(): void {
         this.x = GAME.element.width / 2;
         this.y = GAME.element.height / 1.5;
-        this.views += 1;
     }
 
 }

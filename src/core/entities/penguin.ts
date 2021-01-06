@@ -4,28 +4,29 @@ import { convertRange, lerp, loadImage, randomInteger } from '../utils';
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
 import spriteRight from '../../sprites/penguin-right.png';
-import { threadId } from 'worker_threads';
 
 // Preload images
 const penguinLeft = loadImage(spriteLeft);
 const penguinRight = loadImage(spriteRight);
 
 // Global game state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
 export class Penguin {
 	public readonly type = 'penguin';
 	public readonly spriteHeight = 92;
-    public readonly spriteWidth = 92;
-    
-	public exists: boolean;
+	public readonly spriteWidth = 92;
 
+	public involvement: number;
+	public exists: boolean;
+	
 	public state: 'spawning' | 'walking' | 'leaving';
 	public direction: 'left' | 'right';
-
+	
 	public frame: number;
 	public x: number;
 	public y: number;
+	public visible: boolean;
 
 	public width: number;
 	public height: number;
@@ -33,20 +34,27 @@ export class Penguin {
 	constructor(x: number, y: number) {
 		this.x = x;
 		this.y = y;
+		this.visible = (GAME.optimize === false);
 
 		this.state = 'spawning';
 		this.frame = randomInteger(0, 20);
 		this.direction = randomInteger(0, 1) ? 'left' : 'right';
 
-		this.width = this.spriteWidth;
-        this.height = 0;
-        this.exists = true;
+		this.width = this.spriteWidth / 2;
+		this.height = 0;
+		this.exists = true;
+		this.involvement = randomInteger(75, 125);
 	}
 
 	/**
 	 * Draw penguin
 	 */
 	public draw(): void {
+		const ctx = GAME.ctx;
+
+		// Remove if its unmounted
+		if (!this.exists || !this.visible) return;
+
 		const sprite = this.direction === 'left' ? penguinLeft : penguinRight;
 		const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
 		const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
@@ -54,12 +62,16 @@ export class Penguin {
 		// Skip drawing if its reversed
 		if (size < 0) return;
 
-		GAME.ctx.save();
-		GAME.ctx.translate(this.x, posY);
-		GAME.ctx.scale(size, size);
+		ctx.save();
+		ctx.translate(this.x, posY);
+		ctx.scale(size, size);
 
-		GAME.ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
-		GAME.ctx.restore();
+		ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
+		ctx.restore();
+		
+        // ctx.font = '11px Segoe UI';
+        // ctx.textAlign = 'center';
+        // ctx.fillText(this.involvement.toFixed(2), this.x, posY);
 	}
 
 	/**
@@ -69,13 +81,53 @@ export class Penguin {
 		const width: number = GAME.element.width;
 		const height: number = GAME.element.height;
 
+		// Remove if its unmounted
+		if (!this.exists) return;
+
+		// Lower involvement
+		this.involvement -= 0.05;
+
+		// Lower involvement one more time
+		if (GAME.relevance >= 1.5 || GAME.relevance <= 0.5) this.involvement -= 0.05;
+
+		// If penguin is not involved
+		if (this.involvement <= 0) {
+			if (!this.visible) {
+				this.exists = false;
+				return;
+			}
+
+			if (GAME.optimize) {
+				const hiddenPenguin = GAME.entities.find(entity => {
+					return entity.type === 'penguin' && entity.involvement > 0 && entity.visible === false;
+				}) as Penguin;
+
+				if (hiddenPenguin) {
+					this.involvement = hiddenPenguin.involvement;
+					hiddenPenguin.involvement = 0;
+					hiddenPenguin.exists = false;
+					return;
+				} else {
+					this.state = 'leaving';
+				}
+			} else {
+				this.state = 'leaving';
+			}
+		}
+
+		// Dont update visibility parameters
+		if (!this.visible) return;
+
 		// Update frame
 		this.frame += 1;
 		if (this.frame > 20) this.frame = 0;
 
+		// Add views
+		if (this.frame === 0) GAME.views += 10;
+
 		// If walking
 		if (this.state === 'walking') {
-			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.3) : lerp(this.height, this.spriteHeight + 4, 0.3);
+			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.2) : lerp(this.height, this.spriteHeight + 4, 0.2);
 
 			if (this.direction === 'left') {
 				this.x -= convertRange(this.y, { min: 0, max: height }, { min: 0, max: 2 });
@@ -84,21 +136,24 @@ export class Penguin {
 				this.x += convertRange(this.y, { min: 0, max: height }, { min: 0, max: 2 });
 				if (this.x >= width + this.width) this.x = -this.width;
 			}
-
-			if (this.x <= -100) this.x = width;
 		}
 
 		// Spawning penguin
 		if (this.state === 'spawning') {
+			this.width = lerp(this.width, this.spriteWidth, 0.1);
 			this.height = lerp(this.height, this.spriteHeight, 0.1) + 0.1;
-			if (this.height >= this.spriteHeight) this.state = 'walking';
+			if (this.height >= this.spriteHeight) {
+				this.state = 'walking';
+				this.width = this.spriteWidth;
+				this.height = this.spriteHeight;
+			}
 		}
 
 		// Removing penguin
 		if (this.state === 'leaving') {
-            this.height = lerp(this.height, 0, 0.1) - 0.05;
-            if (this.height <= 0) this.exists = false;
+			this.width = lerp(this.width, 0, 0.1);
+			this.height = lerp(this.height, 0, 0.1) - 0.1;
+			if (this.height <= 10) this.exists = false;
 		}
-
 	}
 }

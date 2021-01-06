@@ -2,7 +2,7 @@ import { State, GameState } from './state';
 import { requestInterval } from './utils';
 
 // Get state
-const GAME: GameState = State<GameState>();
+const GAME: GameState = State();
 
 // Elements
 const newPost = document.getElementById('newPost');
@@ -14,6 +14,7 @@ const pause = document.getElementById(`pauseMenu`);
 
 // UI
 newPost.addEventListener('click', () => {
+	GAME.relevance += 1;
 	modal.style.top = '45%';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
