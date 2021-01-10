@@ -1,6 +1,6 @@
 import { Penguin } from './entities/penguin';
 import { State, GameState } from './state';
-import { randomInteger, requestInterval, insertionSort, lerp } from './utils';
+import { randomInteger, requestInterval, insertionSort, average, requestTimeout } from './utils';
 
 // Get state
 const GAME: GameState = State();
@@ -9,21 +9,36 @@ const GAME: GameState = State();
 const news = document.getElementById('news');
 
 // Show news blocks
-requestInterval(() => {
+const newsInterval = requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
-
-	console.log(GAME.interests);
 }, 10000);
+
+// Speedup timer
+let newsUpdateTime = 10000;
+requestInterval(() => {
+	if (newsUpdateTime <= 5000) return;
+
+	newsUpdateTime -= 500;
+	newsInterval(newsUpdateTime);
+}, 20000);
+
+// TODO: Remove
+let weShouldStopThisGame = false;
 
 // Relevance update
 requestInterval(() => {
 	if (GAME.paused) return;
 	if (!GAME.started) return;
 
-	GAME.relevance -= 0.02;
-	if (GAME.relevance > 1.1) GAME.relevance -= 0.01;
+	// TODO: Tricky pricky trick, REMOVE IT
+	if (GAME.entities.length > 3000) weShouldStopThisGame = true;
+	if (weShouldStopThisGame && GAME.relevance > 0.9) GAME.relevance -= 0.1;
+
+	GAME.relevance -= 0.03;
+	if (GAME.relevance > 1.2) GAME.relevance -= 0.02;
 	
+
 	if (GAME.relevance < 0) GAME.relevance = 0;
 	if (GAME.relevance > 2) GAME.relevance = 2;
 }, 1000);
@@ -52,47 +67,16 @@ requestInterval(() => {
 }, 1000);
 
 /**
- * Init news blocks
- */
-function initNewsBlocks() {
-	const elements = ['one', 'two', 'last'];
-
-	GAME.newsIndex = 3;
-	news.innerHTML = '';
-
-	for (let i = 0; i < elements.length; i++) {
-		const block = GAME.news[i];
-
-		// Create next post
-		const newsPostNext = document.createElement('div');
-		newsPostNext.className = `news-block ${elements[i]}`;
-
-		// Title
-		const title = document.createElement('h3');
-		title.innerText = block.title;
-
-		// Content
-		const content = document.createElement('p');
-		content.innerText = block.content;
-
-		newsPostNext.appendChild(title);
-		newsPostNext.appendChild(content);
-		news.appendChild(newsPostNext);
-	}
-}
-
-/**
  * Next news block
  */
 function nextNewsBlock() {
-
 	const index = GAME.newsIndex;
-	const block = GAME.news[index];
+	const interests = GAME.interests;
 
-	console.log(index, block);
-
+	const latest = GAME.news[index];
+	const seccond = GAME.news[index - 1]
+	const first = GAME.news[index - 2]
 	
-
 	// Remove old news block
 	const oldBlock = news.querySelector('.old');
 	if (oldBlock) oldBlock.remove();
@@ -103,11 +87,11 @@ function nextNewsBlock() {
 
 	// Title
 	const title = document.createElement('h3');
-	title.innerText = block.title;
+	title.innerText = latest.title;
 
 	// Content
 	const content = document.createElement('p');
-	content.innerText = block.content;
+	content.innerText = latest.content;
 
 	// Build element
 	nextBlock.appendChild(title);
@@ -129,14 +113,41 @@ function nextNewsBlock() {
 		if (lastBlock) lastBlock.className = 'news-block last';
 	});
 
-	const interests = GAME.interests;
-	// Update interests
-	interests.gaming = Math.floor((interests.gaming + block.gaming) / 2);
-	interests.films = Math.floor((interests.films + block.films) / 2);
-	interests.music = Math.floor((interests.music + block.music) / 2);
-	interests.sport = Math.floor((interests.sport + block.sport) / 2);
-	interests.politics = Math.floor((interests.politics + block.politics) / 2);
-	interests.educational = Math.floor((interests.educational + block.educational) / 2);
+	interests.gaming = average([
+		latest.gaming, 
+		seccond ? seccond.gaming : latest.gaming, 
+		first ? first.gaming : latest.gaming, 
+	]);
+
+	interests.films = average([
+		latest.films, 
+		seccond ? seccond.films : latest.films, 
+		first ? first.films : latest.films, 
+	]);
+
+	interests.music = average([
+		latest.music, 
+		seccond ? seccond.music : latest.music, 
+		first ? first.music : latest.music, 
+	]);
+
+	interests.sport = average([
+		latest.sport, 
+		seccond ? seccond.sport : latest.sport, 
+		first ? first.sport : latest.sport, 
+	]);
+
+	interests.politics = average([
+		latest.politics, 
+		seccond ? seccond.politics : latest.politics, 
+		first ? first.politics : latest.politics, 
+	]);
+
+	interests.educational = average([
+		latest.educational, 
+		seccond ? seccond.educational : latest.educational, 
+		first ? first.educational : latest.educational, 
+	]);
 
 	// Clamp down
 	if (interests.gaming < 0) interests.gaming = 0;
@@ -154,10 +165,9 @@ function nextNewsBlock() {
 	if (interests.politics > 10) interests.politics = 10;
 	if (interests.educational > 10) interests.educational = 10;
 
+	console.log(interests);
+	(document.getElementById('newPost') as HTMLButtonElement).disabled = false;
+
 	GAME.newsIndex += 1;
 	if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
 }
-
-// Initialize news
-// initNewsBlocks();
-		

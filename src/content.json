@@ -3,7 +3,9 @@
         { 
             "title": "U.S. Elections!",
             "content": "In a week we will know who will be the new president of the United States!",
-            "gaming": 1,
+            "theme": "",
+            "fake": true,
+            
             "music": 1,
             "films": 1,
             "sport": 1,

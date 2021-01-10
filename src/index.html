@@ -19,18 +19,18 @@
 
         <!-- News -->
         <div id="news">
-            <!-- <div class="news-block one">
+            <div class="news-block one" style="background-color: black; color: white">
                 <h3>Hello boys and girls!</h3>
-                <p>Welcome to our game! We put a lot of love in it ♥</p>
+                <p>Our team spent nights to make this game better 😄</p>
             </div>
-            <div class="news-block two">
-                <h3>Ho</h3>
-                <p></p>
+            <div class="news-block two" style="background-color: black; color: white">
+                <h3>How to play?</h3>
+                <p>Create posts by choosing a topic based on the latest news</p>
             </div>
-            <div class="news-block last">
-                <h3>Yo</h3>
-                <p></p>
-            </div> -->
+            <div class="news-block last" style="background-color: black; color: white">
+                <h3>Whats next?</h3>
+                <p>The game starts when you make your first post! Wait, in a few seconds the news will start to appear</p>
+            </div>
         </div>
 
         <!-- Game UI -->
@@ -39,32 +39,44 @@
 
             <label for="montage">Theme</label>
 
-            <div class="theme-picker"> 
+            <div class="theme-picker">
                 <div class="row">
-                    <button id="gaming"></button>
-                    <button id="educational"></button>    
-                    <button id="politics"></button>
+                    <button id="gaming">
+                        <img src="./sprites/Game.png" />
+                    </button>
+                    <button id="educational">
+                        <img src="./sprites/Educational.png" />
+                    </button>
+                    <button id="politics">
+                        <img src="./sprites/Political.png" />
+                    </button>
                 </div>
                 <div class="row">
-                    <button id="films"></button>
-                    <button id="music"></button>
-                    <button id="sport"></button>    
+                    <button id="films">
+                        <img src="./sprites/Film.png" />
+
+                    </button>
+                    <button id="music">
+                        <img src="./sprites/Music.png" />
+
+                    </button>
+                    <button id="sport">
+                        <img src="./sprites/Sports.png" />
+
+                    </button>
                 </div>
             </div>
 
-            <!-- <label for="montage">Emotionality</label>
+            <label for="montage">Emotionality</label>
             <input type="range" min="0" max="10" value="5" class="slider" id="emotionality">
 
             <label for="informativity">Informativity</label>
             <input type="range" min="0" max="10" value="5" class="slider" id="informativity">
 
-            <label for="montage">Montage</label>
-            <input type="range" min="0" max="10" value="5" class="slider" id="montage">
+            <label for="informativity">Сredibility</label>
+            <input type="range" min="0" max="10" value="5" class="slider" id="сredibility">
 
-            <label for="montage">Advertisment</label>
-            <input type="range" min="0" max="10" value="5" class="slider" id="montage"> -->
-
-            <button type="submit" id="post" class="cool-button">Post Video</button>
+            <button type="submit" id="post" class="cool-button">UPLOAD POST</button>
         </div>
 
         <div id="overlay" style="opacity: 0; pointer-events: none;"></div>
@@ -73,9 +85,7 @@
             <div id="menuButtons">
                 <h1>PAUSE MENU</h1>
                 <label>To resume click outsidse the window.</labe>
-
                     <label>Must add HELP for INFO</labe>
-
             </div>
         </div>
 

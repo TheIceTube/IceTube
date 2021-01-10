@@ -55,9 +55,9 @@ export class Billboard {
         ctx.textAlign = 'center';
 
         
-        ctx.fillText(`Relevance: ${relevance}`, this.x, this.y - 300);
-        ctx.fillText(`Views: ${views}`, this.x, this.y - 270);
-        ctx.fillText(`Penguins: ${penguins}`, this.x, this.y - 240);
+        ctx.fillText(`Relevance: ${relevance}`, this.x, posY - 400);
+        ctx.fillText(`Views: ${views}`, this.x, posY - 360);
+        ctx.fillText(`Penguins: ${penguins}`, this.x, posY - 320);
     }
 
     /**
@@ -67,5 +67,4 @@ export class Billboard {
         this.x = GAME.element.width / 2;
         this.y = GAME.element.height / 1.5;
     }
-
 }

@@ -5,7 +5,7 @@ import { requestInterval } from './utils';
 const GAME: GameState = State();
 
 // Elements
-const newPost = document.getElementById('newPost');
+const newPost = document.getElementById('newPost') as HTMLButtonElement;
 const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 const menu = document.getElementById(`menu`);
@@ -127,7 +127,7 @@ function createPost() {
 	let highestInterest = 0;
 
 	GAME.started = true;
-	
+
 	for(const key in GAME.interests) {
 		const interest = GAME.interests[key];
 		
@@ -141,7 +141,10 @@ function createPost() {
 	if (selectedTheme === null) return;
 
 	console.log(selectedTheme.id, topTheme);
-
+	
 	// TODO: Build this value from multiple factors
+	if (GAME.relevance < 0.5) GAME.relevance = 0.5
 	if (selectedTheme.id === topTheme) GAME.relevance += 0.5;
+
+	newPost.disabled = true;
 }

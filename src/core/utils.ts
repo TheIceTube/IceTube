@@ -104,7 +104,7 @@ export function randomFromArray(array: any[]): number {
  * @param callback Callback that will be executed after delay
  * @param delay Delay before executing
  */
-export function requestInterval(callback: () => void, delay: number): () => void {
+export function requestInterval(callback: () => void, delay: number): (number?: number) => void {
 	let start = Date.now();
 	let canceled = false;
 
@@ -113,8 +113,8 @@ export function requestInterval(callback: () => void, delay: number): () => void
 
 		let current = Date.now();
 		let delta = current - start;
-			
-		if(delta >= delay) {
+
+		if (delta >= delay) {
 			callback();
 			start = Date.now();
 		}
@@ -124,8 +124,12 @@ export function requestInterval(callback: () => void, delay: number): () => void
 
 	loop();
 
-	return () => {
-		canceled = true;
+	return (number) => {
+		if (number) {
+			delay = number;
+		} else {
+			canceled = true;
+		}
 	};
 }
 
@@ -143,8 +147,8 @@ export function requestTimeout(callback: () => void, delay: number): () => void 
 
 		let current = Date.now();
 		let delta = current - start;
-			
-		if(delta >= delay) {
+
+		if (delta >= delay) {
 			callback();
 			return;
 		}
@@ -164,5 +168,15 @@ export function requestTimeout(callback: () => void, delay: number): () => void 
  * @param number Number to add commas to
  */
 export function numberWithCommas(num: number): string {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+/**
+ * Calculate average value of all numbers
+ * @param nums Array of number
+ * @param floor Round returned value
+ */
+export function average(nums: number[], floor: boolean = true): number {
+	const result: number = nums.reduce((a, b) => a + b, 0) / nums.length;
+	return floor ? Math.floor(result) : result;
 }

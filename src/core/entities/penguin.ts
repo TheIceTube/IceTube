@@ -52,10 +52,10 @@ export class Penguin {
 	public draw(): void {
 		const ctx = GAME.ctx;
 
+		if (!GAME.started) return;
+
 		// Remove if its unmounted
 		if (!this.exists || !this.visible) return;
-
-		if (!GAME.started) return;
 
 		const sprite = this.direction === 'left' ? penguinLeft : penguinRight;
 		const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
@@ -94,7 +94,7 @@ export class Penguin {
 		// Lower involvement one more time
 		if (GAME.relevance <= 0.5) this.involvement -= 0.05;
 		
-		// 
+		//
 		if (GAME.relevance >= 1) this.involvement += 0.02;
 
 		// If penguin is not involved

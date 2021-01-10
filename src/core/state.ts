@@ -43,6 +43,7 @@ export interface GameState {
 
     entities: Array<Penguin | Billboard>;
 	started: boolean;
+	
 	views: number;
 	relevance: number;
 	interests: Interests;
