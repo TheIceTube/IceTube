@@ -1,5 +1,11 @@
 import { Penguin } from './entities/penguin';
 import { Billboard } from './entities/billboard';
+import { Fish } from './entities/fish';
+
+/**
+ * Possible post themes
+ */
+type Theme = 'politics' | 'gaming' | 'music' | 'films' | 'educational' | 'sports';
 
 /**
  * Sctructure of the news post
@@ -7,13 +13,8 @@ import { Billboard } from './entities/billboard';
 interface NewsBlock {
 	title: string;
     content: string;
-    
-	gaming: number;
-	music: number;
-	films: number;
-	sport: number;
-	politics: number;
-	educational: number;
+	theme: Theme;
+	fake: boolean;
 }
 
 /**
@@ -29,14 +30,15 @@ export interface GameState {
 	mouseY: number;
 	mouseDown: boolean;
 
-    entities: Array<Penguin | Billboard>;
+    entities: Array<Penguin | Billboard | Fish>;
 	started: boolean;
-	
-	views: number;
+
+	fish: number;
 	relevance: number;
-    
+	
 	news: NewsBlock[];
 	newsIndex: number;
+	selectedNewsIndex: number;
 }
 
 /**

@@ -5,13 +5,8 @@ import { randomInteger, requestInterval, insertionSort, average, requestTimeout 
 // Get state
 const GAME: GameState = State();
 
-// Elements
-const news = document.getElementById('news');
-
-// Show news blocks
-const newsInterval = requestInterval(() => {
-	if (GAME.paused) return;
-	nextNewsBlock();
+requestInterval(() => {
+	document.getElementById('counter').innerText = `${GAME.fish}`;
 }, 1000);
 
 // // Speedup timer
@@ -58,61 +53,3 @@ requestInterval(() => {
 
 	insertionSort(GAME.entities, 'y');
 }, 1000);
-
-/**
- * Next news block
- */
-function nextNewsBlock() {
-	const index = GAME.newsIndex;
-	const latest = GAME.news[index];
-
-	// Remove old news block
-	const blockOld = news.querySelector('.old');
-	if (blockOld) blockOld.remove();
-
-	// Move all blocks
-	const blockOne = news.querySelector('.block.one');
-	if (blockOne) {
-		blockOne.classList.remove('one');
-		blockOne.classList.add('old');
-	}
-
-	const blockTwo = news.querySelector('.block.two');
-	if (blockTwo) {
-		blockTwo.classList.add('one');
-		blockTwo.classList.remove('two');
-	}
-
-	const blockThree = news.querySelector('.block.three');
-	if (blockThree) {
-		blockThree.classList.add('two');
-		blockThree.classList.remove('three');
-	}
-	
-	// Create next post
-	const blockNew = document.createElement('div');
-	blockNew.className = 'block new';
-
-	// Title
-	const title = document.createElement('h3');
-	title.innerText = latest.title;
-
-	// Content
-	const content = document.createElement('p');
-	content.innerText = latest.content;
-
-	// Build element
-	blockNew.appendChild(title);
-	blockNew.appendChild(content);
-	news.appendChild(blockNew);
-
-	// Make new block 
-	setTimeout(() => {
-		blockNew.className = 'block three';
-	});
-
-	// (document.getElementById('newPost') as HTMLButtonElement).disabled = false;
-
-	GAME.newsIndex += 1;
-	if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
-}

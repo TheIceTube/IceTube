@@ -37,7 +37,7 @@ export class Billboard {
     public draw(): void {
         const ctx = GAME.ctx;
 
-        const views = numberWithCommas(Math.floor(GAME.views));
+        const views = 0;
         const penguins = GAME.started ? numberWithCommas(GAME.entities.length - 1) : 0;
         const relevance = GAME.relevance.toFixed(2);
 

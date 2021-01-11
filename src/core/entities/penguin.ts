@@ -1,5 +1,7 @@
+import { Fish } from './fish';  
+
 import { State, GameState } from '../state';
-import { convertRange, lerp, loadImage, randomInteger } from '../utils';
+import { convertRange, insertionSort, lerp, loadImage, randomInteger } from '../utils';
 
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
@@ -23,6 +25,7 @@ export class Penguin {
 	public state: 'spawning' | 'walking' | 'leaving';
 	public direction: 'left' | 'right';
 	
+	public spawnFrame: number;
 	public frame: number;
 	public x: number;
 	public y: number;
@@ -44,6 +47,7 @@ export class Penguin {
 		this.height = 0;
 		this.exists = true;
 		this.involvement = randomInteger(75, 125);
+		this.spawnFrame = randomInteger(0, 180);
 	}
 
 	/**
@@ -125,12 +129,20 @@ export class Penguin {
 		// Dont update visibility parameters
 		if (!this.visible) return;
 
+		if (this.spawnFrame === 180) {
+			const fish = new Fish(this.x, this.y - 1);
+			GAME.entities.push(fish);
+			insertionSort(GAME.entities, 'y');
+			GAME.fish += 1;
+		}
+
 		// Update frame
 		this.frame += 1;
 		if (this.frame > 20) this.frame = 0;
 
-		// Add views
-		if (this.frame === 0) GAME.views += 10;
+		// Update spawn frame
+		this.spawnFrame += 1;
+		if (this.spawnFrame > 180) this.spawnFrame = 0;
 
 		// If walking
 		if (this.state === 'walking') {

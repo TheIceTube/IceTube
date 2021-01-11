@@ -2,7 +2,7 @@ import { State } from './core/state';
 import { shuffle } from './core/utils';
 
 // Array of news
-import { all_news } from './content.json';
+import { all_news } from './content_real.json';
 
 // Setup canvas element
 const stage = document.getElementById('stage') as HTMLCanvasElement;
@@ -26,11 +26,12 @@ State({
 
 	entities: [],
 	started: false,
-	views: 0,
+	fish: 0,
 	relevance: 1,
-
+	
 	news: shuffle(all_news),
 	newsIndex: 0,
+	selectedNewsIndex: 0
 });
 
 // Input module

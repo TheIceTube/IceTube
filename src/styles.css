@@ -28,10 +28,9 @@ main {
 	max-height: 100%;
 	margin-right: 16px;
 	background: linear-gradient(-10deg, white, rgb(100, 200, 255));
-
 	background: linear-gradient(-10deg, #ff9a03, #ff2448);
 	background: linear-gradient(-10deg, #39a372, #e8ff66);
-	transition: transform 1s ease;
+	transition: transform 0.5s ease;
 }
 
 #post {
@@ -80,9 +79,9 @@ main {
 #modal {
 	z-index: 999999;
 	position: fixed;
-	top: 45%;
+	top: 32px;
 	left: 50%;
-	width: 400px;
+	width: 600px;
 	padding: 64px;
 	max-height: 100vh;
 	overflow: hidden;
@@ -93,7 +92,7 @@ main {
 	transition: top 0.4s ease;
 	box-shadow: 0 12px black;
 	border: solid 4px black;
-	transform: translate(-50%, -50%);
+	transform: translateX(-50%);
 }
 
 label {
@@ -152,6 +151,15 @@ label {
 	left: 16px;
 }
 
+#selected {
+	width: 100%;
+	height: auto;
+	padding: 16px;
+	border-radius: 8px;
+	margin-bottom: 16px;
+	border: solid 4px black;
+}
+
 #news {
 	z-index: 9999;
 }
@@ -181,10 +189,11 @@ label {
 #news .block.posted {
 	cursor: auto;
 	pointer-events: none;
-	opacity: 0.75;
+	opacity: 0.5;
+	transform: scale(0.9);
 }
 
-#news .block > h3 {
+#news .block > h3, #selected .block > h3 {
 	margin: 0;
 	font-size: 16px;
 	margin-bottom: 4px;
@@ -194,7 +203,7 @@ label {
 	border-bottom: dashed 2px black;
 }
 
-#news .block > p {
+#news .block > p, #selected .block > p {
 	margin: 0;
 	font-size: 14px;
 }
@@ -259,7 +268,7 @@ label {
 	display: flex;
 	overflow: hidden;
 	border-radius: 8px;
-	flex-direction: column;
+	flex-direction: row;
 	width: 100%;
 	height: auto;
 	margin-bottom: 24px;
@@ -290,6 +299,7 @@ label {
 	transition: all 0.1s linear;
 	background-position: center;
 	background-repeat: no-repeat;
+	user-select: none;
 }
 
 .theme-picker button.active {
@@ -350,15 +360,16 @@ label {
 }
 
 #start-menu p {
-	color: black;
-	letter-spacing: 2px;
 	margin: 0;
-	margin-bottom: 64px;
+	color: black;
 	font-size: 20px;
+	letter-spacing: 2px;
+	margin-bottom: 64px;
 	font-style: italic;
 	text-transform: lowercase;
 	font-weight: bold;
 	transition: all 0.1s ease;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 #start-menu p:hover {
@@ -395,4 +406,34 @@ label {
 #start-button:active,
 #start-button:focus {
 	outline: none;
+}
+
+#fish {
+	z-index: 99999;
+	position: fixed;
+	height: 64px;
+	top: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	flex-direction: row;
+}
+
+.fish-icon {
+	margin-right: 8px;
+	height: 100%;
+	width: 64px;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url('./sprites/fish.png');
+}
+
+#fish #counter {
+	color: black;
+	font-size: 20px;
+	line-height: 64px;
+	font-style: italic;
+	font-weight: bold;
+	font-family: 'Courier New', Courier, monospace;
 }
