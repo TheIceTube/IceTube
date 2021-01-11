@@ -65,11 +65,15 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
+const overlay = document.getElementById('overlay');
+overlay.style.opacity = '1';
 
 document.getElementById('start-button').onclick = () => {
 	loop();
 	GAME.paused = false;
+	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
+
 }
 
 GAME.paused = true;

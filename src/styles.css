@@ -309,8 +309,8 @@ label {
 }
 
 #start-menu {
-	background-color: #e8ff66;
-	background-image: url('./sprites/bg4.png');
+	background-color: linear-gradient(-10deg, #39a372, #e8ff66);
+	background-image: url('./sprites/bg5.png');
 	background-position: center;
 	z-index: 99999999;
 	width: 100%;
