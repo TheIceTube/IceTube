@@ -5,7 +5,6 @@ import { requestInterval } from './utils';
 const GAME: GameState = State();
 
 // Elements
-const newPost = document.getElementById('newPost') as HTMLButtonElement;
 const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
 const menu = document.getElementById(`menu`);
@@ -20,13 +19,13 @@ const musicButt = document.getElementById('music');
 const sportsButt = document.getElementById('sport');
 
 // UI
-newPost.addEventListener('click', () => {
-	modal.style.top = '45%';
-	overlay.style.opacity = '1';
-	overlay.style.pointerEvents = 'auto';
-	GAME.element.style.transform = 'scale(2) translateY(-32px)';
-	GAME.paused = true;
-});
+// newPost.addEventListener('click', () => {
+// 	modal.style.top = '45%';
+// 	overlay.style.opacity = '1';
+// 	overlay.style.pointerEvents = 'auto';
+// 	GAME.element.style.transform = 'scale(2) translateY(-32px)';
+// 	GAME.paused = true;
+// });
 
 postBut.addEventListener('click', () => {
 	modal.style.top = '150%';
@@ -35,7 +34,6 @@ postBut.addEventListener('click', () => {
 	GAME.element.style.transform = 'scale(1)';
 	GAME.paused = false;
 
-	createPost();
 	unpressButtons();
 });
 
@@ -122,29 +120,29 @@ function unpressButtons(): void {
 	sportsButt.classList.remove('active');
 }
 
-function createPost() {
-	let topTheme = 'gaming';
-	let highestInterest = 0;
+// function createPost() {
+// 	let topTheme = 'gaming';
+// 	let highestInterest = 0;
 
-	GAME.started = true;
+// 	GAME.started = true;
 
-	for(const key in GAME.interests) {
-		const interest = GAME.interests[key];
+// 	for(const key in GAME.interests) {
+// 		const interest = GAME.interests[key];
 		
-		if (interest >= highestInterest) {
-			topTheme = key;
-			highestInterest = interest;
-		}
-	}
+// 		if (interest >= highestInterest) {
+// 			topTheme = key;
+// 			highestInterest = interest;
+// 		}
+// 	}
 
-	let selectedTheme = document.querySelector('button.active');
-	if (selectedTheme === null) return;
+// 	let selectedTheme = document.querySelector('button.active');
+// 	if (selectedTheme === null) return;
 
-	console.log(selectedTheme.id, topTheme);
+// 	console.log(selectedTheme.id, topTheme);
 	
-	// TODO: Build this value from multiple factors
-	if (GAME.relevance < 0.5) GAME.relevance = 0.5
-	if (selectedTheme.id === topTheme) GAME.relevance += 0.5;
+// 	// TODO: Build this value from multiple factors
+// 	if (GAME.relevance < 0.5) GAME.relevance = 0.5
+// 	if (selectedTheme.id === topTheme) GAME.relevance += 0.5;
 
-	newPost.disabled = true;
-}
+// 	newPost.disabled = true;
+// }

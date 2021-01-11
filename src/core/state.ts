@@ -17,18 +17,6 @@ interface NewsBlock {
 }
 
 /**
- * World interests
- */
-interface Interests {
-	gaming: number;
-	music: number;
-	films: number;
-	sport: number;
-	politics: number;
-	educational: number;
-}
-
-/**
  * State of the game
  */
 export interface GameState {
@@ -46,7 +34,6 @@ export interface GameState {
 	
 	views: number;
 	relevance: number;
-	interests: Interests;
     
 	news: NewsBlock[];
 	newsIndex: number;

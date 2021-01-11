@@ -28,14 +28,6 @@ State({
 	started: false,
 	views: 0,
 	relevance: 1,
-	interests: {
-		gaming: 5,
-		films: 5,
-		music: 5,
-		sport: 5,
-		politics: 5,
-		educational: 5,
-	},
 
 	news: shuffle(all_news),
 	newsIndex: 0,
