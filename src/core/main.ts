@@ -22,6 +22,8 @@ for (let i = 0; i < 20; i++) {
 	GAME.entities.push(penguin);
 }
 
+(GAME.entities[5] as any).state = 'speaking';
+
 // Spawn billboard
 const billboard = new Billboard();
 GAME.entities.push(billboard);

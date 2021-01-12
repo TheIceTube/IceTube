@@ -6,10 +6,12 @@ import { convertRange, lerp, loadImage, randomInteger } from '../utils';
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
 import spriteRight from '../../sprites/penguin-right.png';
+import speachBubbleImage from '../../sprites/speech_bubble.png';
 
 // Preload images
 const penguinLeft = loadImage(spriteLeft);
 const penguinRight = loadImage(spriteRight);
+const speackBubble = loadImage(speachBubbleImage);
 
 // Global game state
 const GAME: GameState = State();
@@ -24,7 +26,7 @@ export class Penguin {
 	
 	public state: 'spawning' | 'walking' | 'leaving' | 'speaking';
 	public direction: 'left' | 'right';
-	public phrase: string = '';
+	public message: string = '';
 
 	public spawnFrame: number;
 	public frame: number;
@@ -70,13 +72,14 @@ export class Penguin {
 		ctx.save();
 		ctx.translate(this.x, posY);
 		ctx.scale(size, size);
-
 		ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
 		ctx.restore();
 		
-        // ctx.font = '16px Segoe UI';
-        // ctx.textAlign = 'center';
-        // ctx.fillText(this.involvement.toFixed(2), this.x, posY);
+		if ((window as any).debug) {
+			ctx.font = '16px Segoe UI';
+			ctx.textAlign = 'center';
+			ctx.fillText(this.involvement.toFixed(2), this.x, posY);
+		}
 	}
 
 	/**
@@ -102,7 +105,7 @@ export class Penguin {
 		if (this.involvement <= 0) this.state = 'leaving';
 
 		// Spawn fish
-		if (this.spawnFrame === 200 && this.state !== 'leaving') {
+		if (this.spawnFrame === 200 && this.state === 'walking') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
 			GAME.fish += 1;
@@ -118,12 +121,15 @@ export class Penguin {
 
 		// Speaking penguin
 		if (this.state === 'speaking') {
-			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.2) : lerp(this.height, this.spriteHeight + 4, 0.2);
+			this.frame += 0.5;
+			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 16, 0.2) : lerp(this.height, this.spriteHeight + 16, 0.2);
+			this.width = this.frame >= 10 ? lerp(this.width, this.spriteWidth + 8, 0.2) : lerp(this.width, this.spriteWidth - 8, 0.2);
 		}
 
 		// If walking
 		if (this.state === 'walking') {
-			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.2) : lerp(this.height, this.spriteHeight + 4, 0.2);
+			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.3) : lerp(this.height, this.spriteHeight + 4, 0.3);
+			this.width = this.frame >= 10 ? lerp(this.width, this.spriteWidth + 16, 0.2) : lerp(this.width, this.spriteWidth - 4, 0.2);
 
 			if (this.direction === 'left') {
 				this.x -= convertRange(this.y, { min: 0, max: height }, { min: 0, max: 2 });

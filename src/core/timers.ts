@@ -45,9 +45,8 @@ requestInterval(() => {
 		const x = randomInteger(0, GAME.element.width);
 		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 		const penguin = new Penguin(x, y);
-		GAME.entities.push(penguin);
+		GAME.entities.push(penguin);		
 	}
 
 	depthSort(GAME.entities);
-
 }, 1000);
