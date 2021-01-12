@@ -57,8 +57,7 @@ export class Billboard {
         ctx.textAlign = 'center';
 
         
-        ctx.fillText(`Relevance: ${relevance}`, this.x, posY - 400);
-        ctx.fillText(`Views: ${views}`, this.x, posY - 360);
+        // ctx.fillText(`Relevance: ${relevance}`, this.x, posY - 400);
         ctx.fillText(`Penguins: ${penguins}`, this.x, posY - 320);
     }
 

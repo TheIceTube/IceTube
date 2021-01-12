@@ -6,6 +6,8 @@ import { randomInteger, requestInterval, depthSort, average, requestTimeout } fr
 const GAME: GameState = State();
 
 
+
+
 // // Speedup timer
 // let newsUpdateTime = 10000;
 // requestInterval(() => {
@@ -23,9 +25,10 @@ requestInterval(() => {
 	GAME.relevance -= 0.03;
 	if (GAME.relevance > 1.2) GAME.relevance -= 0.02;
 	
-
 	if (GAME.relevance < 0) GAME.relevance = 0;
 	if (GAME.relevance > 2) GAME.relevance = 2;
+
+
 }, 1000);
 
 // TODO: Optimize Penguins view, increase penguins number without creating more entities

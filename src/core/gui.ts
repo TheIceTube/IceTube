@@ -20,6 +20,9 @@ const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post');
 
+const revBar = document.querySelector('.bar');
+const overlap = document.querySelector('.overlap');
+
 // Update fish counter
 requestInterval(() => {
 	counter.innerText = numberWithCommas(GAME.fish);
@@ -30,6 +33,23 @@ requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
 }, 1000);
+
+
+//Update revelence bar
+requestInterval(() => {
+	const revelance = GAME.relevance * 50;
+	revBar.style.width = `${revelance}%`;
+
+	if (revelance < 30) {
+		overlap.style.background = '#f35858'
+	} else if (revelance > 70) {
+		overlap.style.background = '#5893f3'
+	} else {
+		overlap.style.background = '#5ef358'
+	}
+
+
+}, 100);
 
 // New post creating
 postButton.addEventListener('click', () => {
