@@ -1,7 +1,7 @@
 import { Fish } from './fish';  
 
 import { State, GameState } from '../state';
-import { convertRange, insertionSort, lerp, loadImage, randomInteger } from '../utils';
+import { convertRange, lerp, loadImage, randomInteger } from '../utils';
 
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
@@ -22,14 +22,14 @@ export class Penguin {
 	public involvement: number;
 	public exists: boolean;
 	
-	public state: 'spawning' | 'walking' | 'leaving';
+	public state: 'spawning' | 'walking' | 'leaving' | 'speaking';
 	public direction: 'left' | 'right';
-	
+	public phrase: string = '';
+
 	public spawnFrame: number;
 	public frame: number;
 	public x: number;
 	public y: number;
-	public visible: boolean;
 
 	public width: number;
 	public height: number;
@@ -37,7 +37,6 @@ export class Penguin {
 	constructor(x: number, y: number) {
 		this.x = x;
 		this.y = y;
-		this.visible = (GAME.optimize === false);
 
 		this.state = 'spawning';
 		this.frame = randomInteger(0, 20);
@@ -47,7 +46,7 @@ export class Penguin {
 		this.height = 0;
 		this.exists = true;
 		this.involvement = randomInteger(75, 125);
-		this.spawnFrame = randomInteger(0, 180);
+		this.spawnFrame = randomInteger(0, 200);
 	}
 
 	/**
@@ -59,7 +58,7 @@ export class Penguin {
 		if (!GAME.started) return;
 
 		// Remove if its unmounted
-		if (!this.exists || !this.visible) return;
+		if (!this.exists) return;
 
 		const sprite = this.direction === 'left' ? penguinLeft : penguinRight;
 		const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
@@ -97,42 +96,15 @@ export class Penguin {
 
 		// Lower involvement one more time
 		if (GAME.relevance <= 0.5) this.involvement -= 0.05;
-		
-		//
 		if (GAME.relevance >= 1) this.involvement += 0.02;
 
 		// If penguin is not involved
-		if (this.involvement <= 0) {
-			if (!this.visible) {
-				this.exists = false;
-				return;
-			}
+		if (this.involvement <= 0) this.state = 'leaving';
 
-			if (GAME.optimize) {
-				const hiddenPenguin = GAME.entities.find(entity => {
-					return entity.type === 'penguin' && entity.involvement > 0 && entity.visible === false;
-				}) as Penguin;
-
-				if (hiddenPenguin) {
-					this.involvement = hiddenPenguin.involvement;
-					hiddenPenguin.involvement = 0;
-					hiddenPenguin.exists = false;
-					return;
-				} else {
-					this.state = 'leaving';
-				}
-			} else {
-				this.state = 'leaving';
-			}
-		}
-
-		// Dont update visibility parameters
-		if (!this.visible) return;
-
-		if (this.spawnFrame === 180) {
+		// Spawn fish
+		if (this.spawnFrame === 200 && this.state !== 'leaving') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
-			insertionSort(GAME.entities, 'y');
 			GAME.fish += 1;
 		}
 
@@ -142,7 +114,12 @@ export class Penguin {
 
 		// Update spawn frame
 		this.spawnFrame += 1;
-		if (this.spawnFrame > 180) this.spawnFrame = 0;
+		if (this.spawnFrame > 200) this.spawnFrame = 0;
+
+		// Speaking penguin
+		if (this.state === 'speaking') {
+			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 24, 0.2) : lerp(this.height, this.spriteHeight + 4, 0.2);
+		}
 
 		// If walking
 		if (this.state === 'walking') {
@@ -170,8 +147,8 @@ export class Penguin {
 
 		// Removing penguin
 		if (this.state === 'leaving') {
-			this.width = lerp(this.width, 0, 0.1);
-			this.height = lerp(this.height, 0, 0.1) - 0.1;
+			this.width = lerp(this.width, 0, 0.05);
+			this.height = lerp(this.height, 0, 0.1) - 0.05;
 			if (this.height <= 10) this.exists = false;
 		}
 	}

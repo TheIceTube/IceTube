@@ -24,7 +24,6 @@ export interface GameState {
 	paused: boolean;
 	element: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
-    optimize: boolean;
 
 	mouseX: number;
 	mouseY: number;

@@ -15,10 +15,9 @@ ctx.imageSmoothingEnabled = false;
 
 // State initialization
 State({
-	paused: false,
+	paused: true,
 	element: stage,
 	ctx: ctx,
-	optimize: false,
 
 	mouseX: 0,
 	mouseY: 0,

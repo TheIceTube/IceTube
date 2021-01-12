@@ -1,6 +1,6 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { insertionSort, randomInteger, randomFromArray, requestInterval, convertRange } from './utils';
+import { depthSort, randomInteger, randomFromArray, requestInterval, convertRange } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -32,13 +32,6 @@ function loop() {
 	if (GAME.paused) {
 		window.requestAnimationFrame(loop);
 		return;
-	}
-
-	// Enable optimizations for many entities
-	if (GAME.entities.length > 1000) {
-		GAME.optimize = true;
-	} else {
-		GAME.optimize = false;
 	}
 
 	stats.begin();
@@ -73,8 +66,4 @@ document.getElementById('start-button').onclick = () => {
 	GAME.paused = false;
 	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
-
 }
-
-GAME.paused = true;
-

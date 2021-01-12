@@ -12,7 +12,9 @@ const GAME: GameState = State();
 
 export class Billboard {
     public readonly type: 'billboard';
-
+	public readonly spriteHeight = 400;
+    public readonly spriteWidth = 400;
+    
     public exists: boolean;
     
     public x: number;
@@ -26,8 +28,8 @@ export class Billboard {
     constructor() {
         this.x = GAME.element.width / 2;
         this.y = GAME.element.height / 1.5
-        this.width = 400;
-        this.height = 400;
+        this.width = this.spriteWidth;
+        this.height = this.spriteHeight;
         this.exists = true;
     }
 

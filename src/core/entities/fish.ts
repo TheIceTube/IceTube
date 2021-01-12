@@ -2,7 +2,7 @@ import { State, GameState } from '../state';
 import { convertRange, loadImage, numberWithCommas, lerp } from '../utils';
 
 // Sprites
-import fishImage from '../../sprites/fish.png';
+import fishImage from '../../sprites/fish-shadow.png';
 
 // Preload images
 const fish = loadImage(fishImage);
@@ -13,11 +13,17 @@ const GAME: GameState = State();
 export class Fish {
     public readonly type: 'fish';
 
+    public readonly spriteHeight = 92;
+	public readonly spriteWidth = 92;
+    public readonly alwaysOnTop: boolean = true;
+
+
     public exists: boolean;
     public frame: number;
     
-    public x: number;
     public y: number;
+    public x: number;
+
     public width: number;
     public height: number;
 
@@ -29,11 +35,11 @@ export class Fish {
     constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.spawnY = this.y;
+        this.spawnY = y;
         this.frame = 0;
         this.exists = true;
-        this.width = 92;
-        this.height = 92;
+        this.width = this.spriteWidth;
+        this.height = this.spriteHeight;
     }
 
     /**
@@ -42,10 +48,10 @@ export class Fish {
     public draw(): void {
         const ctx = GAME.ctx;
 
-        const size = convertRange(this.spawnY, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
-		const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
-
         if (this.exists === false) return;
+
+        const size = convertRange(this.spawnY, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
+        const posY: number = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
 
         ctx.save();
         ctx.translate(this.x, posY);
@@ -58,17 +64,17 @@ export class Fish {
      * Update billboard state
      */
     public update(): void {
-        this.frame += 1;
-        
         if (this.exists === false) return;
 
+        this.frame += 1;
+        
         if (this.frame < 50) {
-            this.y = lerp(this.y, this.spawnY - 64, 0.02);
+            this.y = lerp(this.y, this.spawnY - 256, 0.05);
         } else {
-            this.y = lerp(this.y, -100, 0.02); 
-            this.x = lerp(this.x, GAME.element.width / 2, 0.02); 
-
-            if (this.y < 10) this.exists = false;
+            this.width = lerp(this.width, 0, 0.1); 
+            this.height = lerp(this.height, 0, 0.1); 
+            this.y = lerp(this.y, this.y - 256, 0.1); 
+            if (this.width < 5) this.exists = false;
         }
     }
 }

@@ -1,121 +1,125 @@
 import { State, GameState } from './state';
-import { requestInterval } from './utils';
+import { requestInterval, numberWithCommas } from './utils';
 
 // Get state
 const GAME: GameState = State();
 
 // Elements
 const news = document.getElementById('news');
-const overlay = document.getElementById('overlay');
 const modal = document.getElementById('modal');
-const menu = document.getElementById(`menu`);
-const postBut = document.getElementById('post');
-const pause = document.getElementById(`pauseMenu`);
+const overlay = document.getElementById('overlay');
+const pauseMenu = document.getElementById('pause-menu');
+const counter = document.getElementById('counter');
 
-const gameButt = document.getElementById('gaming');
-const bookButt = document.getElementById('educational');
-const poliButt = document.getElementById('politics');
-const filmButt = document.getElementById('films');
-const musicButt = document.getElementById('music');
-const sportsButt = document.getElementById('sport');
+// Buttons
+const gamingButton = document.getElementById('gaming');
+const educationalButton = document.getElementById('educational');
+const politicsButton = document.getElementById('politics');
+const filmsButton = document.getElementById('films');
+const musicButton = document.getElementById('music');
+const sportButton = document.getElementById('sport');
+const postButton = document.getElementById('post');
 
+// Update fish counter
+requestInterval(() => {
+	counter.innerText = numberWithCommas(GAME.fish);
+}, 100);
+
+// Request news block
 requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
 }, 1000);
 
-
-
-postBut.addEventListener('click', () => {
+// New post creating
+postButton.addEventListener('click', () => {
 	createPost();
-	unpressButtons();
-	hideModal();
+	hideModals();
 });
 
+// Hide modals in overlay click
 overlay.addEventListener('click', () => {
-	menu.style.left = '-150%';
-	modal.style.top = '200%';
-	overlay.style.opacity = '0';
-	overlay.style.pointerEvents = 'none';
-	GAME.element.style.transform = 'scale(1)';
-	GAME.paused = false;
+	hideModals();
+});
+
+// Pause menu on Escape press
+window.addEventListener('keydown', event => {
+	if (event.key === 'Escape') {
+		if (GAME.paused) {
+			GAME.paused = false
+			hideModals();
+		} else {
+			GAME.paused = true;
+			pauseMenu.style.display = 'block';
+			overlay.style.opacity = '1';
+			overlay.style.pointerEvents = 'auto';
+		}
+	}
+});
+
+//Buttons for the new post thingy
+gamingButton.addEventListener('click', () => {
 	unpressButtons();
+	gamingButton.classList.contains('active')
+		? gamingButton.classList.remove('active')
+		: gamingButton.classList.add('active');
 });
 
-pause.addEventListener('click', () => {
-	GAME.paused = true;
-	menu.style.left = '50%';
-	overlay.style.opacity = '1';
-	overlay.style.pointerEvents = 'auto';
+educationalButton.addEventListener('click', () => {
+	unpressButtons();
+	educationalButton.classList.contains('active')
+		? educationalButton.classList.remove('active')
+		: educationalButton.classList.add('active');
 });
 
-//Buttons for the new post thingy
-gameButt.addEventListener('click', () => {
-	if (!gameButt.classList.contains('active')) {
-		unpressButtons();
-		gameButt.classList.add('active');
-	} else {
-		gameButt.classList.remove('active');
-	}
+// Film theme selection
+filmsButton.addEventListener('click', () => {
+	unpressButtons();
+	filmsButton.classList.contains('active')
+		? filmsButton.classList.remove('active')
+		: filmsButton.classList.add('active');
 });
 
-bookButt.addEventListener('click', () => {
-	if (!bookButt.classList.contains('active')) {
-		unpressButtons();
-		bookButt.classList.add('active');
-	} else {
-		bookButt.classList.remove('active');
-	}
+// Politics theme selection
+politicsButton.addEventListener('click', () => {
+	unpressButtons();
+	politicsButton.classList.contains('active')
+		? politicsButton.classList.remove('active')
+		: politicsButton.classList.add('active');
 });
 
-//Buttons for the new post thingy
-filmButt.addEventListener('click', () => {
-	if (!filmButt.classList.contains('active')) {
-		unpressButtons();
-		filmButt.classList.add('active');
-	} else {
-		filmButt.classList.remove('active');
-	}
+// Music theme selection
+musicButton.addEventListener('click', () => {
+	unpressButtons();
+	musicButton.classList.contains('active')
+		? musicButton.classList.remove('active')
+		: musicButton.classList.add('active');
 });
 
-poliButt.addEventListener('click', () => {
-	if (!poliButt.classList.contains('active')) {
-		unpressButtons();
-		poliButt.classList.add('active');
-	} else {
-		poliButt.classList.remove('active');
-	}
+// Sports theme selection
+sportButton.addEventListener('click', () => {
+	unpressButtons();
+	sportButton.classList.contains('active')
+		? sportButton.classList.remove('active')
+		: sportButton.classList.add('active');
 });
 
-//Buttons for the new post thingy
-musicButt.addEventListener('click', () => {
-	if (!musicButt.classList.contains('active')) {
-		unpressButtons();
-		musicButt.classList.add('active');
-	} else {
-		musicButt.classList.remove('active');
-	}
-});
-
-sportsButt.addEventListener('click', () => {
-	if (!sportsButt.classList.contains('active')) {
-		unpressButtons();
-		sportsButt.classList.add('active');
-	} else {
-		sportsButt.classList.remove('active');
-	}
-});
-
+/**
+ * Unpress all theme buttons 
+ */
 function unpressButtons(): void {
-	gameButt.classList.remove('active');
-	bookButt.classList.remove('active');
-	filmButt.classList.remove('active');
-	poliButt.classList.remove('active');
-	musicButt.classList.remove('active');
-	sportsButt.classList.remove('active');
+	gamingButton.classList.remove('active');
+	educationalButton.classList.remove('active');
+	filmsButton.classList.remove('active');
+	politicsButton.classList.remove('active');
+	musicButton.classList.remove('active');
+	sportButton.classList.remove('active');
 }
 
-function createPost() {
+/**
+ * Create new post
+ */
+function createPost(): void {
 	const index = GAME.selectedNewsIndex;
 	const current = GAME.news[index];
 
@@ -140,11 +144,9 @@ function nextNewsBlock() {
 	const index = GAME.newsIndex;
 	const current = GAME.news[index];
 
-	// Remove old news block
 	const blockOld = news.querySelector('.old');
 	if (blockOld) blockOld.remove();
 
-	// Move all blocks
 	const blockOne = news.querySelector('.block.one');
 	if (blockOne) {
 		blockOne.classList.remove('one');
@@ -167,12 +169,8 @@ function nextNewsBlock() {
 	const blockNew = document.createElement('div');
 	blockNew.className = 'block new';
 	blockNew.setAttribute('news-index', `${index}`);
-
-	// Title
 	const title = document.createElement('h3');
 	title.innerText = current.title;
-
-	// Content
 	const content = document.createElement('p');
 	content.innerText = current.content;
 
@@ -184,10 +182,9 @@ function nextNewsBlock() {
 	// Make new block
 	setTimeout(() => {
 		blockNew.className = 'block three';
-
 		blockNew.onclick = () => {
 			GAME.selectedNewsIndex = index;
-			showModal();
+			showCreatePostModal();
 		};
 	});
 
@@ -195,19 +192,18 @@ function nextNewsBlock() {
 	if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
 }
 
-function showModal() {
+/**
+ * Show post creating modal
+ */
+function showCreatePostModal(): void {
 	const index = GAME.selectedNewsIndex;
 	const current = GAME.news[index];
 
-	// Create next post
+	// Create post element
 	const blockNew = document.createElement('div');
 	blockNew.className = 'block new';
-
-	// Title
 	const title = document.createElement('h3');
 	title.innerText = current.title;
-
-	// Content
 	const content = document.createElement('p');
 	content.innerText = current.content;
 
@@ -224,9 +220,13 @@ function showModal() {
 	GAME.paused = true;
 }
 
-function hideModal() {
+/**
+ * Hide post creating modal
+ */
+function hideModals(): void {
 	modal.style.top = '100%';
 	overlay.style.opacity = '0';
+	pauseMenu.style.display = 'none';
 	overlay.style.pointerEvents = 'none';
 	GAME.element.style.transform = 'scale(1)';
 	GAME.paused = false;

@@ -1,13 +1,10 @@
 import { Penguin } from './entities/penguin';
 import { State, GameState } from './state';
-import { randomInteger, requestInterval, insertionSort, average, requestTimeout } from './utils';
+import { randomInteger, requestInterval, depthSort, average, requestTimeout } from './utils';
 
 // Get state
 const GAME: GameState = State();
 
-requestInterval(() => {
-	document.getElementById('counter').innerText = `${GAME.fish}`;
-}, 1000);
 
 // // Speedup timer
 // let newsUpdateTime = 10000;
@@ -51,5 +48,6 @@ requestInterval(() => {
 		GAME.entities.push(penguin);
 	}
 
-	insertionSort(GAME.entities, 'y');
+	depthSort(GAME.entities);
+
 }, 1000);

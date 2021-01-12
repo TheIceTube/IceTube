@@ -31,13 +31,13 @@ export function preloadImage(src: string): Promise<HTMLImageElement> {
 }
 
 /**
- * Sort objects by field
+ * Sort objects by field.
  * @param array Array to sort
  * @param field To sort by
  */
 export function insertionSort(array: object[], field: string): object[] {
 	for (let i = 0; i < array.length; i++) {
-		const value = array[i];
+		const value = array[i] as any;
 
 		for (var j = i - 1; j > -1 && array[j][field] > value[field]; j--) {
 			array[j + 1] = array[j];
@@ -47,6 +47,27 @@ export function insertionSort(array: object[], field: string): object[] {
 	}
 
 	return array;
+}
+
+/**
+ * Sort entities for depth effect
+ * @param array Array of entities to sort
+ * @param field To sort by
+ */
+export function depthSort(array: object[]): void {
+	array.sort((a: any, b: any) => {
+		if (a.alwaysOnTop) return 1;
+		if (b.alwaysOnTop) return -1;
+
+		if (a.y < b.y) {
+			return -1;
+		}
+		if (a.y > b.y) {
+			return 1;
+		}
+
+		return 0;
+	});
 }
 
 /**
@@ -65,7 +86,11 @@ export function randomInteger(min: number, max: number): number {
  * @param {Object} newRange min, max of desired range
  * @return {Number} value converted to other range
  */
-export function convertRange(value: number, oldRange: { min: number; max: number }, newRange: { min: number; max: number }) {
+export function convertRange(
+	value: number,
+	oldRange: { min: number; max: number },
+	newRange: { min: number; max: number }
+) {
 	return ((value - oldRange.min) * (newRange.max - newRange.min)) / (oldRange.max - oldRange.min) + newRange.min;
 }
 
@@ -124,7 +149,7 @@ export function requestInterval(callback: () => void, delay: number): (number?: 
 
 	loop();
 
-	return (number) => {
+	return number => {
 		if (number) {
 			delay = number;
 		} else {

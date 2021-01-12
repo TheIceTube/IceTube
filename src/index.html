@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IceTube</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="icon" type="image/png" href="./sprites/favicon.png" />
 </head>
 
 <body>
@@ -16,6 +17,13 @@
             <h1>IceTube</h1>
             <p>Game by Penguins for Penguins</p>
             <button id="start-button">Start</button>
+        </div>
+
+        <!-- Pause menu -->
+        <div id="pause-menu" style="display: none;">
+            <h1>PAUSE MENU</h1>
+            <label>To resume click outsidse the window.</label>
+            <label>Must add HELP for INFO</label>
         </div>
 
         <!-- News -->
@@ -34,9 +42,10 @@
             </div>
         </div>
 
+        <!-- Fish counter -->
         <div id="fish">
             <div class="fish-icon"></div>
-            <div id="counter">12376</div>
+            <div id="counter">0</div>
         </div>
 
         <!-- Game UI -->
@@ -46,25 +55,25 @@
             <label for="selected">Selected Event</label>
             <div id="selected"></div>
 
-            <label>Theme</label>
-            <div class="theme-picker">
+            <label for="theme">Theme</label>
+            <div id="theme">
                 <button id="gaming">
-                    <img src="./sprites/Game.png" />
+                    <img src="./sprites/gaming.png" />
                 </button>
                 <button id="educational">
-                    <img src="./sprites/Educational.png" />
+                    <img src="./sprites/educational.png" />
                 </button>
                 <button id="politics">
-                    <img src="./sprites/Political.png" />
+                    <img src="./sprites/politics.png" />
                 </button>
                 <button id="films">
-                    <img src="./sprites/Film.png" />
+                    <img src="./sprites/films.png" />
                 </button>
                 <button id="music">
-                    <img src="./sprites/Music.png" />
+                    <img src="./sprites/music.png" />
                 </button>
                 <button id="sport">
-                    <img src="./sprites/Sports.png" />
+                    <img src="./sprites/sport.png" />
                 </button>
             </div>
 
@@ -80,23 +89,14 @@
             <button type="submit" id="post" class="cool-button">UPLOAD POST</button>
         </div>
 
+        <!-- Overlay -->
         <div id="overlay" style="opacity: 0; pointer-events: none;"></div>
-
-        <div id="menu" style="left: -150%">
-            <div id="menuButtons">
-                <h1>PAUSE MENU</h1>
-                <label>To resume click outsidse the window.</labe>
-                    <label>Must add HELP for INFO</labe>
-            </div>
-        </div>
-
-        <button id="pauseMenu" class="cool-button">Pause</button>
 
         <!-- Game stage -->
         <canvas id="stage"></canvas>
     </main>
 
-    <script src="index.ts"></script>
+    <script src="./index.ts"></script>
 </body>
 
 </html>
