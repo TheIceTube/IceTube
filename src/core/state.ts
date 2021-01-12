@@ -1,6 +1,7 @@
 import { Penguin } from './entities/penguin';
 import { Billboard } from './entities/billboard';
 import { Fish } from './entities/fish';
+import { LoudPenguin } from './entities/loudPenguin';
 
 /**
  * Possible post themes
@@ -29,7 +30,7 @@ export interface GameState {
 	mouseY: number;
 	mouseDown: boolean;
 
-    entities: Array<Penguin | Billboard | Fish>;
+    entities: Array<Penguin | Billboard | Fish | LoudPenguin>;
 	started: boolean;
 
 	fish: number;
@@ -38,6 +39,8 @@ export interface GameState {
 	news: NewsBlock[];
 	newsIndex: number;
 	selectedNewsIndex: number;
+
+	posted:boolean;
 }
 
 /**

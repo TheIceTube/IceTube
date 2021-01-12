@@ -5,6 +5,7 @@ import { depthSort, randomInteger, randomFromArray, requestInterval, convertRang
 // Entities
 import { Penguin } from './entities/penguin';
 import { Billboard } from './entities/billboard';
+import { LoudPenguin } from './entities/loudPenguin';
 
 // Stats setup
 const stats = new Stats();
@@ -25,8 +26,13 @@ for (let i = 0; i < 20; i++) {
 (GAME.entities[5] as any).state = 'speaking';
 
 // Spawn billboard
-const billboard = new Billboard();
-GAME.entities.push(billboard);
+// const billboard = new Billboard();
+// GAME.entities.push(billboard);
+
+//Spawn speker penguin
+
+const loudPenguin = new LoudPenguin();
+GAME.entities.push(loudPenguin);
 
 // Main loop
 function loop() {

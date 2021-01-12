@@ -124,6 +124,8 @@ export class Penguin {
 			this.frame += 0.5;
 			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 16, 0.2) : lerp(this.height, this.spriteHeight + 16, 0.2);
 			this.width = this.frame >= 10 ? lerp(this.width, this.spriteWidth + 8, 0.2) : lerp(this.width, this.spriteWidth - 8, 0.2);
+			console.log('spoke');
+			
 		}
 
 		// If walking

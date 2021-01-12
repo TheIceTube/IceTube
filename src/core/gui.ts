@@ -32,7 +32,7 @@ requestInterval(() => {
 requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
-}, 1000);
+}, 4000);
 
 
 //Update revelence bar
@@ -53,6 +53,7 @@ requestInterval(() => {
 
 // New post creating
 postButton.addEventListener('click', () => {
+	GAME.posted = false;
 	createPost();
 	hideModals();
 });
@@ -155,6 +156,7 @@ function createPost(): void {
 	// TODO: Build this value from multiple factors
 	// TODO: Lower relevance if you choosen incorect theme
 	if (current.theme === selectedTheme.id) GAME.relevance += 0.5;
+	GAME.posted = true;
 }
 
 /**
