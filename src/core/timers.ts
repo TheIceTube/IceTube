@@ -1,6 +1,6 @@
 import { Penguin } from './entities/penguin';
 import { State, GameState } from './state';
-import { randomInteger, requestInterval, depthSort, average, requestTimeout } from './utils';
+import { randomInteger, requestInterval, average, requestTimeout, insertionSort } from './utils';
 
 // Get state
 const GAME: GameState = State();
@@ -48,8 +48,8 @@ requestInterval(() => {
 		const x = randomInteger(0, GAME.element.width);
 		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 		const penguin = new Penguin(x, y);
-		GAME.entities.push(penguin);		
+		GAME.penguins.push(penguin);		
 	}
 
-	depthSort(GAME.entities);
+	insertionSort(GAME.penguins, 'y');
 }, 1000);

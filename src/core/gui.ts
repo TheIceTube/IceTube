@@ -175,7 +175,7 @@ function createPost(): void {
 	if (selectedNewsBlock) selectedNewsBlock.classList.add('posted');
 
 	// Penguin Animation
-	const player = GAME.entities.find(entity => entity.type === 'player') as Player;
+	const player = GAME.penguins.find(entity => entity.type === 'player') as Player;
 	player.state = 'speaking';
 	player.speakFrame = 0;
 
@@ -197,9 +197,11 @@ function createPost(): void {
 	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
 	
 	if (penguins < 100) revelanceConst = 0.1;
-	if (penguins > 100) revelanceConst = 0.13;
+	if (penguins > 100) revelanceConst = 0.15;
 	if (penguins > 400) revelanceConst = 0.2;
 
+	revelanceConst = 0.5;
+	
 	// if (penguins < 100) revelanceConst = 0.5;
 	// if (penguins > 400) revelanceConst = 0.3;
 	// if (penguins > 800) revelanceConst = 0.2;
@@ -214,14 +216,16 @@ function createPost(): void {
 	const moodValue: number = parseInt(mood.value);
 
 
-	const maxBoundary = moodTable[theme] + 1;
-	const minBoundary = moodTable[theme] - 1;
+	// const maxBoundary = moodTable[theme] + 1;
+	// const minBoundary = moodTable[theme] - 1;
 
-	if (moodValue >= minBoundary && moodValue <= maxBoundary) {
-		console.log('correct!');
-	} else {
-		revelanceConst = revelanceConst * 0.75;
-	}
+	// if (moodValue >= minBoundary && moodValue <= maxBoundary) {
+	// 	if (moodValue === moodTable[theme]) revelanceConst = revelanceConst * 1.25;
+	// } else {
+	// 	revelanceConst = revelanceConst * 0.75;
+	// }
+
+	console.log(revelanceConst);
 
 	// If correct theme
 	if (theme === selectedTheme.id) {

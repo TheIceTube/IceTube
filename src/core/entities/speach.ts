@@ -14,7 +14,6 @@ export class Speach {
     public readonly type = 'speach';
     public readonly spriteHeight = 128;
 	public readonly spriteWidth = 128;
-    public readonly alwaysOnTop = true;
 
     public exists: boolean;
     public frame: number;

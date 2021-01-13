@@ -23,6 +23,7 @@ State({
 	mouseDown: false,
 
 	entities: [],
+	penguins: [],
 	started: false,
 	fish: 0,
 	relevance: 1,

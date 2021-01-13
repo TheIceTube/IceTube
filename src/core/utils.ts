@@ -50,27 +50,6 @@ export function insertionSort(array: object[], field: string): object[] {
 }
 
 /**
- * Sort entities for depth effect
- * @param array Array of entities to sort
- * @param field To sort by
- */
-export function depthSort(array: object[]): void {
-	array.sort((a: any, b: any) => {
-		if (a.alwaysOnTop) return 1;
-		if (b.alwaysOnTop) return -1;
-
-		if (a.y < b.y) {
-			return -1;
-		}
-		if (a.y > b.y) {
-			return 1;
-		}
-
-		return 0;
-	});
-}
-
-/**
  * Generate random integer
  * @param min Minimal
  * @param max Maximal
