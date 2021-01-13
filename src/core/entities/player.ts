@@ -18,8 +18,8 @@ export class Player {
     public readonly type = 'player';
 	public readonly stoneSpriteHeight = 200;
     public readonly stoneSpriteWidth = 400;
-    public readonly penguinSpriteHeight = 98;
-    public readonly penguinSpriteWidth = 98;
+    public readonly penguinSpriteHeight = 120;
+    public readonly penguinSpriteWidth = 120;
     public readonly penguinOffsetX = 48;
     public readonly penguinOffsetY = -60;
 

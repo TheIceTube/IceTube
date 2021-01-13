@@ -23,6 +23,8 @@ const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post') as HTMLButtonElement;
 const relevanceBar = document.getElementById('relevance-bar');
 
+let revelanceConst = 0;
+
 // Update fish counter
 requestInterval(() => {
 	counter.innerText = numberWithCommas(GAME.fish);
@@ -36,7 +38,10 @@ requestInterval(() => {
 
 //Update revelence bar
 requestInterval(() => {
-	const revelance = Math.floor(GAME.relevance * 50);
+	let revelance = Math.floor(GAME.relevance * 50);
+
+	if (revelance > 100) revelance = 100; 
+
 	relevanceBar.style.width = `${revelance}%`;
 
 	if (revelance < 30) {
@@ -46,6 +51,10 @@ requestInterval(() => {
 	} else {
 		relevanceBar.style.backgroundColor = '#5893f3'
 	}
+
+ 
+
+
 }, 100);
 
 // New post creating
@@ -162,7 +171,32 @@ function createPost(): void {
 	// TODO: Fake news check
 	// TODO: Build this value from multiple factors
 	// TODO: Lower relevance if you choosen incorect theme
-	if (current.theme === selectedTheme.id) GAME.relevance += 0.5;
+
+	//TODO: This is a note, after more then 24 correct answear game started to crash (revelence was 0.1)
+	//Verdict game starts to crash at around 2500 penguins
+
+	//Longest game i posted 47 news
+
+	//TODO
+
+	const penguins = GAME.started ? GAME.entities.length - 1 : 0;
+
+	console.log('current:',penguins);
+	console.log(revelanceConst);
+
+
+	//This is the way to go, was able to play the game, it adds dificulty,
+	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
+	
+	if (penguins < 100) revelanceConst = 0.1;
+	if (penguins > 100) revelanceConst = 0.13;
+	if (penguins > 400) revelanceConst = 0.2;
+
+	// if (penguins < 100) revelanceConst = 0.5;
+	// if (penguins > 400) revelanceConst = 0.3;
+	// if (penguins > 800) revelanceConst = 0.2;
+
+	if (current.theme === selectedTheme.id) GAME.relevance += revelanceConst;
 }
 
 /**
