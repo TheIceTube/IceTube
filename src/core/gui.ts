@@ -1,3 +1,4 @@
+import { Player } from './entities/player';
 import { State, GameState } from './state';
 import { requestInterval, numberWithCommas } from './utils';
 
@@ -19,9 +20,7 @@ const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post');
-
-const revBar = document.querySelector('.bar');
-const overlap = document.querySelector('.overlap');
+const relevanceBar = document.getElementById('relevance-bar');
 
 // Update fish counter
 requestInterval(() => {
@@ -32,23 +31,21 @@ requestInterval(() => {
 requestInterval(() => {
 	if (GAME.paused) return;
 	nextNewsBlock();
-}, 4000);
+}, 2000);
 
 
 //Update revelence bar
 requestInterval(() => {
-	const revelance = GAME.relevance * 50;
-	revBar.style.width = `${revelance}%`;
+	const revelance = Math.floor(GAME.relevance * 50);
+	relevanceBar.style.width = `${revelance}%`;
 
 	if (revelance < 30) {
-		overlap.style.background = '#f35858'
+		relevanceBar.style.backgroundColor = '#f35858'
 	} else if (revelance > 70) {
-		overlap.style.background = '#5893f3'
+		relevanceBar.style.backgroundColor = '#5ef358'
 	} else {
-		overlap.style.background = '#5ef358'
+		relevanceBar.style.backgroundColor = '#5893f3'
 	}
-
-
 }, 100);
 
 // New post creating
@@ -151,6 +148,11 @@ function createPost(): void {
 
 	const selectedNewsBlock = news.querySelector(`[news-index="${index}"]`);
 	if (selectedNewsBlock) selectedNewsBlock.classList.add('posted');
+
+	// Penguin Animation
+	const player = GAME.entities.find(entity => entity.type === 'player') as Player;
+	player.state = 'speaking';
+	player.speakFrame = 0;
 
 	// TODO: Fake news check
 	// TODO: Build this value from multiple factors

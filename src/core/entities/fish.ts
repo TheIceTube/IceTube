@@ -11,12 +11,10 @@ const fish = loadImage(fishImage);
 const GAME: GameState = State();
 
 export class Fish {
-    public readonly type: 'fish';
-
+    public readonly type = 'fish';
     public readonly spriteHeight = 92;
 	public readonly spriteWidth = 92;
-    public readonly alwaysOnTop: boolean = true;
-
+    public readonly alwaysOnTop = true;
 
     public exists: boolean;
     public frame: number;
