@@ -26,8 +26,6 @@ for (let i = 0; i < 20; i++) {
 const player = new Player();
 GAME.entities.push(player);
 
-console.log(player);
-
 // Sort entities
 depthSort(GAME.entities);
 

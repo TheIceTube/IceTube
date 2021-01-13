@@ -11,6 +11,7 @@ const modal = document.getElementById('modal');
 const overlay = document.getElementById('overlay');
 const pauseMenu = document.getElementById('pause-menu');
 const counter = document.getElementById('counter');
+const mood = document.getElementById('mood') as HTMLInputElement;
 const selectedNews = document.getElementById('selected');
 
 // Buttons
@@ -24,6 +25,16 @@ const postButton = document.getElementById('post') as HTMLButtonElement;
 const relevanceBar = document.getElementById('relevance-bar');
 
 let revelanceConst = 0;
+
+const moodTable = {
+	music: 11,
+	sport: 9,
+	gaming: 7,
+	films: 5,
+	politics: 3,
+	educational: 1,
+}
+
 
 // Update fish counter
 requestInterval(() => {
@@ -181,9 +192,6 @@ function createPost(): void {
 
 	const penguins = GAME.started ? GAME.entities.length - 1 : 0;
 
-	console.log('current:',penguins);
-	console.log(revelanceConst);
-
 
 	//This is the way to go, was able to play the game, it adds dificulty,
 	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
@@ -202,8 +210,21 @@ function createPost(): void {
 		return;
 	}
 
+	const theme = current.theme;
+	const moodValue: number = parseInt(mood.value);
+
+
+	const maxBoundary = moodTable[theme] + 1;
+	const minBoundary = moodTable[theme] - 1;
+
+	if (moodValue >= minBoundary && moodValue <= maxBoundary) {
+		console.log('correct!');
+	} else {
+		revelanceConst = revelanceConst * 0.75;
+	}
+
 	// If correct theme
-	if (current.theme === selectedTheme.id) {
+	if (theme === selectedTheme.id) {
 		GAME.relevance += revelanceConst;
 	}
 }
