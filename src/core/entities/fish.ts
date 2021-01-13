@@ -1,5 +1,5 @@
 import { State, GameState } from '../state';
-import { convertRange, loadImage, numberWithCommas, lerp } from '../utils';
+import { convertRange, loadImage, numberWithCommas, lerp, requestTimeout } from '../utils';
 
 // Sprites
 import fishImage from '../../sprites/fish-shadow.png';
@@ -9,6 +9,9 @@ const fish = loadImage(fishImage);
 
 // Global game state
 const GAME: GameState = State();
+
+// Element
+const fishCounter = document.getElementById('fish');
 
 export class Fish {
     public readonly type = 'fish';
@@ -66,13 +69,34 @@ export class Fish {
 
         this.frame += 1;
         
+        // Spawn animation
         if (this.frame < 50) {
             this.y = lerp(this.y, this.spawnY - 256, 0.05);
-        } else {
+            return;
+        }
+
+        // Size animation
+        if (this.y < 64) {
             this.width = lerp(this.width, 0, 0.1); 
             this.height = lerp(this.height, 0, 0.1); 
-            this.y = lerp(this.y, this.y - 256, 0.1); 
-            if (this.width < 5) this.exists = false;
+        }
+
+        // Change position
+        const posX = GAME.element.width / 2;
+        const posY = 0 - (GAME.element.height / 5);
+        this.x = lerp(this.x, posX, 0.1); 
+        this.y = lerp(this.y, posY, 0.1); 
+
+
+        if (this.width < 16) {
+            this.exists = false;
+            GAME.fish += 1;
+
+            // Counter animation
+            fishCounter.className = 'added';
+            setTimeout(() => {
+                fishCounter.className = '';
+            }, 20);
         }
     }
 }

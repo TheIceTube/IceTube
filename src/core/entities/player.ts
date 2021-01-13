@@ -69,8 +69,8 @@ export class Player {
      * Update player state
      */
     public update(): void {
-        this.x = GAME.element.width / 2;
-        this.y = GAME.element.height / 1.75;
+        this.x = Math.floor(GAME.element.width / 2);
+        this.y = Math.floor(GAME.element.height / 1.75);
 
         // Frame update
         this.frame += 1;

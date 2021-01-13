@@ -27,9 +27,9 @@ main {
 	max-width: 100%;
 	max-height: 100%;
 	margin-right: 16px;
-	/* background: linear-gradient(-10deg, white, #64c8ff);
-	background: linear-gradient(-10deg, #ff9a03, #ff2448); */
-	background: linear-gradient(-10deg, #39a372, #e8ff66);
+	background: linear-gradient(-10deg, #64c8ff, white);
+	background: linear-gradient(-10deg, #ff9a03, #ff2448);
+	/* background: linear-gradient(-10deg, #39a372, #e8ff66); */
 	transition: transform 0.5s ease;
 }
 
@@ -65,7 +65,7 @@ main {
 
 .cool-button:disabled {
 	cursor: auto;
-	opacity: 0.75;
+	opacity: 0.5;
 	box-shadow: 0 0px black;
 	transform: translateY(8px);
 }
@@ -371,9 +371,15 @@ label {
 	height: 64px;
 	top: 16px;
 	left: 50%;
-	transform: translateX(-50%);
 	display: flex;
 	flex-direction: row;
+	transition: transform 0.2s ease-out;
+	transform: translateX(-50%) scale(1);
+}
+
+#fish.added {
+	transition: transform 10ms linear;
+	transform: translateX(-50%) scale(1.25);
 }
 
 .fish-icon {
@@ -384,6 +390,12 @@ label {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-image: url('./sprites/fish.png');
+	transition: transform 0.2s ease-out;
+}
+
+#fish.added .fish-icon {
+	transform: rotate(-10deg);
+	transition: transform 0.05s linear;
 }
 
 #fish #counter {

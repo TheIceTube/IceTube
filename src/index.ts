@@ -11,7 +11,6 @@ stage.height = window.innerHeight * window.devicePixelRatio;
 
 // Setup canvas context
 const ctx = stage.getContext('2d');
-ctx.imageSmoothingEnabled = false;
 
 // State initialization
 State({
@@ -30,7 +29,7 @@ State({
 	
 	news: shuffle(all_news),
 	newsIndex: 0,
-	selectedNewsIndex: 0
+	selectedNewsIndex: 0,
 });
 
 // Input module

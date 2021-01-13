@@ -102,7 +102,6 @@ export class Penguin {
 		if (this.spawnFrame === 200 && this.state === 'walking') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
-			GAME.fish += 1;
 		}
 
 		// Update frame

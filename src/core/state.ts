@@ -38,8 +38,6 @@ export interface GameState {
 	news: NewsBlock[];
 	newsIndex: number;
 	selectedNewsIndex: number;
-
-	posted:boolean;
 }
 
 /**
