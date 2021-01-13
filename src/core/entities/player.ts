@@ -91,7 +91,7 @@ export class Player {
 
         // Speaking animation
         if (this.state === 'speaking') {
-            this.frame += 7;
+            this.frame += 8;
             this.speakFrame += 1;
 
             if (this.frame > 50) {

@@ -34,7 +34,6 @@ requestInterval(() => {
 	nextNewsBlock();
 }, 2000);
 
-
 //Update revelence bar
 requestInterval(() => {
 	const revelance = Math.floor(GAME.relevance * 50);

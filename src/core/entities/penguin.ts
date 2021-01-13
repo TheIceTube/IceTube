@@ -2,6 +2,7 @@ import { Fish } from './fish';
 
 import { State, GameState } from '../state';
 import { convertRange, lerp, loadImage, randomInteger } from '../utils';
+import { Speach } from './speach';
 
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
@@ -99,7 +100,7 @@ export class Penguin {
 		if (this.involvement <= 0) this.state = 'leaving';
 
 		// Spawn fish
-		if (this.spawnFrame === 200 && this.state === 'walking') {
+		if (this.spawnFrame === 300 && this.state === 'walking') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
 		}
@@ -110,7 +111,7 @@ export class Penguin {
 
 		// Update spawn frame
 		this.spawnFrame += 1;
-		if (this.spawnFrame > 200) this.spawnFrame = 0;
+		if (this.spawnFrame > 300) this.spawnFrame = 0;
 
 		// Speaking penguin
 		if (this.state === 'speaking') {

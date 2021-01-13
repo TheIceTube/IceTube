@@ -1,6 +1,7 @@
 import { Penguin } from './entities/penguin';
 import { Fish } from './entities/fish';
 import { Player } from './entities/player';
+import { Speach } from './entities/speach';
 
 /**
  * Possible post themes
@@ -29,7 +30,7 @@ export interface GameState {
 	mouseY: number;
 	mouseDown: boolean;
 
-    entities: Array<Penguin | Fish | Player>;
+    entities: Array<Penguin | Fish | Player | Speach>;
 	started: boolean;
 
 	fish: number;

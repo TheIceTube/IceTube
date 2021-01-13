@@ -96,7 +96,7 @@ export class Fish {
             fishCounter.className = 'added';
             setTimeout(() => {
                 fishCounter.className = '';
-            }, 20);
+            }, 50);
         }
     }
 }
