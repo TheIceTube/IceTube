@@ -2,7 +2,7 @@ import { State } from './core/state';
 import { shuffle } from './core/utils';
 
 // Array of news
-import { all_news } from './content_real.json';
+import { real_news, fake_news } from './content.json';
 
 // Setup canvas element
 const stage = document.getElementById('stage') as HTMLCanvasElement;
@@ -27,7 +27,7 @@ State({
 	fish: 0,
 	relevance: 1,
 	
-	news: shuffle(all_news),
+	news: shuffle([...real_news, ...fake_news]),
 	newsIndex: 0,
 	selectedNewsIndex: 0,
 });

@@ -196,7 +196,16 @@ function createPost(): void {
 	// if (penguins > 400) revelanceConst = 0.3;
 	// if (penguins > 800) revelanceConst = 0.2;
 
-	if (current.theme === selectedTheme.id) GAME.relevance += revelanceConst;
+	// Fake content check
+	if (current.fake) {
+		GAME.relevance -= 0.5;
+		return;
+	}
+
+	// If correct theme
+	if (current.theme === selectedTheme.id) {
+		GAME.relevance += revelanceConst;
+	}
 }
 
 /**
