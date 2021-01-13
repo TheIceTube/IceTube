@@ -11,6 +11,7 @@ const modal = document.getElementById('modal');
 const overlay = document.getElementById('overlay');
 const pauseMenu = document.getElementById('pause-menu');
 const counter = document.getElementById('counter');
+const selectedNews = document.getElementById('selected');
 
 // Buttons
 const gamingButton = document.getElementById('gaming');
@@ -19,7 +20,7 @@ const politicsButton = document.getElementById('politics');
 const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
-const postButton = document.getElementById('post');
+const postButton = document.getElementById('post') as HTMLButtonElement;
 const relevanceBar = document.getElementById('relevance-bar');
 
 // Update fish counter
@@ -78,6 +79,7 @@ window.addEventListener('keydown', event => {
 //Buttons for the new post thingy
 gamingButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	gamingButton.classList.contains('active')
 		? gamingButton.classList.remove('active')
 		: gamingButton.classList.add('active');
@@ -85,6 +87,7 @@ gamingButton.addEventListener('click', () => {
 
 educationalButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	educationalButton.classList.contains('active')
 		? educationalButton.classList.remove('active')
 		: educationalButton.classList.add('active');
@@ -93,6 +96,7 @@ educationalButton.addEventListener('click', () => {
 // Film theme selection
 filmsButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	filmsButton.classList.contains('active')
 		? filmsButton.classList.remove('active')
 		: filmsButton.classList.add('active');
@@ -101,6 +105,7 @@ filmsButton.addEventListener('click', () => {
 // Politics theme selection
 politicsButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	politicsButton.classList.contains('active')
 		? politicsButton.classList.remove('active')
 		: politicsButton.classList.add('active');
@@ -109,6 +114,7 @@ politicsButton.addEventListener('click', () => {
 // Music theme selection
 musicButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	musicButton.classList.contains('active')
 		? musicButton.classList.remove('active')
 		: musicButton.classList.add('active');
@@ -117,6 +123,7 @@ musicButton.addEventListener('click', () => {
 // Sports theme selection
 sportButton.addEventListener('click', () => {
 	unpressButtons();
+	postButton.disabled = false;
 	sportButton.classList.contains('active')
 		? sportButton.classList.remove('active')
 		: sportButton.classList.add('active');
@@ -234,9 +241,10 @@ function showCreatePostModal(): void {
 	blockNew.appendChild(title);
 	blockNew.appendChild(content);
 
-	document.getElementById('selected').innerHTML = '';
-	document.getElementById('selected').appendChild(blockNew);
+	selectedNews.innerHTML = '';
+	selectedNews.appendChild(blockNew);
 
+	postButton.disabled = true;
 	modal.style.top = '32px';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
@@ -248,6 +256,7 @@ function showCreatePostModal(): void {
  * Hide post creating modal
  */
 function hideModals(): void {
+	postButton.disabled = true;
 	modal.style.top = '100%';
 	overlay.style.opacity = '0';
 	pauseMenu.style.display = 'none';

@@ -63,6 +63,13 @@ main {
 	outline: none;
 }
 
+.cool-button:disabled {
+	cursor: auto;
+	opacity: 0.75;
+	box-shadow: 0 0px black;
+	transform: translateY(8px);
+}
+
 #overlay {
 	z-index: 99999;
 	position: fixed;
