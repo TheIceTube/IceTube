@@ -71,7 +71,8 @@ export class Fish {
         
         // Spawn animation
         if (this.frame < 50) {
-            this.y = lerp(this.y, this.spawnY - 256, 0.05);
+            const posY: number = convertRange(this.spawnY - 512, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
+            this.y = lerp(this.y, posY, 0.05);
             return;
         }
 
