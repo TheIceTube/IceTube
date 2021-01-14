@@ -6,6 +6,9 @@ import stoneImage from '../../sprites/stone.png';
 import mainPenguinImage from '../../sprites/main-penguin.png';
 import mainPenguinLoudspeakerImage from '../../sprites/main-penguin-loudspeaker.png';
 
+// Sounds
+import popSound from '../../sounds/penguin-speach.mp3';
+
 // Preload images
 const stone = loadImage(stoneImage);
 const mainPenguin = loadImage(mainPenguinImage);
@@ -93,6 +96,12 @@ export class Player {
         if (this.state === 'speaking') {
             this.frame += 8;
             this.speakFrame += 1;
+
+            if (this.speakFrame === 1) {
+                const audio = new Audio(popSound);
+                audio.volume = 0.1;
+                audio.play();
+            }
 
             if (this.frame > 50) {
                 this.height = lerp(this.height, this.penguinSpriteHeight + 16, 0.1);

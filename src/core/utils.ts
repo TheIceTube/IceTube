@@ -9,6 +9,15 @@ export function lerp(v0: number, v1: number, t: number): number {
 }
 
 /**
+ * Load audio file
+ * @param src Audio path
+ */
+export function loadAudio(src: string): HTMLAudioElement {
+	const audio = new Audio(src);
+	return audio;
+}
+
+/**
  * Load image
  * @param src Image path
  */

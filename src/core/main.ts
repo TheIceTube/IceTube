@@ -62,7 +62,6 @@ function loop() {
 
 // Relevance update
 requestInterval(() => {
-	if (GAME.paused) return;
 	if (!GAME.started) return;
 
 	GAME.relevance -= 0.03;
@@ -74,7 +73,6 @@ requestInterval(() => {
 
 // Spawn penguins
 requestInterval(() => {
-	if (GAME.paused) return;
 	if (!GAME.started) return;
 
 	const penguinMultiplier = GAME.entities.length / 5;
@@ -104,4 +102,3 @@ document.getElementById('start-button').onclick = () => {
 	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
 };
-

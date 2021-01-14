@@ -83,7 +83,7 @@ main {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-#modal {
+.modal {
 	z-index: 999999;
 	position: fixed;
 	top: 32px;
@@ -107,17 +107,6 @@ label {
 	color: #969696;
 	display: inline-block;
 	font-style: italic;
-	font-size: 14px;
-	letter-spacing: 1px;
-	padding-bottom: 4px;
-}
-
-.label {
-	user-select: none;
-	color: #000000;
-	display: inline-block;
-	font-weight: bold;
-	padding: 3px 3px;
 	font-size: 14px;
 	letter-spacing: 1px;
 	padding-bottom: 4px;

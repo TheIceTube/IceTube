@@ -8,7 +8,7 @@ const GAME: GameState = State();
  * @param callback Callback that will be executed after delay
  * @param delay Delay before executing
  */
-export function requestInterval(callback: () => void, delay: number): (newDelay?: number) => void {
+export function requestInterval(callback: () => void, delay: number = 0): (newDelay?: number) => void {
 	let start: number = Date.now();
 	let passed: number = 0;
 	let canceled: boolean = false;
@@ -54,7 +54,7 @@ export function requestInterval(callback: () => void, delay: number): (newDelay?
  * @param callback Callback that will be executed after delay
  * @param delay Delay before executing
  */
-export function requestTimeout(callback: () => void, delay: number): () => void {
+export function requestTimeout(callback: () => void, delay: number = 0): () => void {
 	let start: number = Date.now();
 	let passed: number = 0;
 	let canceled: boolean = false;

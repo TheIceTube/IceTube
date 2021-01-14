@@ -1,17 +1,17 @@
 import { Player } from './entities/player';
 import { State, GameState } from './state';
 import { numberWithCommas } from './utils';
-import { requestInterval, requestTimeout } from './timers';
+import { requestInterval } from './timers';
 
 // Get state
 const GAME: GameState = State();
 
 // Elements
 const news = document.getElementById('news');
-const modal = document.getElementById('modal');
 const overlay = document.getElementById('overlay');
-const pauseMenu = document.getElementById('pause-menu');
 const counter = document.getElementById('counter');
+const pauseMenu = document.getElementById('pause-menu');
+const postModal = document.getElementById('post-modal');
 const mood = document.getElementById('mood') as HTMLInputElement;
 const selectedNews = document.getElementById('selected');
 const relevanceBar = document.getElementById('relevance-bar');
@@ -25,8 +25,6 @@ const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post') as HTMLButtonElement;
 
-let revelanceConst = 0;
-
 const moodTable = {
 	music: 11,
 	sport: 9,
@@ -36,37 +34,31 @@ const moodTable = {
 	educational: 1,
 }
 
-// Update fish counter
+// Update GUI elements
 requestInterval(() => {
+
+	// Fish counter
 	counter.innerText = numberWithCommas(GAME.fish);
-}, 100);
 
-// Request news block
-requestInterval(() => {
-	if (GAME.paused) return;
-	nextNewsBlock();
-}, 2000);
-
-//Update revelence bar
-requestInterval(() => {
-	let revelance = Math.floor(GAME.relevance * 50);
-
+	// Bar width
+	let revelance: number = Math.floor(GAME.relevance * 50);
 	if (revelance > 100) revelance = 100; 
-
 	relevanceBar.style.width = `${revelance}%`;
 
-	if (revelance < 30) {
+	// Bar color
+	if (revelance < 33) {
 		relevanceBar.style.backgroundColor = '#f35858'
-	} else if (revelance > 70) {
+	} else if (revelance > 66) {
 		relevanceBar.style.backgroundColor = '#5ef358'
 	} else {
 		relevanceBar.style.backgroundColor = '#5893f3'
 	}
-
- 
-
-
 }, 100);
+
+// Request news block
+requestInterval(() => {
+	nextNewsBlock();
+}, 2000);
 
 // New post creating
 postButton.addEventListener('click', () => {
@@ -195,17 +187,14 @@ function createPost(): void {
 
 	//This is the way to go, was able to play the game, it adds dificulty,
 	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
-	
-	if (penguins < 100) revelanceConst = 0.1;
-	if (penguins > 100) revelanceConst = 0.15;
-	if (penguins > 400) revelanceConst = 0.2;
+	let relevanceConst = 0;
 
-	revelanceConst = 0.5;
-	
-	// if (penguins < 100) revelanceConst = 0.5;
-	// if (penguins > 400) revelanceConst = 0.3;
-	// if (penguins > 800) revelanceConst = 0.2;
+	if (penguins < 100) relevanceConst = 0.1;
+	if (penguins > 100) relevanceConst = 0.15;
+	if (penguins > 400) relevanceConst = 0.2;
 
+	relevanceConst = 0.5;
+	
 	// Fake content check
 	if (current.fake) {
 		GAME.relevance -= 0.5;
@@ -227,7 +216,7 @@ function createPost(): void {
 
 	// If correct theme
 	if (theme === selectedTheme.id) {
-		GAME.relevance += revelanceConst;
+		GAME.relevance += relevanceConst;
 	}
 }
 
@@ -280,7 +269,7 @@ function nextNewsBlock() {
 		blockNew.className = 'block three';
 		blockNew.onclick = () => {
 			GAME.selectedNewsIndex = index;
-			showCreatePostModal();
+			showPostModal();
 		};
 	});
 
@@ -291,7 +280,7 @@ function nextNewsBlock() {
 /**
  * Show post creating modal
  */
-function showCreatePostModal(): void {
+function showPostModal(): void {
 	const index = GAME.selectedNewsIndex;
 	const current = GAME.news[index];
 
@@ -310,7 +299,7 @@ function showCreatePostModal(): void {
 	selectedNews.appendChild(blockNew);
 
 	postButton.disabled = true;
-	modal.style.top = '32px';
+	postModal.style.top = '32px';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
 	GAME.element.style.transform = 'scale(2) translateY(-32px)';
@@ -322,7 +311,7 @@ function showCreatePostModal(): void {
  */
 function hideModals(): void {
 	postButton.disabled = true;
-	modal.style.top = '100%';
+	postModal.style.top = '100%';
 	overlay.style.opacity = '0';
 	pauseMenu.style.display = 'none';
 	overlay.style.pointerEvents = 'none';

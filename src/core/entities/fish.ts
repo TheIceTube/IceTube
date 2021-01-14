@@ -1,8 +1,12 @@
 import { State, GameState } from '../state';
 import { convertRange, loadImage, numberWithCommas, lerp } from '../utils';
+import { requestTimeout } from '../timers';
 
 // Sprites
 import fishImage from '../../sprites/fish-shadow.png';
+
+// Sounds
+import popSound from '../../sounds/pop.mp3';
 
 // Preload images
 const fish = loadImage(fishImage);
@@ -94,6 +98,10 @@ export class Fish {
 
             // Check mouse collision
             if (GAME.mouseX <= (this.x + 64) && GAME.mouseX >= (this.x - 64)) {
+                const audio = new Audio(popSound);
+                audio.volume = 0.1;
+                audio.play();
+
                 this.collected = true;
             } else {
                 return;
@@ -119,9 +127,9 @@ export class Fish {
 
             // Counter animation
             fishCounter.className = 'added';
-            setTimeout(() => {
+            requestTimeout(() => {
                 fishCounter.className = '';
-            }, 50);
+            }, 10);
         }
     }
 }

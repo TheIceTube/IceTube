@@ -25,8 +25,10 @@ State({
 	entities: [],
 	penguins: [],
 	started: false,
+
 	fish: 0,
 	relevance: 1,
+	score: 0,
 	
 	news: shuffle([...real_news, ...fake_news]),
 	newsIndex: 0,

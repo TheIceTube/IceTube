@@ -2,17 +2,14 @@ import { Fish } from './fish';
 
 import { State, GameState } from '../state';
 import { convertRange, lerp, loadImage, randomInteger } from '../utils';
-import { Speach } from './speach';
 
 // Sprites
 import spriteLeft from '../../sprites/penguin-left.png';
 import spriteRight from '../../sprites/penguin-right.png';
-import speachBubbleImage from '../../sprites/speech_bubble.png';
 
 // Preload images
 const penguinLeft = loadImage(spriteLeft);
 const penguinRight = loadImage(spriteRight);
-const speackBubble = loadImage(speachBubbleImage);
 
 // Global game state
 const GAME: GameState = State();
@@ -25,7 +22,7 @@ export class Penguin {
 	public involvement: number;
 	public exists: boolean;
 	
-	public state: 'spawning' | 'walking' | 'leaving' | 'speaking';
+	public state: 'spawning' | 'walking' | 'leaving';
 	public direction: 'left' | 'right';
 	public message: string = '';
 
@@ -112,13 +109,6 @@ export class Penguin {
 		// Update spawn frame
 		this.spawnFrame += 1;
 		if (this.spawnFrame > 300) this.spawnFrame = 0;
-
-		// Speaking penguin
-		if (this.state === 'speaking') {
-			this.frame += 0.5;
-			this.height = this.frame >= 10 ? lerp(this.height, this.spriteHeight - 16, 0.2) : lerp(this.height, this.spriteHeight + 16, 0.2);
-			this.width = this.frame >= 10 ? lerp(this.width, this.spriteWidth + 8, 0.2) : lerp(this.width, this.spriteWidth, 0.2);
-		}
 
 		// If walking
 		if (this.state === 'walking') {
