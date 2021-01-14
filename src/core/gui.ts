@@ -3,8 +3,14 @@ import { State, GameState } from './state';
 import { numberWithCommas } from './utils';
 import { requestInterval } from './timers';
 
+import popSound from '../sounds/pop.mp3';
+
 // Get state
 const GAME: GameState = State();
+
+const body =document.body;
+
+const audio = new Audio(popSound);
 
 // Elements
 const news = document.getElementById('news');
@@ -71,6 +77,11 @@ overlay.addEventListener('click', () => {
 	hideModals();
 });
 
+// body.addEventListener('click', () => {
+// 	audio.volume = 0.1;
+//     audio.play();
+// });
+
 // Pause menu on Escape press
 window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
@@ -85,6 +96,7 @@ window.addEventListener('keydown', event => {
 		}
 	}
 });
+
 
 //Buttons for the new post thingy
 gamingButton.addEventListener('click', () => {
@@ -155,6 +167,7 @@ function unpressButtons(): void {
  * Create new post
  */
 function createPost(): void {
+	console.log(GAME.penguins.length);
 	const index = GAME.selectedNewsIndex;
 	const current = GAME.news[index];
 
@@ -182,16 +195,16 @@ function createPost(): void {
 
 	//TODO
 
-	const penguins = GAME.started ? GAME.entities.length - 1 : 0;
+
 
 
 	//This is the way to go, was able to play the game, it adds dificulty,
 	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
 	let relevanceConst = 0;
 
-	if (penguins < 100) relevanceConst = 0.1;
-	if (penguins > 100) relevanceConst = 0.15;
-	if (penguins > 400) relevanceConst = 0.2;
+	if (GAME.penguins.length < 100) relevanceConst = 0.1;
+	if (GAME.penguins.length> 100) relevanceConst = 0.15;
+	if (GAME.penguins.length> 400) relevanceConst = 0.2;
 
 	relevanceConst = 0.5;
 	

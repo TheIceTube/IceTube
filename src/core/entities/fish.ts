@@ -89,6 +89,35 @@ export class Fish {
             }
 
             // Despawn
+
+            
+
+            if (GAME.penguins.length < 50) {
+                if (this.frame > 120) {
+                    this.width = lerp(this.width, 0, 0.2); 
+                    this.height = lerp(this.height, 0, 0.2); 
+                    if (this.width < 16) this.exists = false;
+                    return
+                }
+            };
+	        if (GAME.penguins.length> 50) {
+                if (this.frame > 90) {
+                    this.width = lerp(this.width, 0, 0.2); 
+                    this.height = lerp(this.height, 0, 0.2); 
+                    if (this.width < 16) this.exists = false;
+                    return
+                }
+             };
+	    if (GAME.penguins.length> 400) {
+            if (this.frame > 60) {
+                this.width = lerp(this.width, 0, 0.2); 
+                this.height = lerp(this.height, 0, 0.2); 
+                if (this.width < 16) this.exists = false;
+                return
+            }
+        }
+
+
             if (this.frame > 200) {
                 this.width = lerp(this.width, 0, 0.2); 
                 this.height = lerp(this.height, 0, 0.2); 
@@ -99,7 +128,7 @@ export class Fish {
             // Check mouse collision
             if (GAME.mouseX <= (this.x + 64) && GAME.mouseX >= (this.x - 64)) {
                 const audio = new Audio(popSound);
-                audio.volume = 0.1;
+                audio.volume = 0.01;
                 audio.play();
 
                 this.collected = true;

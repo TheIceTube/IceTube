@@ -38,6 +38,19 @@ function loop() {
 		return;
 	}
 
+	//Game ends
+	if (checkEnd()) {	
+
+		GAME.paused = true;
+
+		document.getElementById('final-fish-count').innerText = `${GAME.fish}`;
+		document.getElementById('end-screen').style.transform = 'translate( -50%, -50%)';
+
+		overlay.style.opacity = '1';
+		overlay.style.pointerEvents = 'auto';
+		return;
+	}
+
 	stats.begin();
 
 	// Update entities
@@ -96,9 +109,21 @@ requestInterval(() => {
 const overlay = document.getElementById('overlay');
 overlay.style.opacity = '1';
 
+//starts the game
 document.getElementById('start-button').onclick = () => {
 	loop();
 	GAME.paused = false;
 	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
 };
+
+//reload button on screen
+document.getElementById('end-button').onclick = () => {
+	location.reload();
+};
+
+function checkEnd(){
+	if ((GAME.penguins.length - 1) === 0 || GAME.relevance === 0 ) {
+		return true;
+	}
+ }

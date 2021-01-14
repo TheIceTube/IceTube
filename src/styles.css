@@ -431,3 +431,23 @@ label {
 	transition: width 0.5s ease, background-color 1s linear ;
 }
 
+#end-screen {
+	z-index: 999999;
+	position: fixed;
+	top: 45%;
+	left: 50%;
+	width: 600px;
+	height: 600px;
+	padding: 64px;
+	padding-top: 48px;
+	letter-spacing: 1px;
+	border-radius: 16px;
+	background-color: white;
+	box-shadow: 0 12px black;
+	border: solid 4px black;
+	transform: translate( -500%);
+}
+
+#inner-end {
+	left: 50%;
+}
