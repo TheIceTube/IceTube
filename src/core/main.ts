@@ -1,6 +1,7 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
-import { randomInteger, randomFromArray, requestInterval, convertRange, insertionSort } from './utils';
+import { requestInterval } from './timers';
+import { randomInteger, randomFromArray, convertRange, insertionSort } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -54,12 +55,45 @@ function loop() {
 	for (let i = 0; i < GAME.penguins.length; i++) GAME.penguins[i].draw();
 	for (let i = 0; i < GAME.entities.length; i++) GAME.entities[i].draw();
 
-	console.log(GAME.penguins.length);
-
 
 	stats.end();
 	window.requestAnimationFrame(loop);
 }
+
+// Relevance update
+requestInterval(() => {
+	if (GAME.paused) return;
+	if (!GAME.started) return;
+
+	GAME.relevance -= 0.03;
+	if (GAME.relevance > 1.2) GAME.relevance -= 0.02;
+	
+	if (GAME.relevance < 0) GAME.relevance = 0;
+	if (GAME.relevance > 2) GAME.relevance = 2;
+}, 1000);
+
+// Spawn penguins
+requestInterval(() => {
+	if (GAME.paused) return;
+	if (!GAME.started) return;
+
+	const penguinMultiplier = GAME.entities.length / 5;
+
+	// Calculate amount of penguins to spawn
+	let toSpawn = Math.floor(penguinMultiplier * GAME.relevance) - penguinMultiplier;
+	if (GAME.relevance > 1.5) toSpawn += 1;
+
+	// Spawn penguins
+	for (let i = 0; i < toSpawn; i++) {
+		const x = randomInteger(0, GAME.element.width);
+		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
+		const penguin = new Penguin(x, y);
+		GAME.penguins.push(penguin);		
+	}
+
+	// Depth sort
+	insertionSort(GAME.penguins, 'y');
+}, 1000);
 
 const overlay = document.getElementById('overlay');
 overlay.style.opacity = '1';

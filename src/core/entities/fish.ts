@@ -1,5 +1,5 @@
 import { State, GameState } from '../state';
-import { convertRange, loadImage, numberWithCommas, lerp, requestTimeout } from '../utils';
+import { convertRange, loadImage, numberWithCommas, lerp } from '../utils';
 
 // Sprites
 import fishImage from '../../sprites/fish-shadow.png';
@@ -17,6 +17,8 @@ export class Fish {
     public readonly type = 'fish';
     public readonly spriteHeight = 92;
 	public readonly spriteWidth = 92;
+
+    public collected: boolean;
 
     public exists: boolean;
     public frame: number;
@@ -40,6 +42,11 @@ export class Fish {
         this.exists = true;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
+        this.collected = false;
+
+        if (this.x < 128) this.x = 128;
+        if (this.x > GAME.element.width - 128) this.x = GAME.element.width - 128;
+
     }
 
     /**
@@ -56,7 +63,7 @@ export class Fish {
         ctx.save();
         ctx.translate(this.x, posY);
         ctx.scale(size, size);
-		ctx.drawImage(fish, -(this.width / 2), -this.height + 18, this.width, this.height);
+		ctx.drawImage(fish, -(this.width / 2), -(this.height / 2), this.width, this.height);
         ctx.restore();
     }
 
@@ -66,13 +73,31 @@ export class Fish {
     public update(): void {
         if (this.exists === false) return;
 
+        // Next frame
         this.frame += 1;
-        
-        // Spawn animation
-        if (this.frame < 50) {
-            const posY: number = convertRange(this.spawnY - 512, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
-            this.y = lerp(this.y, posY, 0.05);
-            return;
+
+        // If not collected
+        if (!this.collected) {
+            // Spawn animation
+            if (this.frame < 50) {
+                const posY: number = convertRange(this.spawnY - 512, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
+                this.y = lerp(this.y, posY, 0.05);
+            }
+
+            // Despawn
+            if (this.frame > 200) {
+                this.width = lerp(this.width, 0, 0.2); 
+                this.height = lerp(this.height, 0, 0.2); 
+                if (this.width < 16) this.exists = false;
+                return
+            }
+
+            // Check mouse collision
+            if (GAME.mouseX <= (this.x + 64) && GAME.mouseX >= (this.x - 64)) {
+                this.collected = true;
+            } else {
+                return;
+            }
         }
 
         // Size animation

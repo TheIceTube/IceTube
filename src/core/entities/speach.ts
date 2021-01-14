@@ -1,5 +1,5 @@
 import { State, GameState } from '../state';
-import { convertRange, loadImage, numberWithCommas, lerp, requestTimeout } from '../utils';
+import { convertRange, loadImage, numberWithCommas, lerp } from '../utils';
 
 // Sprites
 import speachBubbleImage from '../../sprites/speech_bubble.png';

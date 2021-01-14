@@ -1,6 +1,7 @@
 import { Player } from './entities/player';
 import { State, GameState } from './state';
-import { requestInterval, numberWithCommas } from './utils';
+import { numberWithCommas } from './utils';
+import { requestInterval, requestTimeout } from './timers';
 
 // Get state
 const GAME: GameState = State();
@@ -13,6 +14,7 @@ const pauseMenu = document.getElementById('pause-menu');
 const counter = document.getElementById('counter');
 const mood = document.getElementById('mood') as HTMLInputElement;
 const selectedNews = document.getElementById('selected');
+const relevanceBar = document.getElementById('relevance-bar');
 
 // Buttons
 const gamingButton = document.getElementById('gaming');
@@ -22,7 +24,6 @@ const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post') as HTMLButtonElement;
-const relevanceBar = document.getElementById('relevance-bar');
 
 let revelanceConst = 0;
 
@@ -34,7 +35,6 @@ const moodTable = {
 	politics: 3,
 	educational: 1,
 }
-
 
 // Update fish counter
 requestInterval(() => {
@@ -225,8 +225,6 @@ function createPost(): void {
 	// 	revelanceConst = revelanceConst * 0.75;
 	// }
 
-	console.log(revelanceConst);
-
 	// If correct theme
 	if (theme === selectedTheme.id) {
 		GAME.relevance += revelanceConst;
@@ -265,8 +263,10 @@ function nextNewsBlock() {
 	const blockNew = document.createElement('div');
 	blockNew.className = 'block new';
 	blockNew.setAttribute('news-index', `${index}`);
+
 	const title = document.createElement('h3');
 	title.innerText = current.title;
+
 	const content = document.createElement('p');
 	content.innerText = current.content;
 
@@ -276,7 +276,7 @@ function nextNewsBlock() {
 	news.appendChild(blockNew);
 
 	// Make new block
-	setTimeout(() => {
+	window.requestAnimationFrame(() => {
 		blockNew.className = 'block three';
 		blockNew.onclick = () => {
 			GAME.selectedNewsIndex = index;

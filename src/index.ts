@@ -41,6 +41,3 @@ import './core/gui';
 
 // Main game code
 import './core/main';
-
-// Game logic timers
-import './core/timers';
