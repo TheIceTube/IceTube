@@ -430,6 +430,7 @@ label {
 }
 
 #end-screen {
+	justify-content: right;
 	z-index: 999999;
 	position: fixed;
 	top: 45%;
@@ -444,6 +445,32 @@ label {
 	box-shadow: 0 12px black;
 	border: solid 4px black;
 	transform: translate( -500%);
+}
+
+#end-button{
+	margin-top: 70%;
+	margin-left: 35%;
+}
+
+#end-screen {
+	background-image: url('./sprites/end_screen.png');
+	background-repeat: no-repeat;
+	background-position-x: 50%;
+	background-position-y: 55%;
+	background-size: 50%;
+}
+
+#end-screen h1{
+	margin-left: 27%;
+}
+
+#end-screen h3{
+	margin-left: 25%;
+}
+
+#final-fish-count {
+float: right;
+margin-right: 37%;
 }
 
 #inner-end {
