@@ -2,6 +2,7 @@ import Stats from 'stats.js';
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
 import { randomInteger, insertionSort } from './utils';
+import { startMusic } from './audio';
 
 import { levels } from '../coefficents.json';
 
@@ -130,7 +131,7 @@ requestInterval(() => {
 		}
 		break;
 	}
-	
+
 	console.log(GAME.level, GAME.score);
 
 }, 1000);
@@ -141,6 +142,7 @@ overlay.style.opacity = '1';
 //starts the game
 document.getElementById('start-button').onclick = () => {
 	loop();
+	startMusic();
 	GAME.paused = false;
 	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
