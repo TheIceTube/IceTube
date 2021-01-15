@@ -1,16 +1,11 @@
 import { Player } from './entities/player';
 import { State, GameState } from './state';
-import { numberWithCommas } from './utils';
 import { requestInterval } from './timers';
-
-import popSound from '../sounds/pop.mp3';
+import { numberWithCommas, randomFromArray, randomInteger } from './utils';
+import { playClickSound, playClick2Sound, playMoveSound, playPaperSound, playSirenSound } from './audio';
 
 // Get state
 const GAME: GameState = State();
-
-const body =document.body;
-
-const audio = new Audio(popSound);
 
 // Elements
 const news = document.getElementById('news');
@@ -31,62 +26,51 @@ const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 const postButton = document.getElementById('post') as HTMLButtonElement;
 
-const moodTable = {
-	music: 11,
-	sport: 9,
-	gaming: 7,
-	films: 5,
-	politics: 3,
-	educational: 1,
-}
-
 // Update GUI elements
 requestInterval(() => {
-
 	// Fish counter
 	counter.innerText = numberWithCommas(GAME.fish);
 
 	// Bar width
 	let revelance: number = Math.floor(GAME.relevance * 50);
-	if (revelance > 100) revelance = 100; 
+	if (revelance > 100) revelance = 100;
 	relevanceBar.style.width = `${revelance}%`;
 
 	// Bar color
 	if (revelance < 33) {
-		relevanceBar.style.backgroundColor = '#f35858'
+		relevanceBar.style.backgroundColor = '#f35858';
 	} else if (revelance > 66) {
-		relevanceBar.style.backgroundColor = '#5ef358'
+		relevanceBar.style.backgroundColor = '#5ef358';
 	} else {
-		relevanceBar.style.backgroundColor = '#5893f3'
+		relevanceBar.style.backgroundColor = '#5893f3';
 	}
 }, 100);
 
 // Request news block
 requestInterval(() => {
+	playMoveSound();
 	nextNewsBlock();
 }, 2000);
 
 // New post creating
 postButton.addEventListener('click', () => {
+	playPaperSound();
+	playClickSound();
 	createPost();
 	hideModals();
 });
 
 // Hide modals in overlay click
 overlay.addEventListener('click', () => {
+	playClick2Sound();
 	hideModals();
 });
-
-// body.addEventListener('click', () => {
-// 	audio.volume = 0.1;
-//     audio.play();
-// });
 
 // Pause menu on Escape press
 window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
 		if (GAME.paused) {
-			GAME.paused = false
+			GAME.paused = false;
 			hideModals();
 		} else {
 			GAME.paused = true;
@@ -97,62 +81,55 @@ window.addEventListener('keydown', event => {
 	}
 });
 
-
 //Buttons for the new post thingy
 gamingButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	gamingButton.classList.contains('active')
-		? gamingButton.classList.remove('active')
-		: gamingButton.classList.add('active');
+	gamingButton.classList.contains('active') ? gamingButton.classList.remove('active') : gamingButton.classList.add('active');
 });
 
 educationalButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	educationalButton.classList.contains('active')
-		? educationalButton.classList.remove('active')
-		: educationalButton.classList.add('active');
+	educationalButton.classList.contains('active') ? educationalButton.classList.remove('active') : educationalButton.classList.add('active');
 });
 
 // Film theme selection
 filmsButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	filmsButton.classList.contains('active')
-		? filmsButton.classList.remove('active')
-		: filmsButton.classList.add('active');
+	filmsButton.classList.contains('active') ? filmsButton.classList.remove('active') : filmsButton.classList.add('active');
 });
 
 // Politics theme selection
 politicsButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	politicsButton.classList.contains('active')
-		? politicsButton.classList.remove('active')
-		: politicsButton.classList.add('active');
+	politicsButton.classList.contains('active') ? politicsButton.classList.remove('active') : politicsButton.classList.add('active');
 });
 
 // Music theme selection
 musicButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	musicButton.classList.contains('active')
-		? musicButton.classList.remove('active')
-		: musicButton.classList.add('active');
+	musicButton.classList.contains('active') ? musicButton.classList.remove('active') : musicButton.classList.add('active');
 });
 
 // Sports theme selection
 sportButton.addEventListener('click', () => {
 	unpressButtons();
+	playClickSound();
 	postButton.disabled = false;
-	sportButton.classList.contains('active')
-		? sportButton.classList.remove('active')
-		: sportButton.classList.add('active');
+	sportButton.classList.contains('active') ? sportButton.classList.remove('active') : sportButton.classList.add('active');
 });
 
 /**
- * Unpress all theme buttons 
+ * Unpress all theme buttons
  */
 function unpressButtons(): void {
 	gamingButton.classList.remove('active');
@@ -167,7 +144,6 @@ function unpressButtons(): void {
  * Create new post
  */
 function createPost(): void {
-	console.log(GAME.penguins.length);
 	const index = GAME.selectedNewsIndex;
 	const current = GAME.news[index];
 
@@ -184,53 +160,39 @@ function createPost(): void {
 	player.state = 'speaking';
 	player.speakFrame = 0;
 
-	// TODO: Fake news check
-	// TODO: Build this value from multiple factors
-	// TODO: Lower relevance if you choosen incorect theme
-
-	//TODO: This is a note, after more then 24 correct answear game started to crash (revelence was 0.1)
-	//Verdict game starts to crash at around 2500 penguins
-
-	//Longest game i posted 47 news
-
-	//TODO
-
-
-
-
-	//This is the way to go, was able to play the game, it adds dificulty,
-	// but we should tweeak the timers every where so that it would little bit slower but with the same difficulty
-	let relevanceConst = 0;
-
-	if (GAME.penguins.length < 100) relevanceConst = 0.1;
-	if (GAME.penguins.length> 100) relevanceConst = 0.15;
-	if (GAME.penguins.length> 400) relevanceConst = 0.2;
-
-	relevanceConst = 0.5;
-	
 	// Fake content check
 	if (current.fake) {
-		GAME.relevance -= 0.5;
+		playSirenSound();
+		
+		// Make penguins angry
+		GAME.penguins.forEach(penguin => {
+			if (penguin.type !== 'penguin') return;
+			if (penguin.state !== 'walking') return;
+			penguin.mood = 'angry';
+		});
+		
+		GAME.relevance -= (GAME.coefficents.relevanceDeduction * 10);
 		return;
 	}
 
-	const theme = current.theme;
+	// If theme is incorrect
+	if (current.theme !== selectedTheme.id) return;
+	
+	// Validate mood
+	let addition: number = GAME.coefficents.relevanceAddition;
+	const moods = GAME.moods;
 	const moodValue: number = parseInt(mood.value);
+	const maxBoundary = moods[current.theme] + 1;
+	const minBoundary = moods[current.theme] - 1;
 
-
-	// const maxBoundary = moodTable[theme] + 1;
-	// const minBoundary = moodTable[theme] - 1;
-
-	// if (moodValue >= minBoundary && moodValue <= maxBoundary) {
-	// 	if (moodValue === moodTable[theme]) revelanceConst = revelanceConst * 1.25;
-	// } else {
-	// 	revelanceConst = revelanceConst * 0.75;
-	// }
-
-	// If correct theme
-	if (theme === selectedTheme.id) {
-		GAME.relevance += relevanceConst;
+	// Lower addition if invalid mood
+	if (moodValue >= minBoundary && moodValue <= maxBoundary) {
+		addition *= 0.75;
 	}
+
+	// Add score
+	GAME.relevance += addition;
+	GAME.score += addition;
 }
 
 /**
@@ -283,6 +245,7 @@ function nextNewsBlock() {
 		blockNew.onclick = () => {
 			GAME.selectedNewsIndex = index;
 			showPostModal();
+			playClickSound();
 		};
 	});
 
@@ -315,7 +278,6 @@ function showPostModal(): void {
 	postModal.style.top = '32px';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
-	GAME.element.style.transform = 'scale(2) translateY(-32px)';
 	GAME.paused = true;
 }
 
@@ -328,7 +290,6 @@ function hideModals(): void {
 	overlay.style.opacity = '0';
 	pauseMenu.style.display = 'none';
 	overlay.style.pointerEvents = 'none';
-	GAME.element.style.transform = 'scale(1)';
 	GAME.paused = false;
 	unpressButtons();
 }

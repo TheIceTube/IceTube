@@ -123,7 +123,7 @@
 		{
 			"title": "Petions made to ban Musicals in movies",
 			"content": "More then 100 000 000 sigantures have been colected",
-			"theme": "films",
+			"theme": ["films"],
 			"fake": false
 		},
 		{

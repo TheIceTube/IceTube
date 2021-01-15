@@ -4,12 +4,21 @@ import { State, GameState } from '../state';
 import { convertRange, lerp, loadImage, randomInteger } from '../utils';
 
 // Sprites
-import spriteLeft from '../../sprites/penguin-left.png';
-import spriteRight from '../../sprites/penguin-right.png';
+import penguinLeftImage from '../../sprites/penguin-left.png';
+import penguinRightImage from '../../sprites/penguin-right.png';
+import angryPenguinLeftImage from '../../sprites/penguin-left-angry.png';
+import anrgyPenguinRightImage from '../../sprites/penguin-right-angry.png';
+import boredPenguinLeftImage from '../../sprites/penguin-left-bored.png';
+import boredPenguinRightImage from '../../sprites/penguin-right-bored.png';
+
 
 // Preload images
-const penguinLeft = loadImage(spriteLeft);
-const penguinRight = loadImage(spriteRight);
+const penguinLeft = loadImage(penguinLeftImage);
+const penguinRight = loadImage(penguinRightImage);
+const angryPenguinLeft = loadImage(angryPenguinLeftImage);
+const angryPenguinRight = loadImage(anrgyPenguinRightImage);
+const boredPenguinLeft = loadImage(boredPenguinLeftImage);
+const boredPenguinRight = loadImage(boredPenguinRightImage);
 
 // Global game state
 const GAME: GameState = State();
@@ -19,13 +28,14 @@ export class Penguin {
 	public readonly spriteHeight = 92;
 	public readonly spriteWidth = 92;
 
-	public involvement: number;
+	public involvment: number;
 	public exists: boolean;
 	
+	public mood: 'normal' | 'bored' | 'angry';
 	public state: 'spawning' | 'walking' | 'leaving';
 	public direction: 'left' | 'right';
-	public message: string = '';
 
+	public angryFrame: number;
 	public spawnFrame: number;
 	public frame: number;
 	public x: number;
@@ -42,10 +52,11 @@ export class Penguin {
 		this.frame = randomInteger(0, 20);
 		this.direction = randomInteger(0, 1) ? 'left' : 'right';
 
+		this.mood = 'normal';
 		this.width = this.spriteWidth / 2;
 		this.height = 0;
 		this.exists = true;
-		this.involvement = randomInteger(75, 125);
+		this.involvment = randomInteger(75, 125);
 		this.spawnFrame = randomInteger(0, 200);
 	}
 
@@ -60,9 +71,19 @@ export class Penguin {
 		// Remove if its unmounted
 		if (!this.exists) return;
 
-		const sprite = this.direction === 'left' ? penguinLeft : penguinRight;
+		let sprite = this.direction === 'left' ? penguinLeft : penguinRight;
 		const size = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
 		const posY = convertRange(this.y, { min: 0, max: GAME.element.height }, { min: GAME.element.height / 5, max: GAME.element.height });
+
+		// Bored sprite
+		if (this.mood === 'bored') {
+			sprite = this.direction === 'left' ? boredPenguinLeft : boredPenguinRight;
+		}
+		
+		// Angry sprite
+		if (this.mood === 'angry') {
+			sprite = this.direction === 'left' ? angryPenguinLeft : angryPenguinRight;
+		}
 
 		// Skip drawing if its reversed
 		if (size < 0) return;
@@ -87,17 +108,16 @@ export class Penguin {
 		if (!this.exists) return;
 
 		// Lower involvement
-		this.involvement -= 0.05;
+		this.involvment -= GAME.coefficents.penguinsInvolvment;
 
 		// Lower involvement one more time
-		if (GAME.relevance <= 0.5) this.involvement -= 0.05;
-		if (GAME.relevance >= 1) this.involvement += 0.02;
+		if (this.mood === 'angry') this.involvment -= 1;
 
 		// If penguin is not involved
-		if (this.involvement <= 0) this.state = 'leaving';
+		if (this.involvment <= 0) this.state = 'leaving';
 
 		// Spawn fish
-		if (this.spawnFrame === 300 && this.state === 'walking') {
+		if (this.spawnFrame === 100 && this.state === 'walking' && this.mood === 'normal') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
 		}
@@ -108,7 +128,18 @@ export class Penguin {
 
 		// Update spawn frame
 		this.spawnFrame += 1;
-		if (this.spawnFrame > 300) this.spawnFrame = 0;
+		if (this.spawnFrame > 100) {
+			this.spawnFrame = 0;
+			this.mood = 'normal';
+		}
+
+		this.angryFrame += 1;
+		if (this.angryFrame > 100) {
+			
+		}
+
+		// Change mood to border
+		if (this.involvment < 20 && this.mood === 'normal') this.mood = 'bored';
 
 		// If walking
 		if (this.state === 'walking') {

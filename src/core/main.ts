@@ -1,7 +1,9 @@
 import Stats from 'stats.js';
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
-import { randomInteger, randomFromArray, convertRange, insertionSort } from './utils';
+import { randomInteger, insertionSort } from './utils';
+
+import { levels } from '../coefficents.json';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -15,19 +17,19 @@ if (process.env.NODE_ENV === 'development') document.body.appendChild(stats.dom)
 // Get state
 const GAME: GameState = State();
 
+// Spawn main penguin player
+const player = new Player();
+GAME.penguins.push(player);
+
 // Spawn penguins
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 10; i++) {
 	const x = randomInteger(0, GAME.element.width);
 	const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
 	const penguin = new Penguin(x, y);
 	GAME.penguins.push(penguin);
 }
 
-// Spawn main penguin player
-const player = new Player();
-GAME.penguins.push(player);
-
-// Sort entities
+// Sort penguins
 insertionSort(GAME.penguins, 'y');
 
 // Main loop
@@ -77,8 +79,8 @@ function loop() {
 requestInterval(() => {
 	if (!GAME.started) return;
 
-	GAME.relevance -= 0.03;
-	if (GAME.relevance > 1.2) GAME.relevance -= 0.02;
+	GAME.relevance -= GAME.coefficents.relevanceDeduction;
+	if (GAME.relevance > 1.5) GAME.relevance -= GAME.coefficents.relevanceDeduction;
 	
 	if (GAME.relevance < 0) GAME.relevance = 0;
 	if (GAME.relevance > 2) GAME.relevance = 2;
@@ -87,23 +89,50 @@ requestInterval(() => {
 // Spawn penguins
 requestInterval(() => {
 	if (!GAME.started) return;
-
-	const penguinMultiplier = GAME.entities.length / 5;
+	const penguinsAmount = GAME.penguins.length - 1;
 
 	// Calculate amount of penguins to spawn
-	let toSpawn = Math.floor(penguinMultiplier * GAME.relevance) - penguinMultiplier;
+	let toSpawn = Math.ceil(penguinsAmount * GAME.coefficents.penguinsMultiplier);
 	if (GAME.relevance > 1.5) toSpawn += 1;
+
+	// Skip spawning if too much penguins
+	if (penguinsAmount > GAME.coefficents.maximumPenguins) return;
 
 	// Spawn penguins
 	for (let i = 0; i < toSpawn; i++) {
 		const x = randomInteger(0, GAME.element.width);
-		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
+		const y = randomInteger(GAME.element.height / 4, GAME.element.height - 64);
 		const penguin = new Penguin(x, y);
 		GAME.penguins.push(penguin);		
 	}
 
 	// Depth sort
 	insertionSort(GAME.penguins, 'y');
+}, 1000);
+
+// Update coefficents
+requestInterval(() => {
+	const score = GAME.score;
+	
+	for (let i = 0; i < levels.length; i++) {
+		const level = levels[i];
+	
+		if (level.score <= score) {
+			GAME.level = level.level;
+			GAME.coefficents.relevanceDeduction = level.relevanceDeduction;
+			GAME.coefficents.relevanceAddition = level.relevanceAddition;
+			GAME.coefficents.maximumPenguins = level.maximumPenguins;
+			GAME.coefficents.penguinsMultiplier = level.penguinsMultiplier;
+			GAME.coefficents.penguinsInvolvment = level.penguinsInvolvment;
+			GAME.coefficents.newsUpadateDelay = level.newsUpadateDelay;
+			GAME.coefficents.fishDespawnFrames = level.fishDespawnFrames;
+			continue;
+		}
+		break;
+	}
+	
+	console.log(GAME.level, GAME.score);
+
 }, 1000);
 
 const overlay = document.getElementById('overlay');

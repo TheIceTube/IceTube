@@ -12,7 +12,7 @@ type Theme = 'politics' | 'gaming' | 'music' | 'films' | 'educational' | 'sports
  */
 interface NewsBlock {
 	title: string;
-    content: string;
+	content: string;
 	theme: Theme;
 	fake: boolean;
 }
@@ -23,20 +23,45 @@ interface NewsBlock {
 export interface GameState {
 	paused: boolean;
 	element: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D;
+	ctx: CanvasRenderingContext2D;
 
 	mouseX: number;
 	mouseY: number;
 	mouseDown: boolean;
 
 	penguins: Array<Penguin | Player>;
-    entities: Array<Fish>;
+	entities: Array<Fish>;
 	started: boolean;
 
 	fish: number;
 	relevance: number;
 	score: number;
+	level: number;
+
+	moods: {
+		music: number;
+		sport: number;
+		gaming: number;
+		films: number;
+		politics: number;
+		educational: number;
+	};
 	
+	coefficents: {
+		relevanceDeduction: number;
+		relevanceAddition: number;
+		maximumPenguins: number;
+		penguinsMultiplier: number;
+		penguinsInvolvment: number;
+		newsUpadateDelay: number;
+		fishDespawnFrames: number;
+	};
+
+	// tutorials: {
+	// 	fakeTutorial: boolean;
+	// 	postTutorial: boolean;
+	// };
+
 	news: NewsBlock[];
 	newsIndex: number;
 	selectedNewsIndex: number;

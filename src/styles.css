@@ -27,10 +27,7 @@ main {
 	max-width: 100%;
 	max-height: 100%;
 	margin-right: 16px;
-	background: linear-gradient(-10deg, #64c8ff, white);
 	background: linear-gradient(-10deg, #ff9a03, #ff2448);
-	/* background: linear-gradient(-10deg, #39a372, #e8ff66); */
-	transition: transform 0.5s ease;
 }
 
 #post {
@@ -388,8 +385,9 @@ label {
 }
 
 #fish #counter {
-	color: black;
-	font-size: 24px;
+	text-shadow: 2px 2px 0px black;
+	color: white;
+	font-size: 32px;
 	line-height: 64px;
 	font-style: italic;
 	font-weight: bold;
