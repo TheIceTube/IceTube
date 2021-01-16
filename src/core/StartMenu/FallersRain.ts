@@ -1,12 +1,29 @@
-import { randomInteger, loadImage, convertRange, insertionSort } from './utils';
+import { randomInteger, loadImage, convertRange, insertionSort } from '../utils';
 
-// Images
-import img1 from '../sprites/gaming.png';
-import img2 from '../sprites/Educational.png';
-import img3 from '../sprites/films.png';
-import img4 from '../sprites/Music.png';
-import img5 from '../sprites/politics.png';
-import img6 from '../sprites/sport.png';
+/**
+ * HOW TO USE:
+ * 
+ * 1. Get canvas to draw the rain on
+ * 2. new FallersRain(canvas, true) (true for resize)
+ * Now the rain will be drawn on the canvas every frame
+ * 
+ * If canvas has an ID, then the FallerRain will automatically stop its loop when the canvas is removed from the DOM.
+ * Otherwise use fallersRain.finish() to stop the animation loop
+ * 
+ */
+
+/// @ts-ignore
+import img1 from '../../sprites/gaming.png';
+/// @ts-ignore
+import img2 from '../../sprites/education.png';
+/// @ts-ignore
+import img3 from '../../sprites/films.png';
+/// @ts-ignore
+import img4 from '../../sprites/Music.png';
+/// @ts-ignore
+import img5 from '../../sprites/politics.png';
+/// @ts-ignore
+import img6 from '../../sprites/sport.png';
 
 interface Faller
 {
@@ -58,7 +75,7 @@ export default class FallersRain
 
     private imagesToLoad: number;
 
-    public constructor(canvas: HTMLCanvasElement)
+    public constructor(canvas: HTMLCanvasElement, resize: boolean = true)
     {
         requestAnimationFrame(this.loop);
 
@@ -67,8 +84,11 @@ export default class FallersRain
 
         // Resize canvas, get ctx
         canvas = canvas;
-        canvas.width = window.innerWidth * window.devicePixelRatio;
-        canvas.height = window.innerHeight * window.devicePixelRatio;
+        if (resize)
+        {
+            canvas.width = window.innerWidth * window.devicePixelRatio;
+            canvas.height = window.innerHeight * window.devicePixelRatio;
+        }
         this.ctx = canvas.getContext('2d');
         
         // Load images
