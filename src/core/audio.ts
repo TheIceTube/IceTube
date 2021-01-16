@@ -1,4 +1,4 @@
-import { requestTimeout } from './timers';
+import { requestInterval, requestTimeout } from './timers';
 
 // Sounds
 import musicSound from '../sounds/music.mp3';
@@ -54,7 +54,7 @@ export function playClick2Sound(): void {
  */
 export function playSpeachSound(): void {
     const audio = new Audio(speachSound);
-    audio.volume = 0.05;
+    audio.volume = 0.1;
     audio.play();
 }
 
@@ -63,7 +63,7 @@ export function playSpeachSound(): void {
  */
 export function playMoveSound(): void {
     const audio = new Audio(moveSound);
-    audio.volume = 0.1;
+    audio.volume = 0.6;
     audio.play();
 }
 
@@ -81,7 +81,7 @@ export function playPaperSound(): void {
  */
 export function playSirenSound(): void {
     const audio = new Audio(sirenSound);
-    audio.volume = 0.1;
+    audio.volume = 0.2;
     audio.play();
 }
 

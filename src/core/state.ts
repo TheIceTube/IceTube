@@ -1,6 +1,6 @@
 import { Penguin } from './entities/penguin';
 import { Fish } from './entities/fish';
-import { Player } from './entities/player';
+import { Characters } from './entities/characters';
 
 /**
  * Possible post themes
@@ -29,38 +29,14 @@ export interface GameState {
 	mouseY: number;
 	mouseDown: boolean;
 
-	penguins: Array<Penguin | Player>;
+	penguins: Array<Penguin | Characters>;
 	entities: Array<Fish>;
 	started: boolean;
 
 	fish: number;
+	tempo: number;
 	relevance: number;
-	score: number;
-	level: number;
-
-	moods: {
-		music: number;
-		sport: number;
-		gaming: number;
-		films: number;
-		politics: number;
-		educational: number;
-	};
-	
-	coefficents: {
-		relevanceDeduction: number;
-		relevanceAddition: number;
-		maximumPenguins: number;
-		penguinsMultiplier: number;
-		penguinsInvolvment: number;
-		newsUpadateDelay: number;
-		fishDespawnFrames: number;
-	};
-
-	// tutorials: {
-	// 	fakeTutorial: boolean;
-	// 	postTutorial: boolean;
-	// };
+	maximumPenguins: number;
 
 	news: NewsBlock[];
 	newsIndex: number;

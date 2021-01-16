@@ -76,8 +76,7 @@ main {
 	height: 100%;
 	display: block;
 	transition: opacity 0.2s linear;
-	backdrop-filter: blur(16px) grayscale(0.2);
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(0, 0, 0, 0.75);
 }
 
 .modal {
@@ -107,34 +106,6 @@ label {
 	font-size: 14px;
 	letter-spacing: 1px;
 	padding-bottom: 4px;
-}
-
-.slider {
-	border-radius: 4px;
-	-webkit-appearance: none;
-	width: 100%;
-	height: 32px;
-	outline: none;
-	background: #d3d3d3;
-	border: solid 4px black;
-	margin-bottom: 20px;
-}
-
-.slider::-webkit-slider-thumb {
-	-webkit-appearance: none;
-	border-radius: 4px;
-	appearance: none;
-	width: 32px;
-	height: 32px;
-	background: black;
-	cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-	width: 32px;
-	height: 32px;
-	background: black;
-	cursor: pointer;
 }
 
 #selected {
@@ -179,7 +150,8 @@ label {
 	transform: scale(0.9);
 }
 
-#news .block > h3, #selected .block > h3 {
+#news .block > h3,
+#selected .block > h3 {
 	margin: 0;
 	font-size: 16px;
 	margin-bottom: 4px;
@@ -189,7 +161,8 @@ label {
 	border-bottom: dashed 2px black;
 }
 
-#news .block > p, #selected .block > p {
+#news .block > p,
+#selected .block > p {
 	margin: 0;
 	font-size: 14px;
 }
@@ -264,7 +237,7 @@ label {
 #theme button {
 	display: flex;
 	align-items: center;
-    justify-content: center;
+	justify-content: center;
 	cursor: pointer;
 	border-radius: 0;
 	width: 100%;
@@ -326,7 +299,7 @@ label {
 	margin-top: -32px;
 	margin-bottom: 0;
 	font-weight: bold;
-	color:white;
+	color: white;
 	letter-spacing: -2px;
 	text-shadow: 6px 6px 0 #000000;
 	transition: all 0.1s ease;
@@ -425,8 +398,8 @@ label {
 	width: 100%;
 	height: 100%;
 	border-radius: 4px;
-	background-color: #5ef358;
-	transition: width 0.5s ease, background-color 1s linear ;
+	background-color: grey;
+	transition: width 0.5s ease, background-color 1s linear;
 }
 
 #end-screen {
@@ -444,33 +417,33 @@ label {
 	background-color: white;
 	box-shadow: 0 12px black;
 	border: solid 4px black;
-	transform: translate( -500%);
+	transform: translate(-500%);
 }
 
-#end-button{
+#end-button {
 	margin-top: 70%;
 	margin-left: 35%;
 }
 
 #end-screen {
-	background-image: url('./sprites/end_screen.png');
+	background-image: url('./sprites/end-screen.png');
 	background-repeat: no-repeat;
 	background-position-x: 50%;
 	background-position-y: 55%;
 	background-size: 50%;
 }
 
-#end-screen h1{
+#end-screen h1 {
 	margin-left: 27%;
 }
 
-#end-screen h3{
+#end-screen h3 {
 	margin-left: 25%;
 }
 
 #final-fish-count {
-float: right;
-margin-right: 37%;
+	float: right;
+	margin-right: 37%;
 }
 
 #inner-end {

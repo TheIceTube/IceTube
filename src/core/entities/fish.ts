@@ -1,6 +1,6 @@
 import { State, GameState } from '../state';
 import { requestTimeout } from '../timers';
-import { convertRange, loadImage, numberWithCommas, lerp, randomInteger } from '../utils';
+import { convertRange, loadImage, lerp } from '../utils';
 
 // Sprites
 import fishImage from '../../sprites/fish-shadow.png';
@@ -45,8 +45,8 @@ export class Fish {
 		this.frame = 0;
 		this.exists = true;
 		this.collected = false;
-		this.width = this.spriteWidth;
-		this.height = this.spriteHeight;
+		this.width = this.spriteWidth / 4;
+		this.height = this.spriteHeight / 4;
 
 		if (this.x < 128) this.x = 128;
 		if (this.x > GAME.element.width - 128) this.x = GAME.element.width - 128;
@@ -85,6 +85,7 @@ export class Fish {
 
 		// If not collected
 		if (!this.collected) {
+
 			// Spawn animation
 			if (this.frame < 50) {
 				const posY: number = convertRange(
@@ -93,10 +94,12 @@ export class Fish {
 					{ min: GAME.element.height / 5, max: GAME.element.height }
 				);
 				this.y = lerp(this.y, posY, 0.05);
+				this.width = lerp(this.width, this.spriteWidth, 0.05);
+				this.height = lerp(this.height, this.spriteHeight, 0.05);
 			}
 
 			// Despawn
-			if (this.frame > GAME.coefficents.fishDespawnFrames) {
+			if (this.frame > 150) {
 				this.width = lerp(this.width, 0, 0.2);
 				this.height = lerp(this.height, 0, 0.2);
 				if (this.width < 16) this.exists = false;
@@ -124,7 +127,8 @@ export class Fish {
 		this.x = lerp(this.x, posX, 0.1);
 		this.y = lerp(this.y, posY, 0.1);
 
-		if (this.width < 16) {
+		// Counter animation
+		if (this.width < 8) {
 			this.exists = false;
 			GAME.fish += 1;
 

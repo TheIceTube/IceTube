@@ -1,14 +1,16 @@
+// Game logic
+import './logic';
+
+// Dependencies
 import Stats from 'stats.js';
+import { startMusic } from './audio';
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
-import { randomInteger, insertionSort } from './utils';
-import { startMusic } from './audio';
-
-import { levels } from '../coefficents.json';
+import { randomInteger, insertionSort, randomFromArray } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
-import { Player } from './entities/player';
+import { Characters } from './entities/characters';
 
 // Stats setup
 const stats = new Stats();
@@ -19,8 +21,8 @@ if (process.env.NODE_ENV === 'development') document.body.appendChild(stats.dom)
 const GAME: GameState = State();
 
 // Spawn main penguin player
-const player = new Player();
-GAME.penguins.push(player);
+const characters = new Characters();
+GAME.penguins.push(characters);
 
 // Spawn penguins
 for (let i = 0; i < 10; i++) {
@@ -35,26 +37,13 @@ insertionSort(GAME.penguins, 'y');
 
 // Main loop
 function loop() {
+	stats.begin();
+
 	// If game paused
 	if (GAME.paused) {
 		window.requestAnimationFrame(loop);
 		return;
 	}
-
-	//Game ends
-	if (checkEnd()) {	
-
-		GAME.paused = true;
-
-		document.getElementById('final-fish-count').innerText = `${GAME.fish}`;
-		document.getElementById('end-screen').style.transform = 'translate( -50%, -50%)';
-
-		overlay.style.opacity = '1';
-		overlay.style.pointerEvents = 'auto';
-		return;
-	}
-
-	stats.begin();
 
 	// Update entities
 	for (let i = 0; i < GAME.penguins.length; i++) GAME.penguins[i].update();
@@ -71,7 +60,6 @@ function loop() {
 	for (let i = 0; i < GAME.penguins.length; i++) GAME.penguins[i].draw();
 	for (let i = 0; i < GAME.entities.length; i++) GAME.entities[i].draw();
 
-
 	stats.end();
 	window.requestAnimationFrame(loop);
 }
@@ -80,60 +68,45 @@ function loop() {
 requestInterval(() => {
 	if (!GAME.started) return;
 
-	GAME.relevance -= GAME.coefficents.relevanceDeduction;
-	if (GAME.relevance > 1.5) GAME.relevance -= GAME.coefficents.relevanceDeduction;
-	
+	GAME.relevance -= 0.001 * GAME.tempo;
 	if (GAME.relevance < 0) GAME.relevance = 0;
-	if (GAME.relevance > 2) GAME.relevance = 2;
-}, 1000);
+}, 100);
 
-// Spawn penguins
+// Despawn penguins
 requestInterval(() => {
-	if (!GAME.started) return;
-	const penguinsAmount = GAME.penguins.length - 1;
+	if (GAME.relevance < 0.5) {
+		const penguinsAmount = GAME.penguins.length - 1;
 
-	// Calculate amount of penguins to spawn
-	let toSpawn = Math.ceil(penguinsAmount * GAME.coefficents.penguinsMultiplier);
-	if (GAME.relevance > 1.5) toSpawn += 1;
+		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.05);
+		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.2);
+		
+		if (toDespawn > penguinsAmount) toDespawn = penguinsAmount;
 
-	// Skip spawning if too much penguins
-	if (penguinsAmount > GAME.coefficents.maximumPenguins) return;
+		for (let i = 0; i < toDespawn; i++) {
+			const index = randomFromArray(GAME.penguins);
+			const penguin = GAME.penguins[index];
 
-	// Spawn penguins
-	for (let i = 0; i < toSpawn; i++) {
-		const x = randomInteger(0, GAME.element.width);
-		const y = randomInteger(GAME.element.height / 4, GAME.element.height - 64);
-		const penguin = new Penguin(x, y);
-		GAME.penguins.push(penguin);		
-	}
+			// Skip invalid penguin
+			if (penguin.type === 'characters' || penguin.state !== 'walking') {
+				i -= 1;
+				continue;
+			}	
 
-	// Depth sort
-	insertionSort(GAME.penguins, 'y');
-}, 1000);
-
-// Update coefficents
-requestInterval(() => {
-	const score = GAME.score;
-	
-	for (let i = 0; i < levels.length; i++) {
-		const level = levels[i];
-	
-		if (level.score <= score) {
-			GAME.level = level.level;
-			GAME.coefficents.relevanceDeduction = level.relevanceDeduction;
-			GAME.coefficents.relevanceAddition = level.relevanceAddition;
-			GAME.coefficents.maximumPenguins = level.maximumPenguins;
-			GAME.coefficents.penguinsMultiplier = level.penguinsMultiplier;
-			GAME.coefficents.penguinsInvolvment = level.penguinsInvolvment;
-			GAME.coefficents.newsUpadateDelay = level.newsUpadateDelay;
-			GAME.coefficents.fishDespawnFrames = level.fishDespawnFrames;
-			continue;
+			penguin.despawn();
 		}
-		break;
 	}
+}, 1000);
 
-	console.log(GAME.level, GAME.score);
-
+// Game Over Check
+requestInterval(() => {
+	if ((GAME.penguins.length - 1) <= 0) {
+		document.getElementById('final-fish-count').innerText = `${GAME.fish}`;
+		document.getElementById('end-screen').style.transform = 'translate( -50%, -50%)';
+	
+		overlay.style.opacity = '1';
+		overlay.style.pointerEvents = 'auto';
+		GAME.paused = true;
+	}
 }, 1000);
 
 const overlay = document.getElementById('overlay');
@@ -152,9 +125,3 @@ document.getElementById('start-button').onclick = () => {
 document.getElementById('end-button').onclick = () => {
 	location.reload();
 };
-
-function checkEnd(){
-	if ((GAME.penguins.length - 1) === 0 || GAME.relevance === 0 ) {
-		return true;
-	}
- }
