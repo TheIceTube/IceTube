@@ -12,14 +12,14 @@ const GAME: GameState = State();
 const news = document.getElementById('news');
 const overlay = document.getElementById('overlay');
 const counter = document.getElementById('counter');
-const pauseMenu = document.getElementById('pause-menu');
+const tutorial = document.getElementById('tutorial');
 const postModal = document.getElementById('post-modal');
 const selectedNews = document.getElementById('selected');
 const relevanceBar = document.getElementById('relevance-bar');
 
 // Buttons
 const gamingButton = document.getElementById('gaming');
-const educationalButton = document.getElementById('educational');
+const educationButton = document.getElementById('education');
 const politicsButton = document.getElementById('politics');
 const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
@@ -80,12 +80,11 @@ window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
 		if (GAME.paused) {
 			GAME.paused = false;
+			tutorial.classList.remove('visible');
 			hideModals();
 		} else {
 			GAME.paused = true;
-			pauseMenu.style.display = 'block';
-			overlay.style.opacity = '1';
-			overlay.style.pointerEvents = 'auto';
+			tutorial.classList.add('visible');
 		}
 	}
 });
@@ -98,11 +97,11 @@ gamingButton.addEventListener('click', () => {
 	gamingButton.classList.contains('active') ? gamingButton.classList.remove('active') : gamingButton.classList.add('active');
 });
 
-educationalButton.addEventListener('click', () => {
+educationButton.addEventListener('click', () => {
 	unpressButtons();
 	playClickSound();
 	postButton.disabled = false;
-	educationalButton.classList.contains('active') ? educationalButton.classList.remove('active') : educationalButton.classList.add('active');
+	educationButton.classList.contains('active') ? educationButton.classList.remove('active') : educationButton.classList.add('active');
 });
 
 // Film theme selection
@@ -142,7 +141,7 @@ sportButton.addEventListener('click', () => {
  */
 function unpressButtons(): void {
 	gamingButton.classList.remove('active');
-	educationalButton.classList.remove('active');
+	educationButton.classList.remove('active');
 	filmsButton.classList.remove('active');
 	politicsButton.classList.remove('active');
 	musicButton.classList.remove('active');
@@ -324,7 +323,6 @@ function hideModals(): void {
 	postButton.disabled = true;
 	postModal.style.top = '100%';
 	overlay.style.opacity = '0';
-	pauseMenu.style.display = 'none';
 	overlay.style.pointerEvents = 'none';
 	GAME.paused = false;
 	unpressButtons();

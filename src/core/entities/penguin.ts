@@ -149,10 +149,12 @@ export class Penguin {
 
 		// Update frame
 		this.frame += 1;
+		if ((window as any).caramelldensen === true) this.frame += 1;
 		if (this.frame > 20) this.frame = 0;
 
 		// Update spawn frame
 		this.spawnFrame += 1;
+		if ((window as any).caramelldensen === true) this.spawnFrame = 100;
 		if (this.spawnFrame > 100) {
 			this.spawnFrame = 0;
 		}

@@ -206,21 +206,37 @@ label {
 	right: -600px;
 }
 
-#pause-menu {
+#tutorial {
+	opacity: 0;
+	user-select: none;
+	pointer-events: none;
 	z-index: 999999;
 	position: fixed;
-	top: 45%;
-	left: 50%;
-	width: 300px;
-	padding: 64px;
-	padding-top: 48px;
-	letter-spacing: 1px;
-	border-radius: 16px;
-	background-color: white;
-	box-shadow: 0 12px black;
-	border: solid 4px black;
-	transform: translate(-50%, -50%);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, 0.6);
+	transition: opacity 0.3s ease;
 }
+
+#tutorial img {
+	width: 360px;
+	height: 360px;
+	display: block;
+	position: fixed;
+	transform: scale(0.1) rotate(15deg);
+	transition: all 0.3s ease;
+}
+
+#tutorial.visible {
+	opacity: 1;
+}
+
+#tutorial.visible img {
+	transform: scale(1) rotate(0deg);
+}
+
 
 #theme {
 	display: flex;

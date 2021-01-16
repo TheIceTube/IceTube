@@ -147,25 +147,25 @@
 		{
 			"title": "Scientist found new large Meteor.",
 			"content": "What can we learn about it?",
-			"theme": "educational",
+			"theme": "education",
 			"fake": false
 		},
 		{
 			"title": "How to study and concentrate better in School",
 			"content": "Tip and Tricks!",
-			"theme": "educational",
+			"theme": "education",
 			"fake": false
 		},
 		{
 			"title": "DIY Hacks for Daily life",
 			"content": "Top 10 Hacks that you ...",
-			"theme": "educational",
+			"theme": "education",
 			"fake": false
 		},
 		{
 			"title": "Maximum speed of human?",
 			"content": "Scientist doing reasearch of how fast can human run.",
-			"theme": "educational",
+			"theme": "education",
 			"fake": false
 		}
 	],

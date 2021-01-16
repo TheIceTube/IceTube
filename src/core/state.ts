@@ -5,7 +5,7 @@ import { Characters } from './entities/characters';
 /**
  * Possible post themes
  */
-type Theme = 'politics' | 'gaming' | 'music' | 'films' | 'educational' | 'sports';
+type Theme = 'politics' | 'gaming' | 'music' | 'films' | 'education' | 'sports';
 
 /**
  * Sctructure of the news post

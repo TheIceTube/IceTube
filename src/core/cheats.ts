@@ -1,4 +1,5 @@
 import { State, GameState } from './state';
+import { playCaramelldansen } from './audio';
 
 // Get state
 const GAME: GameState = State();
@@ -16,10 +17,20 @@ globalScope.junkie = () => {
 }
 
 /** 
- * Junkie penguins mode
- * Type "junkie()" in DevTools console to activate it
+ * Tempo update
+ * Update tempo manually
  */
 globalScope.setTempo = (tempo: number) => {
     GAME.tempo = tempo;
     return 'Tempo set to ' + tempo;
+}
+
+/** 
+ * Junkie penguins mode
+ * Type "junkie()" in DevTools console to activate it
+ */
+globalScope.caramelldensen = () => {
+    playCaramelldansen();
+    globalScope.caramelldensen = true;
+    return 'Full bass mode ON!';
 }
