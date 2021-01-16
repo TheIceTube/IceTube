@@ -62,6 +62,6 @@ import './core/gui';
 import './core/main';
 
 // TO BE MOVED SOMEWHERE
-import StartMenuCanvas from './core/startMenuCanvas';
+import FallersRain from './core/FallersRain';
 
-let startMenuCanvas = new StartMenuCanvas(document.getElementById('start-menu-canvas') as HTMLCanvasElement);
+new FallersRain(document.getElementById('start-menu-canvas') as HTMLCanvasElement);
