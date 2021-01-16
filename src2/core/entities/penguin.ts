@@ -11,6 +11,9 @@ import anrgyPenguinRightImage from '../../sprites/penguin-right-angry.png';
 import boredPenguinLeftImage from '../../sprites/penguin-left-bored.png';
 import boredPenguinRightImage from '../../sprites/penguin-right-bored.png';
 
+import junkieLeftImage from '../../sprites/junkie-left.png';
+import junkieRightImage from '../../sprites/junkie-right.png';
+
 
 // Preload images
 const penguinLeft = loadImage(penguinLeftImage);
@@ -19,6 +22,8 @@ const angryPenguinLeft = loadImage(angryPenguinLeftImage);
 const angryPenguinRight = loadImage(anrgyPenguinRightImage);
 const boredPenguinLeft = loadImage(boredPenguinLeftImage);
 const boredPenguinRight = loadImage(boredPenguinRightImage);
+const junkieLeft = loadImage(junkieLeftImage);
+const junkieRight = loadImage(junkieRightImage);
 
 // Global game state
 const GAME: GameState = State();
@@ -27,15 +32,14 @@ export class Penguin {
 	public readonly type = 'penguin';
 	public readonly spriteHeight = 92;
 	public readonly spriteWidth = 92;
-
-	public involvment: number;
-	public exists: boolean;
 	
-	public mood: 'normal' | 'bored' | 'angry';
 	public state: 'spawning' | 'walking' | 'leaving';
 	public direction: 'left' | 'right';
+	public exists: boolean;
 
-	public angryFrame: number;
+	public mood: 'normal' | 'bored' | 'angry';
+	
+	public emotionFrame: number;
 	public spawnFrame: number;
 	public frame: number;
 	public x: number;
@@ -47,17 +51,35 @@ export class Penguin {
 	constructor(x: number, y: number) {
 		this.x = x;
 		this.y = y;
-
+		
+		this.mood = 'normal';
+		
 		this.state = 'spawning';
 		this.frame = randomInteger(0, 20);
 		this.direction = randomInteger(0, 1) ? 'left' : 'right';
-
-		this.mood = 'normal';
+		
 		this.width = this.spriteWidth / 2;
 		this.height = 0;
 		this.exists = true;
-		this.involvment = randomInteger(75, 125);
+		
+		this.emotionFrame = 0;
 		this.spawnFrame = randomInteger(0, 200);
+	}
+
+	/**
+	 * Set penguin mood
+	 * @param mood Mood of the penguin
+	 */
+	public setMood(mood: 'angry' | 'bored'): void {
+		this.mood = mood;
+		this.emotionFrame = mood === 'angry' ? randomInteger(200, 400) : randomInteger(150, 300);
+	}
+
+	/**
+	 * Remove penguin from stage
+	 */
+	public despawn(): void {
+		this.state = 'leaving';
 	}
 
 	/**
@@ -84,15 +106,18 @@ export class Penguin {
 		if (this.mood === 'angry') {
 			sprite = this.direction === 'left' ? angryPenguinLeft : angryPenguinRight;
 		}
-
+		
 		// Skip drawing if its reversed
 		if (size < 0) return;
+
+		// Junkie mode
+		if ((window as any).junkie === true) sprite = this.direction === 'left' ? junkieLeft : junkieRight;
 
 		ctx.save();
 		ctx.translate(this.x, posY);
 		ctx.scale(size, size);
 		ctx.drawImage(sprite, -(this.width / 2), -this.height + 18, this.width, this.height);
-		ctx.restore();
+		ctx.restore();		
 	}
 
 	/**
@@ -107,39 +132,32 @@ export class Penguin {
 		// Remove if its unmounted
 		if (!this.exists) return;
 
-		// Lower involvement
-		this.involvment -= GAME.coefficents.penguinsInvolvment;
-
-		// Lower involvement one more time
-		if (this.mood === 'angry') this.involvment -= 1;
-
-		// If penguin is not involved
-		if (this.involvment <= 0) this.state = 'leaving';
-
 		// Spawn fish
 		if (this.spawnFrame === 100 && this.state === 'walking' && this.mood === 'normal') {
 			const fish = new Fish(this.x, this.y - 1);
 			GAME.entities.push(fish);
 		}
 
+		// Update emotion frame
+		if (this.mood !== 'normal') {
+			this.emotionFrame -= 1;
+			if (this.emotionFrame <= 0) {
+				this.emotionFrame = 0;
+				this.mood = 'normal';
+			}
+		}
+
 		// Update frame
 		this.frame += 1;
+		if ((window as any).caramelldensen === true) this.frame += 1;
 		if (this.frame > 20) this.frame = 0;
 
 		// Update spawn frame
 		this.spawnFrame += 1;
+		if ((window as any).caramelldensen === true) this.spawnFrame = 100;
 		if (this.spawnFrame > 100) {
 			this.spawnFrame = 0;
-			this.mood = 'normal';
 		}
-
-		this.angryFrame += 1;
-		if (this.angryFrame > 100) {
-			
-		}
-
-		// Change mood to border
-		if (this.involvment < 20 && this.mood === 'normal') this.mood = 'bored';
 
 		// If walking
 		if (this.state === 'walking') {

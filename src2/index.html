@@ -15,8 +15,9 @@
         Start menu -->
         <div id="start-menu">
             <canvas id="start-menu-canvas"></canvas>
+            <div id="start-menu-penguins"></div>
             <h1>IceTube</h1>
-            <p>Game by Penguins for Penguins</p>
+            <p>by Penguins for Penguins</p>
             <button id="start-button" class="cool-button">Start</button>
         </div>
 
@@ -31,27 +32,32 @@
         </div>
 
         <!-- Pause menu -->
-        <div id="pause-menu" style="display: none;">
-            <h1>PAUSE MENU</h1>
-            <label>To resume click outsidse the window.</label>
-            <label>Must add HELP for INFO</label>
+        <div id="tutorial">
+            <img src="./sprites/tutorial/leaderboard.png" style="left: -16px; top: -64px">
+            <img src="./sprites/tutorial/score.png" style="left: calc(50% - 180px); top: -64px">
+            <img src="./sprites/tutorial/relevance.png" style="right: -16px; top: 320px">
+            <img src="./sprites/tutorial/events.png" style="right: 32px; top: 16px">
+            <img src="./sprites/tutorial/themes.png" style="left: calc(50% - 450px); bottom: -128px; width: 900px;">
+            <img src="./sprites/tutorial/moods.png" style="left: calc(50% - 180px); top: 30%;">
         </div>
 
         <!-- Relevance meter -->
         <div id="relevance">
             <h1>Relevance Meter</h1>
-            <div id="relevance-bar" style="width: 50%"></div>
+            <div id="relevance-bar"></div>
         </div>
 
         <!-- News -->
         <div id="news">
             <div class="block info one">
-                <h3>Hello boys and girls!</h3>
-                <p>Our team spent nights to make this game better 😄</p>
+                <h3>Hello Boys and Girls!</h3>
+                <p>Welcome to our lovely game! Our team spent nights to make this game better 😄</p>
             </div>
             <div class="block info two">
                 <h3>How to play?</h3>
-                <p>Create posts by choosing a topic based on the latest news</p>
+                <p>Create posts by choosing a topic based on the latest news.
+                    Press <b>ESCAPE</b> for help
+                </p>
             </div>
             <div class="block info three">
                 <h3>Whats next?</h3>
@@ -63,14 +69,6 @@
         <div id="fish">
             <div class="fish-icon"></div>
             <div id="counter">0</div>
-        </div>
-
-        <!-- Message -->
-        <div id="message-modal" class="modal" style="top: 100%">
-            <h1>title</h1>
-            <p>
-                Some text
-            </p>
         </div>
 
         <!-- Create post modal -->
@@ -85,8 +83,8 @@
                 <button id="gaming">
                     <img src="./sprites/gaming.png" />
                 </button>
-                <button id="educational">
-                    <img src="./sprites/educational.png" />
+                <button id="education">
+                    <img src="./sprites/education.png" />
                 </button>
                 <button id="politics">
                     <img src="./sprites/politics.png" />
@@ -102,14 +100,7 @@
                 </button>
             </div>
 
-            <div class="mood-labels">
-                <label for="mood">Informative</label>
-                <!-- <label for="mood"></label> -->
-                <label for="mood" style="float: right;">Emotional</label>
-            </div>
-            <input type="range" min="0" max="12" value="6" class="slider" id="mood">
-
-            <button type="submit" id="post" class="cool-button">UPLOAD POST</button>
+            <button type="submit" id="post" class="cool-button">PUBLISH</button>
         </div>
 
         <!-- Overlay -->
