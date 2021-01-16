@@ -120,14 +120,12 @@ export class Characters {
 
 		// Frame update
 		this.frame += 1;
-		if ((window as any).caramelldensen === true) this.frame += 5;
 		if (this.frame > 100) {
 			this.frame = 0;
 		}
 
 		// Athena character frame update
 		this.anthenaFrame += 1;
-		if ((window as any).caramelldensen === true) this.anthenaFrame += 5;
 		if (this.anthenaFrame > 60) {
 			this.anthenaFrame = 0;
 		}

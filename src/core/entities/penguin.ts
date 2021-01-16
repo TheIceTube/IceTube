@@ -88,8 +88,6 @@ export class Penguin {
 	public draw(): void {
 		const ctx = GAME.ctx;
 
-		if (!GAME.started) return;
-
 		// Remove if its unmounted
 		if (!this.exists) return;
 
@@ -127,8 +125,6 @@ export class Penguin {
 		const width: number = GAME.element.width;
 		const height: number = GAME.element.height;
 
-		if (!GAME.started) return;
-
 		// Remove if its unmounted
 		if (!this.exists) return;
 
@@ -149,12 +145,11 @@ export class Penguin {
 
 		// Update frame
 		this.frame += 1;
-		if ((window as any).caramelldensen === true) this.frame += 1;
 		if (this.frame > 20) this.frame = 0;
 
 		// Update spawn frame
 		this.spawnFrame += 1;
-		if ((window as any).caramelldensen === true) this.spawnFrame = 100;
+		if ((window as any).rave === true) this.spawnFrame = 100;
 		if (this.spawnFrame > 100) {
 			this.spawnFrame = 0;
 		}

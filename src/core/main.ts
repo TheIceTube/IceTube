@@ -54,7 +54,7 @@ function loop() {
 	GAME.entities = GAME.entities.filter(entity => entity.exists);
 
 	// Clean screen
-	GAME.ctx.clearRect(0, 0, GAME.element.width, GAME.element.height);
+	if ((window as any).rave !== true) GAME.ctx.clearRect(0, 0, GAME.element.width, GAME.element.height);
 
 	// Draw entities
 	for (let i = 0; i < GAME.penguins.length; i++) GAME.penguins[i].draw();
@@ -64,60 +64,13 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
-// Relevance update
-requestInterval(() => {
-	if (!GAME.started) return;
-
-	GAME.relevance -= 0.001 * GAME.tempo;
-	if (GAME.relevance < 0) GAME.relevance = 0;
-}, 100);
-
-// Despawn penguins
-requestInterval(() => {
-	if (GAME.relevance < 0.5) {
-		const penguinsAmount = GAME.penguins.length - 1;
-
-		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.05);
-		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.2);
-		
-		if (toDespawn > penguinsAmount) toDespawn = penguinsAmount;
-
-		for (let i = 0; i < toDespawn; i++) {
-			const index = randomFromArray(GAME.penguins);
-			const penguin = GAME.penguins[index];
-
-			// Skip invalid penguin
-			if (penguin.type === 'characters' || penguin.state !== 'walking') {
-				i -= 1;
-				continue;
-			}	
-
-			penguin.despawn();
-		}
-	}
-}, 1000);
-
-// Game Over Check
-requestInterval(() => {
-	if ((GAME.penguins.length - 1) <= 0) {
-		document.getElementById('final-fish-count').innerText = `${GAME.fish}`;
-		document.getElementById('end-screen').style.transform = 'translate( -50%, -50%)';
-	
-		overlay.style.opacity = '1';
-		overlay.style.pointerEvents = 'auto';
-		GAME.paused = true;
-	}
-}, 1000);
-
-const overlay = document.getElementById('overlay');
-overlay.style.opacity = '1';
+document.getElementById('black-screen').style.opacity = 0 + '';
 
 //starts the game
 document.getElementById('start-button').onclick = () => {
 	loop();
 	startMusic();
 	GAME.paused = false;
-	overlay.style.opacity = '0';
 	document.getElementById('start-menu').remove();
 };
 

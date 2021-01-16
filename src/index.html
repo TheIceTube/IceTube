@@ -11,8 +11,17 @@
 
 <body>
     <main>
-<!-- 
-        Start menu -->
+
+        <!-- Black screen -->
+        <div id="black-screen"></div>
+
+        <!-- Story comics -->
+        <div id="comics">
+            <div class="row"></div>
+            <div class="row"></div>
+        </div>
+
+        <!-- Start menu -->
         <div id="start-menu">
             <canvas id="start-menu-canvas"></canvas>
             <div id="start-menu-penguins"></div>
@@ -25,8 +34,9 @@
         <div id="end-screen">
             <div id='inner-end'>
                 <h1>GAME OVER</h1>
-                <h3>Gathered fishes: <div id='final-fish-count'></div></h3>
-                <div id = "end-screen-image"></div>
+                <h3>Gathered fishes: <div id='final-fish-count'></div>
+                </h3>
+                <div id="end-screen-image"></div>
             </div>
             <button id="end-button" class="cool-button">Restart</button>
         </div>
@@ -72,7 +82,7 @@
         </div>
 
         <!-- Create post modal -->
-        <div id="post-modal" class="modal" style="top: 100%">
+        <div id="post-modal">
             <h1>NEW POST!</h1>
 
             <label for="selected">Selected Event</label>
@@ -100,11 +110,11 @@
                 </button>
             </div>
 
-            <button type="submit" id="post" class="cool-button">PUBLISH</button>
+            <button type="submit" id="post-button" class="cool-button">PUBLISH</button>
         </div>
 
         <!-- Overlay -->
-        <div id="overlay" style="opacity: 0; pointer-events: none;"></div>
+        <div id="post-overlay"></div>
 
         <!-- Game stage -->
         <canvas id="stage"></canvas>

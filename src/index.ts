@@ -24,12 +24,11 @@ State({
 
 	entities: [],
 	penguins: [],
-	started: false,
 
 	fish: 0,
 	tempo: 1,
 	relevance: 1.25,
-	maximumPenguins: 0,
+	maximumPenguins: 10,
 
 	news: shuffle([...real_news, ...fake_news]),
 	selectedNewsIndex: 0,
