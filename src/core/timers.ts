@@ -37,7 +37,6 @@ export function requestInterval(callback: () => void, delay: number = 0): (newDe
 		window.requestAnimationFrame(loop);
 	}
 
-	
 	loop();
 
 	return newDelay => {

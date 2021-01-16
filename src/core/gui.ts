@@ -1,7 +1,8 @@
-import { Player } from './entities/player';
 import { State, GameState } from './state';
-import { requestInterval } from './timers';
-import { numberWithCommas, randomFromArray, randomInteger } from './utils';
+import { Penguin } from './entities/penguin';
+import { Characters } from './entities/characters';
+import { requestInterval, requestTimeout } from './timers';
+import { numberWithCommas, randomInteger, insertionSort } from './utils';
 import { playClickSound, playClick2Sound, playMoveSound, playPaperSound, playSirenSound } from './audio';
 
 // Get state
@@ -11,15 +12,14 @@ const GAME: GameState = State();
 const news = document.getElementById('news');
 const overlay = document.getElementById('overlay');
 const counter = document.getElementById('counter');
-const pauseMenu = document.getElementById('pause-menu');
+const tutorial = document.getElementById('tutorial');
 const postModal = document.getElementById('post-modal');
-const mood = document.getElementById('mood') as HTMLInputElement;
 const selectedNews = document.getElementById('selected');
 const relevanceBar = document.getElementById('relevance-bar');
 
 // Buttons
 const gamingButton = document.getElementById('gaming');
-const educationalButton = document.getElementById('educational');
+const educationButton = document.getElementById('education');
 const politicsButton = document.getElementById('politics');
 const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
@@ -31,30 +31,39 @@ requestInterval(() => {
 	// Fish counter
 	counter.innerText = numberWithCommas(GAME.fish);
 
-	// Bar width
-	let revelance: number = Math.floor(GAME.relevance * 50);
-	if (revelance > 100) revelance = 100;
-	relevanceBar.style.width = `${revelance}%`;
+	// Bar width update
+	let percent: number = Math.floor(GAME.relevance * 50);
+	if (percent > 100) percent = 100;
+	relevanceBar.style.width = `${percent}%`;
 
 	// Bar color
-	if (revelance < 33) {
+	if (GAME.relevance < 0.5) {
 		relevanceBar.style.backgroundColor = '#f35858';
-	} else if (revelance > 66) {
+	} else if (GAME.relevance > 1.5) {
 		relevanceBar.style.backgroundColor = '#5ef358';
 	} else {
 		relevanceBar.style.backgroundColor = '#5893f3';
 	}
 }, 100);
 
-// Request news block
+// Increase tempo
 requestInterval(() => {
+	if (GAME.started === false) return;
+	GAME.tempo += 0.2;
+}, 1000);
+
+// Request news block
+const newsInterval = requestInterval(() => {
 	playMoveSound();
 	nextNewsBlock();
-}, 2000);
+
+	// Update interval
+	const nextDelay = Math.floor(5000 - (100 * GAME.tempo));
+	newsInterval(nextDelay > 500 ? nextDelay : 500)
+}, 7500);
 
 // New post creating
 postButton.addEventListener('click', () => {
-	playPaperSound();
 	playClickSound();
 	createPost();
 	hideModals();
@@ -71,12 +80,11 @@ window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
 		if (GAME.paused) {
 			GAME.paused = false;
+			tutorial.classList.remove('visible');
 			hideModals();
 		} else {
 			GAME.paused = true;
-			pauseMenu.style.display = 'block';
-			overlay.style.opacity = '1';
-			overlay.style.pointerEvents = 'auto';
+			tutorial.classList.add('visible');
 		}
 	}
 });
@@ -89,11 +97,11 @@ gamingButton.addEventListener('click', () => {
 	gamingButton.classList.contains('active') ? gamingButton.classList.remove('active') : gamingButton.classList.add('active');
 });
 
-educationalButton.addEventListener('click', () => {
+educationButton.addEventListener('click', () => {
 	unpressButtons();
 	playClickSound();
 	postButton.disabled = false;
-	educationalButton.classList.contains('active') ? educationalButton.classList.remove('active') : educationalButton.classList.add('active');
+	educationButton.classList.contains('active') ? educationButton.classList.remove('active') : educationButton.classList.add('active');
 });
 
 // Film theme selection
@@ -133,7 +141,7 @@ sportButton.addEventListener('click', () => {
  */
 function unpressButtons(): void {
 	gamingButton.classList.remove('active');
-	educationalButton.classList.remove('active');
+	educationButton.classList.remove('active');
 	filmsButton.classList.remove('active');
 	politicsButton.classList.remove('active');
 	musicButton.classList.remove('active');
@@ -148,51 +156,78 @@ function createPost(): void {
 	const current = GAME.news[index];
 
 	GAME.started = true;
+	const penguinsAmount = GAME.penguins.length - 1;
 
+	// Unpress last active button
 	let selectedTheme = document.querySelector('button.active');
 	if (selectedTheme === null) return;
 
+	// Mark news as posted
 	const selectedNewsBlock = news.querySelector(`[news-index="${index}"]`);
 	if (selectedNewsBlock) selectedNewsBlock.classList.add('posted');
 
 	// Penguin Animation
-	const player = GAME.penguins.find(entity => entity.type === 'player') as Player;
-	player.state = 'speaking';
-	player.speakFrame = 0;
+	const characters = GAME.penguins.find(entity => entity.type === 'characters') as Characters;
+	characters.state = 'speaking';
+	characters.speakFrame = 0;
 
-	// Fake content check
+	// If fake post
 	if (current.fake) {
 		playSirenSound();
-		
-		// Make penguins angry
+
 		GAME.penguins.forEach(penguin => {
 			if (penguin.type !== 'penguin') return;
 			if (penguin.state !== 'walking') return;
-			penguin.mood = 'angry';
+
+			penguin.setMood('angry');
 		});
-		
-		GAME.relevance -= (GAME.coefficents.relevanceDeduction * 10);
+
+		GAME.relevance -= 0.5;
+		if (GAME.relevance < 0) GAME.relevance = 0;
 		return;
 	}
 
-	// If theme is incorrect
-	if (current.theme !== selectedTheme.id) return;
-	
-	// Validate mood
-	let addition: number = GAME.coefficents.relevanceAddition;
-	const moods = GAME.moods;
-	const moodValue: number = parseInt(mood.value);
-	const maxBoundary = moods[current.theme] + 1;
-	const minBoundary = moods[current.theme] - 1;
+	// If wrong theme
+	if (current.theme !== selectedTheme.id) {
+		GAME.penguins.forEach(penguin => {
+			if (penguin.type !== 'penguin') return;
+			if (penguin.state !== 'walking') return;
 
-	// Lower addition if invalid mood
-	if (moodValue >= minBoundary && moodValue <= maxBoundary) {
-		addition *= 0.75;
+			penguin.setMood('bored');
+		});
+
+		GAME.relevance -= 0.25;
+		if (GAME.relevance < 0) GAME.relevance = 0;
+		return;
 	}
 
-	// Add score
-	GAME.relevance += addition;
-	GAME.score += addition;
+	// Calculate amount of penguins to spawn
+	let toSpawn = Math.ceil(penguinsAmount * 0.5);
+	if (GAME.relevance > 1.5) toSpawn += 1;
+	if (penguinsAmount < 25) toSpawn += 1;
+
+	// Skip spawning if too much penguins
+	if (penguinsAmount > 1000) return;
+
+	// Spawn penguins
+	for (let i = 0; i < toSpawn; i++) {
+		const x = randomInteger(0, GAME.element.width);
+		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
+		const penguin = new Penguin(x, y);
+		GAME.penguins.push(penguin);	
+	}
+
+	// Sort penguins
+	insertionSort(GAME.penguins, 'y');
+
+	// Update maximum penguins value
+	const newPenguinsAmount = GAME.penguins.length - 1
+	GAME.maximumPenguins = newPenguinsAmount;
+	if (newPenguinsAmount < GAME.maximumPenguins) GAME.maximumPenguins = newPenguinsAmount;
+
+	GAME.relevance += 0.5;
+	if (GAME.relevance > 2) GAME.relevance = 2;
+	if (GAME.relevance <= 0.75) GAME.relevance = 1;
 }
 
 /**
@@ -275,7 +310,7 @@ function showPostModal(): void {
 	selectedNews.appendChild(blockNew);
 
 	postButton.disabled = true;
-	postModal.style.top = '32px';
+	postModal.style.top = '10vh';
 	overlay.style.opacity = '1';
 	overlay.style.pointerEvents = 'auto';
 	GAME.paused = true;
@@ -288,7 +323,6 @@ function hideModals(): void {
 	postButton.disabled = true;
 	postModal.style.top = '100%';
 	overlay.style.opacity = '0';
-	pauseMenu.style.display = 'none';
 	overlay.style.pointerEvents = 'none';
 	GAME.paused = false;
 	unpressButtons();

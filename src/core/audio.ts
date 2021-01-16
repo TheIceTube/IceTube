@@ -1,8 +1,7 @@
-import { requestTimeout } from './timers';
+import { requestInterval, requestTimeout } from './timers';
 
 // Sounds
 import musicSound from '../sounds/music.mp3';
-
 import popSound from '../sounds/pop.mp3';
 import moveSound from '../sounds/move.mp3';
 import paperSound from '../sounds/paper.mp3';
@@ -10,6 +9,11 @@ import clickSound from '../sounds/click.mp3';
 import click2Sound from '../sounds/click2.mp3';
 import speachSound from '../sounds/speach.mp3';
 import sirenSound from '../sounds/siren.mp3';
+
+import caramelldensenSound from '../sounds/caramelldensen.mp3';
+
+// Music
+let music = new Audio(musicSound);
 
  // Pop sound
 let popIndex: number = 0;
@@ -54,7 +58,7 @@ export function playClick2Sound(): void {
  */
 export function playSpeachSound(): void {
     const audio = new Audio(speachSound);
-    audio.volume = 0.05;
+    audio.volume = 0.1;
     audio.play();
 }
 
@@ -63,7 +67,7 @@ export function playSpeachSound(): void {
  */
 export function playMoveSound(): void {
     const audio = new Audio(moveSound);
-    audio.volume = 0.1;
+    audio.volume = 0.6;
     audio.play();
 }
 
@@ -81,7 +85,7 @@ export function playPaperSound(): void {
  */
 export function playSirenSound(): void {
     const audio = new Audio(sirenSound);
-    audio.volume = 0.1;
+    audio.volume = 0.2;
     audio.play();
 }
 
@@ -89,8 +93,32 @@ export function playSirenSound(): void {
  * Paper sound
  */
 export function startMusic(): void {
-    const audio = new Audio(musicSound);
+    music.volume = 0.5;
+    music.loop = true;
+    music.play();
+}
+
+/**
+ * Paper sound
+ */
+export function stopMusic(): void {
+    music.pause();
+    music.currentTime = 0
+
+    const toPlay = (window as any).caramelldensen ? caramelldensenSound : musicSound; 
+    const audio = new Audio(toPlay);
     audio.volume = 0.5;
+    audio.loop = true;
+    audio.play();
+}
+
+/**
+ * Caramelldansen mode
+ */
+export function playCaramelldansen(): void {
+    stopMusic();
+    const audio = new Audio(caramelldensenSound);
+    audio.volume = 1;
     audio.loop = true;
     audio.play();
 }
