@@ -51,3 +51,28 @@ import './core/cheats';
 // Start the fallers rain animation (in the start menu)
 import FallersRain from './core/StartMenu/FallersRain';
 new FallersRain(document.getElementById('start-menu-canvas') as HTMLCanvasElement);
+
+// let canvas = document.getElementById('start-menu-canvas') as HTMLCanvasElement;
+// document.getElementById('start-menu-penguins').remove();
+// canvas.width = window.innerWidth * window.devicePixelRatio;
+// canvas.height = window.innerHeight * window.devicePixelRatio;
+// let ctx = canvas.getContext('2d');
+// canvas.style.opacity = "1";
+
+// import { lerp } from './core/utils';
+// ctx.transform(1, 0, 0, -1, 0, canvas.height)
+// let min = 50;
+// let max = 100;
+// let curr = 250;
+// let frame = 0;
+// ctx.moveTo(0, 0);
+
+// for (let i = 100; i < 1000; i++)
+// {
+// 	frame = (frame + 1) % 100;
+// 	curr = frame < 50 ? lerp(curr, max, 0.1) : lerp(curr, min, 0.1);
+// 	ctx.lineTo(i, curr);
+// }
+// ctx.stroke();
+// ctx.fillStyle = 'black';
+// ctx.fillRect(-5000, -500, 500, 500);
