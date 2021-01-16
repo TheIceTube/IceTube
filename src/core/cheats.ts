@@ -26,11 +26,14 @@ globalScope.setTempo = (tempo: number) => {
 }
 
 /** 
- * Junkie penguins mode
- * Type "junkie()" in DevTools console to activate it
+ * Rave mode
+ * Type "ravee()" in DevTools console to activate it
  */
-globalScope.caramelldensen = () => {
+globalScope.rave = () => {
     playCaramelldansen();
-    globalScope.caramelldensen = true;
-    return 'Full bass mode ON!';
+    document.getElementById('stage').style.animation = 'party 0.32s infinite ease-in-out';
+    globalScope.rave = true;
+    GAME.tempo = 5;
+    
+    return 'Rave mode ON!';
 }

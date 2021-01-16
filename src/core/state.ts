@@ -31,7 +31,6 @@ export interface GameState {
 
 	penguins: Array<Penguin | Characters>;
 	entities: Array<Fish>;
-	started: boolean;
 
 	fish: number;
 	tempo: number;

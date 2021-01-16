@@ -9,6 +9,7 @@ import clickSound from '../sounds/click.mp3';
 import click2Sound from '../sounds/click2.mp3';
 import speachSound from '../sounds/speach.mp3';
 import sirenSound from '../sounds/siren.mp3';
+import sadSound from '../sounds/sad.mp3';
 
 import caramelldensenSound from '../sounds/caramelldensen.mp3';
 
@@ -90,6 +91,15 @@ export function playSirenSound(): void {
 }
 
 /**
+ * Sad sound
+ */
+export function playSadSound(): void {
+    const audio = new Audio(sadSound);
+    audio.volume = 0.2;
+    audio.play();
+}
+
+/**
  * Paper sound
  */
 export function startMusic(): void {
@@ -104,12 +114,6 @@ export function startMusic(): void {
 export function stopMusic(): void {
     music.pause();
     music.currentTime = 0
-
-    const toPlay = (window as any).caramelldensen ? caramelldensenSound : musicSound; 
-    const audio = new Audio(toPlay);
-    audio.volume = 0.5;
-    audio.loop = true;
-    audio.play();
 }
 
 /**
