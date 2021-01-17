@@ -170,7 +170,7 @@ postButton.addEventListener('click', () => {
 			penguin.setMood('angry');
 		});
 
-		GAME.relevance -= 0.5;
+		GAME.relevance -= 0.75;
 		if (GAME.relevance < 0) GAME.relevance = 0;
 		return;
 	}
@@ -191,7 +191,7 @@ postButton.addEventListener('click', () => {
 	}
 
 	// Calculate amount of penguins to spawn
-	let toSpawn = Math.ceil(penguinsAmount * 0.5);
+	let toSpawn = Math.ceil(penguinsAmount * 0.4);
 	if (GAME.relevance > 1.5) toSpawn += 1;
 	if (penguinsAmount < 25) toSpawn += 1;
 
