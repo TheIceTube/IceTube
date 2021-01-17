@@ -93,8 +93,10 @@ export class Fish {
 		if (!this.collected) {
 
 			// Rotate
-			let rotPeriod = (this.frame > 100) ? 5 : 60;
-			this.rot = lerpAnim(this.rot, -0.8, 0.8, this.frame, rotPeriod, 0.05);
+			let slowPeriod = 60;
+			let fastPeriod = convertRange(this.frame - 100, { min: 0, max: 100 }, { min: 20, max: 5 });
+			let rotPeriod = (this.frame > 100) ? fastPeriod : slowPeriod;
+			this.rot = lerpAnim(this.rot, -1, 1, this.frame, rotPeriod, 0.05);
 
 			// Spawn animation
 			if (this.frame < 60)
