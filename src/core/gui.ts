@@ -64,6 +64,7 @@ nextButton.addEventListener('click', () => {
 	}, 1000);
 });
 
+// Restart button
 restartButton.addEventListener('click', () => {
 	blackScreen.classList.add('visible');
 	restartButton.disabled = true;
@@ -75,6 +76,8 @@ restartButton.addEventListener('click', () => {
 
 		gameRestart();
 		restartMusic();
+		document.getElementById('end-screen').style.transform = 'translate(500%)';
+		
 
 		GAME.paused = false;
 	}, 1000);
@@ -110,7 +113,6 @@ postOverlay.addEventListener('click', () => {
 // Pause menu on Escape press
 window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
-
 		if (GAME.paused && GAME.penguins.length > 1) {
 			GAME.paused = false;
 			tutorial.classList.remove('visible');

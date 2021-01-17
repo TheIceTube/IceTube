@@ -76,6 +76,14 @@ export class Characters {
 	}
 
 	/**
+	 * Start speaking
+	 */
+	public speak(): void {
+		this.state = 'speaking';
+		this.speakFrame = 0;
+	}
+
+	/**
 	 * Draw sprite on canvas
 	 */
 	public draw(): void {

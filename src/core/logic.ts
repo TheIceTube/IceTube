@@ -35,9 +35,9 @@ requestInterval(() => {
 	if (GAME.relevance < 0.5) {
 		const penguinsAmount = GAME.penguins.length - 1;
 
-		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.05);
-		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.1);
-
+		// Callculate how much penguins we should despawn
+		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.1);
+		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.2);
 		if (toDespawn > penguinsAmount) toDespawn = penguinsAmount;
 
 		for (let i = 0; i < toDespawn; i++) {
@@ -151,8 +151,7 @@ postButton.addEventListener('click', () => {
 
 	// Penguin Animation
 	const characters = GAME.penguins.find(entity => entity.type === 'characters') as Characters;
-	characters.state = 'speaking';
-	characters.speakFrame = 0;
+	characters.speak();
 
 	// Click sound
 	playClickSound();
@@ -218,7 +217,10 @@ postButton.addEventListener('click', () => {
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export function gameRestart() {
+/**
+ * Restart game state
+ */
+export function gameRestart(): void {
 	GAME.paused = true;
 
 	GAME.mouseX = 0;
@@ -226,7 +228,9 @@ export function gameRestart() {
 	GAME.mouseDown = false;
 
 	GAME.entities = [];
-	GAME.penguins = [];
+	GAME.penguins = [
+		new Characters()
+	];
 
 	GAME.fish = 0;
 	GAME.tempo = 1;
@@ -236,6 +240,8 @@ export function gameRestart() {
 	GAME.news = shuffle(GAME.news);
 	GAME.selectedNewsIndex = 0;
 	GAME.newsIndex = 0;
+
+	spawnPenguins(10);
 }
 
 /**
