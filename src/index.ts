@@ -50,3 +50,5 @@ import './core/cheats';
 // Start the fallers rain animation (in the start menu)
 import FallersRain from './core/StartMenu/FallersRain';
 new FallersRain(document.getElementById('start-menu-canvas') as HTMLCanvasElement);
+
+(window as any).skipStartMenu();

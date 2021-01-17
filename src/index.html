@@ -42,11 +42,22 @@
 
         <!-- End Screen menu -->
         <div id="end-screen">
-            <div id='inner-end'>
-                <h1>GAME OVER</h1>
-                <h3>Gathered fishes: <div id='final-fish-count'></div>
-                </h3>
-                <div id="end-screen-image"></div>
+            <h1>GAME OVER</h1>
+            <h3 style="display: none;">Gathered fishes: <div id='final-fish-count'></div></h3>
+            <div id="leaderboard">
+
+                <div id="leaderboard-table">
+                </div>
+
+                <label>Your score will be</label>
+                <div id="score-yours" class="score-entry yours">
+
+                    <div class="score-rank">44</div>
+                    <input maxLength='12' placeholder="enter your name" class="score-name"></input>
+                    <div class="score-score">234</div>
+                </div>
+
+                <button id="submit-score-button" disabled class="cool-button">Submit</button>
             </div>
             <button id="restart-button" class="cool-button">Restart</button>
         </div>

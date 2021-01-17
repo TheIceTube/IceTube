@@ -221,3 +221,22 @@ export function hidePostModals(): void {
 	postOverlay.classList.remove('visible');
 	unpressThemeButtons();
 }
+
+
+
+(window as any).skipStartMenu = () =>
+{
+    playClickSound();
+    blackScreen.classList.add('visible');
+    startMusic();
+    startMenu.remove();
+    blackScreen.classList.remove('visible');
+    comics.classList.add('visible');
+    playPaperSound();
+    playClickSound();
+    blackScreen.classList.add('visible');
+    blackScreen.classList.remove('visible');
+    comics.classList.remove('visible');
+
+    GAME.paused = false;
+}
