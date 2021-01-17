@@ -5,6 +5,7 @@ import { requestInterval } from './timers';
 import { randomInteger, insertionSort, randomFromArray } from './utils';
 import { playClickSound, playMoveSound, playPaperSound, playSadSound, playSirenSound } from './audio';
 import { hidePostModals, showPostModal } from './gui';
+import { gameOver } from './gameOver';
 
 // Get state
 const GAME: GameState = State();
@@ -56,14 +57,10 @@ requestInterval(() => {
 }, 1000);
 
 // Game Over Check
-requestInterval(() => {
-	if ((GAME.penguins.length - 1) <= 0) {
-		// document.getElementById('final-fish-count').innerText = `${GAME.fish}`;
-		// document.getElementById('end-screen').style.transform = 'translate( -50%, -50%)';
-	
-		// overlay.style.opacity = '1';
-		// overlay.style.pointerEvents = 'auto';
-		GAME.paused = true;
+requestInterval(() =>
+{
+	if (true || (GAME.penguins.length - 1) <= 0) {
+		gameOver();
 	}
 }, 1000);
 
