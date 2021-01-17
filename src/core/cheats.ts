@@ -1,5 +1,6 @@
 import { State, GameState } from './state';
 import { playCaramelldansen } from './audio';
+import { FishingRod } from './entities/fishingRod';
 
 // Get state
 const GAME: GameState = State();
@@ -36,4 +37,10 @@ globalScope.rave = () => {
     GAME.tempo = 5;
     
     return 'Rave mode ON!';
+}
+
+globalScope.рыбалОчка = () =>
+{
+    // THE FISHING ROD
+    GAME.entities.push(new FishingRod());
 }

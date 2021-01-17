@@ -102,19 +102,15 @@ export default class FallersRain
 
     private loadImages (...imagePaths: string[])
     {
-        imagePaths.forEach(path =>
+        this.imagesToLoad = imagePaths.length;
+        imagePaths.forEach(async (path) =>
         {
-            this.imagesToLoad++;
+            let img = await preloadImage(path);
 
-            let img = loadImage(path);
+            this.imagesToLoad--;
             this.images.push(img);
 
-            console.log(`New image starts loading. ${this.imagesToLoad} images to be load.`);
-
-            img.addEventListener('load', () => {
-                this.imagesToLoad--;
-                console.log(`Image loaded. ${this.imagesToLoad} images remain.`);
-            });
+            console.log(`New image starts loading. ${this.imagesToLoad} images to be load.`)
 
         });
     }
