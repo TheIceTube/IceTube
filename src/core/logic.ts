@@ -191,7 +191,7 @@ postButton.addEventListener('click', () => {
 	}
 
 	// Calculate amount of penguins to spawn
-	let toSpawn = Math.ceil(penguinsAmount * 0.4);
+	let toSpawn = Math.ceil(penguinsAmount * 0.3);
 	if (GAME.relevance > 1.5) toSpawn += 1;
 	if (penguinsAmount < 25) toSpawn += 1;
 
@@ -200,9 +200,6 @@ postButton.addEventListener('click', () => {
 
 	// Spawn penguins
 	spawnPenguins(toSpawn);
-
-	// Sort penguins
-	insertionSort(GAME.penguins, 'y');
 
 	// Update maximum penguins value
 	const newPenguinsAmount = GAME.penguins.length - 1;
@@ -221,6 +218,8 @@ postButton.addEventListener('click', () => {
  * Restart game state
  */
 export function gameRestart(): void {
+
+	// Reset games state
 	GAME.paused = true;
 
 	GAME.mouseX = 0;
@@ -241,6 +240,7 @@ export function gameRestart(): void {
 	GAME.selectedNewsIndex = 0;
 	GAME.newsIndex = 0;
 
+	// Spawn new penguins
 	spawnPenguins(10);
 }
 

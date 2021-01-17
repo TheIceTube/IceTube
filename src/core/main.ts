@@ -5,10 +5,8 @@ import { spawnPenguins } from './logic';
 import Stats from 'stats.js';
 import { startMusic } from './audio';
 import { State, GameState } from './state';
-import { randomInteger, insertionSort } from './utils';
 
 // Entities
-import { Penguin } from './entities/penguin';
 import { Characters } from './entities/characters';
 
 // Stats setup
