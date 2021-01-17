@@ -34,9 +34,11 @@ const sportButton = document.getElementById('sport');
 blackScreen.classList.remove('visible');
 
 startButton.addEventListener('click', () => {
+	playClickSound();
 	blackScreen.classList.add('visible');
 
 	setTimeout(() => {
+		startMusic();
 		startMenu.remove();
 		blackScreen.classList.remove('visible');
 		comics.classList.add('visible');
@@ -44,10 +46,11 @@ startButton.addEventListener('click', () => {
 });
 
 nextButton.addEventListener('click', () => {
+	playPaperSound();
+	playClickSound();
 	blackScreen.classList.add('visible');
 
 	setTimeout(() => {
-		startMusic();
 		blackScreen.classList.remove('visible');
 		comics.classList.remove('visible');
 
