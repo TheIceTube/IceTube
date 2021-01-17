@@ -30,7 +30,7 @@ export interface GameState {
 	mouseDown: boolean;
 
 	penguins: Array<Penguin | Characters>;
-	entities: Array<Fish>;
+	entities: Array<Fish | FishingRod>;
 
 	fish: number;
 	tempo: number;
