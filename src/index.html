@@ -13,7 +13,7 @@
     <main>
 
         <!-- Black screen -->
-        <div id="black-screen"></div>
+        <div id="black-screen" class="visible"></div>
 
         <!-- Story comics -->
         <div id="comics">
@@ -32,13 +32,11 @@
 
         <!-- Start menu -->
         <div id="start-menu">
-            <div id="start-menu-penguins"></div>
-
-            <h1>IceTube</h1>
-            <p>by Penguins for Penguins</p>
-            <button id="start-button" class="cool-button">Start</button>
-            <small>sdfsdfh usd </small>
-
+            <div class="window">
+                <h1>IceTube</h1>
+                <p>by Penguins for Penguins</p>
+                <button id="start-button" class="cool-button">Start</button>
+            </div>
             <canvas id="start-menu-canvas"></canvas>
         </div>
 
@@ -50,17 +48,16 @@
                 </h3>
                 <div id="end-screen-image"></div>
             </div>
-            <button id="end-button" class="cool-button">Restart</button>
+            <button id="restart-button" class="cool-button">Restart</button>
         </div>
 
         <!-- Pause menu -->
         <div id="tutorial">
-            <img src="./sprites/tutorial/leaderboard.png" style="left: -16px; top: -64px">
             <img src="./sprites/tutorial/score.png" style="left: calc(50% - 180px); top: -64px">
             <img src="./sprites/tutorial/relevance.png" style="right: -16px; top: 320px">
             <img src="./sprites/tutorial/events.png" style="right: 32px; top: 16px">
             <img src="./sprites/tutorial/themes.png" style="left: calc(50% - 450px); bottom: -128px; width: 900px;">
-            <img src="./sprites/tutorial/moods.png" style="left: calc(50% - 180px); top: 30%;">
+            <img src="./sprites/tutorial/moods.png" style="left: 64px; top: 25%;">
         </div>
 
         <!-- Relevance meter -->
