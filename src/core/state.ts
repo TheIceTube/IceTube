@@ -1,6 +1,7 @@
 import { Penguin } from './entities/penguin';
 import { Fish } from './entities/fish';
 import { Characters } from './entities/characters';
+import { FishingRod } from './entities/fishingRod';
 
 /**
  * Possible post themes

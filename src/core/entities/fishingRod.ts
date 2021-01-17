@@ -8,6 +8,7 @@ import { requestTimeout } from '../timers';
 import { convertRange, loadImage, lerp } from '../utils';
 
 // Sprites
+/// @ts-ignore
 import imgpathRod from '../../sprites/rod.png';
 
 // Preload images

@@ -1,4 +1,4 @@
-import { randomInteger, loadImage, convertRange, insertionSort } from '../utils';
+import { randomInteger, preloadImage, convertRange, insertionSort } from '../utils';
 
 /**
  * HOW TO USE:
