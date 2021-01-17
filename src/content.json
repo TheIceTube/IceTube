@@ -116,6 +116,36 @@
 			"content": "Why it happened?",
 			"theme": "politics",
 			"fake": false
+		},
+		{
+			"title": "Vaccine for Covid-19 have been released",
+			"content": "Will finaly covid be beaten?",
+			"theme": "politics",
+			"fake": false
+		},
+		{
+			"title": "G7 Summit in UK",
+			"content": "What will they discuss?",
+			"theme": "politics",
+			"fake": false
+		},
+		{
+			"title": "German farmers prostest",
+			"content": "New policy make them really mad",
+			"theme": "politics",
+			"fake": false
+		},
+		{
+			"title": "Finlands prime minister got asaulted",
+			"content": "Is there any reason?",
+			"theme": "politics",
+			"fake": false
+		},
+		{
+			"title": "Second assoult on USA Capitol might happen",
+			"content": "Why is it happening?",
+			"theme": "politics",
+			"fake": false
 		}
 	],
 	"fake_news": [
