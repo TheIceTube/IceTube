@@ -7,6 +7,7 @@
 
 <p align="center">
     <i>The game about managing your own media!</i>
+	<i>And knowing what fake news are!</i>
 </p>
 
 <p align="center">
