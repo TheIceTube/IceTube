@@ -41,7 +41,7 @@ enum FALLER_CFG
     TopDownScaleDiff = 0.3,
     MaxRotSpeed = 0.010,
     MinRotSpeed = 0.004,
-    TotalFallers = 25,
+    TotalFallers = 100,
 }
 
 function randomFloat (min: number, max: number): number
@@ -123,8 +123,8 @@ export default class FallersRain
 
         let canvas = this.ctx.canvas;
 
-        let maxX = canvas.width - imageWidth - 1;
-        let minX = 0;
+        let maxX = canvas.width;
+        let minX = -imageWidth;
         let maxY = canvas.height - imageHeight - 1;
         let minY = -imageHeight;
 
