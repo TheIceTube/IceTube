@@ -5,8 +5,7 @@ import './logic';
 import Stats from 'stats.js';
 import { startMusic } from './audio';
 import { State, GameState } from './state';
-import { requestInterval } from './timers';
-import { randomInteger, insertionSort, randomFromArray } from './utils';
+import { randomInteger, insertionSort } from './utils';
 
 // Entities
 import { Penguin } from './entities/penguin';
@@ -64,17 +63,23 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
-document.getElementById('black-screen').style.opacity = 0 + '';
-
 //starts the game
-document.getElementById('start-button').onclick = () => {
-	loop();
-	startMusic();
-	GAME.paused = false;
-	document.getElementById('start-menu').remove();
-};
+// document.getElementById('start-button').onclick = () => {
+// 	startMusic();
+// 	GAME.paused = false;
+// 	document.getElementById('start-menu').remove();
+// };s
+
+loop();
 
 //reload button on screen
 document.getElementById('end-button').onclick = () => {
 	location.reload();
 };
+
+// document.getElementById('next').addEventListener('click', () => {
+	
+// 	setTimeout(() => {
+
+// 	}, 1000);
+// });

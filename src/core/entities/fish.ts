@@ -3,6 +3,7 @@ import { requestTimeout } from '../timers';
 import { convertRange, loadImage, lerp } from '../utils';
 
 // Sprites
+/// @ts-ignore
 import fishImage from '../../sprites/fish-shadow.png';
 
 // Sounds

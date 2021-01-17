@@ -13,17 +13,7 @@ import { randomInteger, loadImage, convertRange, insertionSort } from '../utils'
  */
 
 /// @ts-ignore
-import img1 from '../../sprites/gaming.png';
-/// @ts-ignore
-import img2 from '../../sprites/education.png';
-/// @ts-ignore
-import img3 from '../../sprites/films.png';
-/// @ts-ignore
-import img4 from '../../sprites/Music.png';
-/// @ts-ignore
-import img5 from '../../sprites/politics.png';
-/// @ts-ignore
-import img6 from '../../sprites/sport.png';
+import fishImage from '../../sprites/fish.png';
 
 interface Faller
 {
@@ -93,7 +83,7 @@ export default class FallersRain
         
         // Load images
         this.imagesToLoad = 0;
-        this.loadImages(img1, img2, img3, img4, img5, img6);
+        this.loadImages(fishImage);
 
     }
 

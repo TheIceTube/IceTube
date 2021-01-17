@@ -4,16 +4,22 @@ import { State, GameState } from '../state';
 import { convertRange, lerp, loadImage, randomInteger } from '../utils';
 
 // Sprites
+/// @ts-ignore
 import penguinLeftImage from '../../sprites/penguin-left.png';
+/// @ts-ignore
 import penguinRightImage from '../../sprites/penguin-right.png';
+/// @ts-ignore
 import angryPenguinLeftImage from '../../sprites/penguin-left-angry.png';
+/// @ts-ignore
 import anrgyPenguinRightImage from '../../sprites/penguin-right-angry.png';
+/// @ts-ignore
 import boredPenguinLeftImage from '../../sprites/penguin-left-bored.png';
+/// @ts-ignore
 import boredPenguinRightImage from '../../sprites/penguin-right-bored.png';
-
+/// @ts-ignore
 import junkieLeftImage from '../../sprites/junkie-left.png';
+/// @ts-ignore
 import junkieRightImage from '../../sprites/junkie-right.png';
-
 
 // Preload images
 const penguinLeft = loadImage(penguinLeftImage);
