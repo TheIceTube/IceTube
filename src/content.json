@@ -171,85 +171,37 @@
 	],
 	"fake_news": [
 		{
-			"title": "Fake",
-			"content": "FakeNews",
+			"title": "FAKE: School is cancelled FOREVER",
+			"content": "The president decided that fun is more important than education",
 			"theme": "FakeNews",
 			"fake": true
 		},
 		{
-			"title": "Fake",
-			"content": "FakeNews",
+			"title": "FAKE: STOP DRINKING WATER",
+			"content": "Scientists have found that all the water once was in the dinasaurs!",
 			"theme": "FakeNews",
 			"fake": true
 		},
 		{
-			"title": "Fake",
-			"content": "FakeNews",
+			"title": "FAKE: EARN 5000 $ A DAY",
+			"content": "With EARN MONEY application you can become a millionaire!",
 			"theme": "FakeNews",
 			"fake": true
 		},
 		{
-			"title": "Fake",
-			"content": "FakeNews",
+			"title": "FAKE: SHREK USED TO BE SPONGE BOB",
+			"content": "Sponge DNA was found inside of SHREK",
 			"theme": "FakeNews",
 			"fake": true
 		},
 		{
-			"title": "Fake",
-			"content": "FakeNews",
+			"title": "FAKE: TETRIS TO BE 2020 BEST MULTIPLAYER GAME",
+			"content": "Tetris got 90% worldwide votes to become the best game!",
 			"theme": "FakeNews",
 			"fake": true
 		},
 		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
-			"content": "FakeNews",
-			"theme": "FakeNews",
-			"fake": true
-		},
-		{
-			"title": "Fake",
+			"title": "FAKE: Fake",
 			"content": "FakeNews",
 			"theme": "FakeNews",
 			"fake": true
