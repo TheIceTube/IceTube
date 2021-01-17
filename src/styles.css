@@ -233,9 +233,9 @@ label {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(255, 255, 255, 0.75);
 	transition: opacity 0.3s ease;
 	backdrop-filter: grayscale(100%);
+	background-color: rgba(255, 255, 255, 0.75);
 }
 
 #tutorial img {
@@ -314,73 +314,47 @@ label {
 	top: 0;
 	left: 0;
 	display: flex;
+	text-align: center;
 	justify-content: center;
 	flex-direction: column;
-	background: linear-gradient(-10deg, #FF9F3F, #FF5A67);
-
-}
-
-#start-menu-penguins {
-	background-color: linear-gradient(-10deg, #39a372, #e8ff66);
-	background-image: url('./sprites/bg.png');
-	background-position: center;
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
-	user-select: none;
-	pointer-events: none;
+	background: linear-gradient(-10deg, #ff9a03, #ff2448);
 }
 
 #start-menu-canvas {
-	position: fixed;
 	z-index: -1;
-	/* width: 100%;
-	height: 100%;
-	max-width: 100%;
-	max-height: 100%; */
-	margin-right: 16px;
-	opacity: 0.2;
-	filter: blur(3px) drop-shadow(10px 10px 10px black);
-	
-}
-
-#start-menu * {
-	width: 100%;
-	text-align: center;
-	user-select: none;
+	opacity: 1;
+	position: fixed;
+	/* filter: blur(2px); */
 }
 
 #start-menu h1 {
-	-webkit-text-stroke: 3px black;
-	font-size: 128px;
+	color: white;
+	font-size: 120px;
 	margin-top: -32px;
 	margin-bottom: 0;
 	font-weight: bold;
-	color: white;
 	letter-spacing: -2px;
 	text-shadow: 6px 6px 0 #000000;
-	transition: all 0.1s ease;
+	-webkit-text-stroke: 3px black;
 }
 
 #start-menu p {
 	margin: 0;
 	color: black;
 	font-size: 20px;
-	letter-spacing: 2px;
+	letter-spacing: 4px;
 	margin-bottom: 64px;
 	font-style: italic;
 	text-transform: lowercase;
 	font-weight: bold;
-	transition: all 0.1s ease;
 	font-family: 'Courier New', Courier, monospace;
 }
 
 #start-button {
+	width: 256px;
 	display: block;
 	margin: 0 auto;
-	width: 256px;
+	margin-bottom: 32px;
 }
 
 #fish {
@@ -511,28 +485,70 @@ label {
 }
 
 #black-screen {
+	z-index: 99999999999999999;
 	pointer-events: none;
 	user-select: none;
-	z-index: 999999999999999999;
 	position: fixed;
 	top: 0;
 	left: 0;
+	opacity: 0;
 	width: 100%;
 	height: 100vh;
 	background-color: black;
 	transition: opacity 1s ease;
 }
 
+#black-screen.visible {
+	opacity: 1;
+}
+
 #comics {
-	display: flex;
+	display: none;
+	z-index: 999999999;
 	position: fixed;
-	flex-direction: row;
+	flex-direction: column;
+	justify-content: center;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	background-color: white;
 }
+
+#comics .row {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+#comics .row img {
+	opacity: 0;
+	width: 256px;
+	height: 256px;
+}
+
+#comics.visible {
+	display: flex;
+}
+
+#comics #next-button {
+	opacity: 0;
+	width: 128px;
+	margin: 8px auto;
+	margin-bottom: 32px;
+}
+
+#comics.visible .row img {
+	animation: reveal 2s ease;
+	animation-fill-mode: forwards;
+} 
+
+#comics.visible #next-button {
+	animation: reveal 4s ease;
+	animation-fill-mode: forwards;
+} 
+
 @keyframes party {
 	0% {
 		transform: scale(2) rotate(-5deg);
@@ -541,5 +557,14 @@ label {
 	100% {
 		transform: scale(1);
 		background: #ff00ee;
+	}
+}
+
+@keyframes reveal {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
 	}
 }

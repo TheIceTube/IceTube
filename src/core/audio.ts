@@ -1,16 +1,26 @@
 import { requestInterval, requestTimeout } from './timers';
 
 // Sounds
-import musicSound from '../sounds/music.mp3';
-import popSound from '../sounds/pop.mp3';
-import moveSound from '../sounds/move.mp3';
-import paperSound from '../sounds/paper.mp3';
-import clickSound from '../sounds/click.mp3';
-import click2Sound from '../sounds/click2.mp3';
-import speachSound from '../sounds/speach.mp3';
-import sirenSound from '../sounds/siren.mp3';
-import sadSound from '../sounds/sad.mp3';
 
+/// @ts-ignore
+import musicSound from '../sounds/music.mp3';
+/// @ts-ignore
+import popSound from '../sounds/pop.mp3';
+/// @ts-ignore
+import moveSound from '../sounds/move.mp3';
+/// @ts-ignore
+import paperSound from '../sounds/paper.mp3';
+/// @ts-ignore
+import clickSound from '../sounds/click.mp3';
+/// @ts-ignore
+import click2Sound from '../sounds/click2.mp3';
+/// @ts-ignore
+import speachSound from '../sounds/speach.mp3';
+/// @ts-ignore
+import sirenSound from '../sounds/siren.mp3';
+/// @ts-ignore
+import sadSound from '../sounds/sad.mp3';
+/// @ts-ignore
 import caramelldensenSound from '../sounds/caramelldensen.mp3';
 
 // Music
@@ -86,7 +96,7 @@ export function playPaperSound(): void {
  */
 export function playSirenSound(): void {
     const audio = new Audio(sirenSound);
-    audio.volume = 0.2;
+    audio.volume = 0.3;
     audio.play();
 }
 
@@ -95,7 +105,7 @@ export function playSirenSound(): void {
  */
 export function playSadSound(): void {
     const audio = new Audio(sadSound);
-    audio.volume = 0.2;
+    audio.volume = 0.4;
     audio.play();
 }
 

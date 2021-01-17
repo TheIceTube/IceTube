@@ -1,7 +1,7 @@
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
 import { numberWithCommas } from './utils';
-import { playClickSound, playClick2Sound } from './audio';
+import { playClickSound, playClick2Sound, playPaperSound, startMusic } from './audio';
 
 // Get state
 const GAME: GameState = State();
@@ -10,7 +10,13 @@ const GAME: GameState = State();
 const counter = document.getElementById('counter');
 const tutorial = document.getElementById('tutorial');
 const selectedNews = document.getElementById('selected');
+const blackScreen = document.getElementById('black-screen');
 const relevanceBar = document.getElementById('relevance-bar');
+const startButton = document.getElementById('start-button');
+const startMenu = document.getElementById('start-menu');
+
+const nextButton = document.getElementById('next-button');
+const comics = document.getElementById('comics');
 
 // Post modal
 const postModal = document.getElementById('post-modal');
@@ -24,6 +30,33 @@ const politicsButton = document.getElementById('politics');
 const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
+
+blackScreen.classList.remove('visible');
+
+startButton.addEventListener('click', () => {
+	blackScreen.classList.add('visible');
+
+	setTimeout(() => {
+		startMenu.remove();
+		blackScreen.classList.remove('visible');
+		comics.classList.add('visible');
+	}, 1000);
+});
+
+nextButton.addEventListener('click', () => {
+	blackScreen.classList.add('visible');
+
+	setTimeout(() => {
+		startMusic();
+		blackScreen.classList.remove('visible');
+		comics.classList.remove('visible');
+
+		GAME.paused = false;
+	}, 1000);
+});
+
+// Setup 
+blackScreen.classList.add();
 
 // Update GUI elements
 requestInterval(() => {
@@ -54,12 +87,13 @@ postOverlay.addEventListener('click', () => {
 // Pause menu on Escape press
 window.addEventListener('keydown', event => {
 	if (event.key === 'Escape') {
-		if (GAME.paused) {
+		if (GAME.paused && GAME.penguins.length > 1) {
 			GAME.paused = false;
 			tutorial.classList.remove('visible');
 			hidePostModals();
 		} else {
 			GAME.paused = true;
+			playPaperSound();
 			tutorial.classList.add('visible');
 		}
 	}

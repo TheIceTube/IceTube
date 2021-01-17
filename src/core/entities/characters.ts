@@ -1,13 +1,17 @@
 import { State, GameState } from '../state';
 import { convertRange, loadImage, lerp } from '../utils';
 
-// Sprites
+/// @ts-ignore
 import stoneImage from '../../sprites/stone.png';
+/// @ts-ignore
 import penguinAnthenaImage from '../../sprites/penguin-anthena.png';
+/// @ts-ignore
 import penguinLoudspeakerImage from '../../sprites/penguin-loudspeaker.png';
+/// @ts-ignore
 import penguinLoudspeakerSpeakImage from '../../sprites/penguin-loudspeaker-speak.png';
-
+/// @ts-ignore
 import junkieLeftImage from '../../sprites/junkie-left.png';
+/// @ts-ignore
 import junkieRightImage from '../../sprites/junkie-right.png';
 
 // Sounds

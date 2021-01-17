@@ -3,7 +3,7 @@ import { Penguin } from './entities/penguin';
 import { Characters } from './entities/characters';
 import { requestInterval } from './timers';
 import { randomInteger, insertionSort, randomFromArray } from './utils';
-import { playClickSound, playMoveSound, playPaperSound, playSirenSound } from './audio';
+import { playClickSound, playMoveSound, playPaperSound, playSadSound, playSirenSound } from './audio';
 import { hidePostModals, showPostModal } from './gui';
 
 // Get state
@@ -154,7 +154,8 @@ postButton.addEventListener('click', () => {
 	characters.speakFrame = 0;
 
     // Click sound
-    playClickSound();
+	playClickSound();
+	playPaperSound();
     
     // Close modal
     hidePostModals();
@@ -176,6 +177,8 @@ postButton.addEventListener('click', () => {
 
 	// If wrong theme
 	if (current.theme !== selectedTheme.id) {
+        playSadSound();
+
 		GAME.penguins.forEach(penguin => {
 			if (penguin.type !== 'penguin') return;
 			if (penguin.state !== 'walking') return;
@@ -216,3 +219,9 @@ postButton.addEventListener('click', () => {
 	if (GAME.relevance > 2) GAME.relevance = 2;
     if (GAME.relevance <= 0.75) GAME.relevance = 1;
 });
+
+////////////////////////////////////////////////////////////////////////////////////
+
+export function gameRestart() {
+    
+}
