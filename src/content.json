@@ -146,6 +146,362 @@
 			"content": "Why is it happening?",
 			"theme": "politics",
 			"fake": false
+		},{
+			"title": "New NBA Champions!",
+			"content": "The Los Angeles Lakers defeated the Miami Heat 4-1, to become the 2020 NBA Champions ",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "New SuperBowl Champions!",
+			"content": "The Kansas City Chiefs defeated the San Francisco 49ers, 31-20",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Kobe Bryant is now dead",
+			"content": "The very popular hall of fame basketball player died in a helicopter accident",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Cristiano Ronaldo leaves Real Madrid to sign with Juventus",
+			"content": "The reigning Ballon d'Or winner will end his nine-year spell at Real Madrid with a move to Turin following a reported rift with Real Madrid president Florentino Perez over a new contract.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Lionel Messi won 2019 Ballon d'Or",
+			"content": "Barcelona captain earned his sixth, thus making history by surpassing Cristiano Ronaldo (5)",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Concacaf Confirms Men's Olympic Qualifying to Take Place in Guadalajara",
+			"content": "Concacaf's men's Olympic qualifying tournament officially has a home, with the confederation confirming Thursday that it will take place in Guadalajara, Mexico, from March 18-30.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Wayne Rooney Retires From Playing, Becomes Derby County's Permanent Coach",
+			"content": "All-time record scorer for England and Manchester United. A haul of 16 trophies. Wayne Rooney’s illustrious playing career is over.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Francisco Lindor's trade to the Mets",
+			"content": "The deal between the Big Money Mets and this offseason’s best trade candidate did not exactly jolt the market.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "James Harden traded to the Nets!",
+			"content": "Brooklyn's newest superstar recorded a triple-double in his first outing with Brooklyn, albeit without Kyrie Irving around to share possession.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Kevin Durant to sign contract with Brooklyn Nets",
+			"content": "The announcement was shared on the Instagram account for The Boardroom, Durant's new series for ESPN's streaming service, ESPN+.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Two-time golf major winner Angel Cabrera arrested in Brazil",
+			"content": "Federal Police in Brazil have arrested golfer Angel Cabrera on an Interpol red notice for alleged crimes committed in Argentina.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Michelle Wie West's retirement thoughts changed by having a baby girl",
+			"content": "",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Petra Vlhova crowned 'Snow Queen'",
+			"content": "Slovakia's Petra Vlhova was crowned 'Snow Queen' of Zagreb for the second straight year after claiming the World Cup slalom event",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "Quarantining tennis players voice 'unequal practice' frustrations",
+			"content": "Instead of training for up to five hours a day as they prepare for the Australian Open, 72 players find themselves unable to leave their hotel rooms under quarantine rules -- and a number of them are vocally expressing their frustrations.",
+			"theme": "sport",
+			"fake": false
+		},
+		{
+			"title": "After 30 league games without a win, Schalke stops the rot with 4-0 victoryAKE: Fortnite live action announced",
+			"content": "Having last won a German Bundesliga game just under a year ago, Schalke ended that dismal record in some style on Saturday",
+			"theme": "sport",
+			"fake": false
+		},{
+			"title": "'Avengers: Endgame' Become No. 1 Grossing Film of All Time",
+			"content": "Through Friday, Avengers: Endgame's global gross was $2.7892 billion, $500,000 behind Avatar's $2.7897 billion.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "‘Black Panther’ Is Now The #3 All-Time Movie In U.S. Box Office History",
+			"content": "Black Panther finished Friday with a domestic total of $659.3 million, just shy of the $659.5 million grossed by Titanic.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "Justice League Will Release As A Movie, Not A TV Show",
+			"content": "Zack Snyder's upcoming director's cut of Justice League will be a movie, not a mini-series like what was previously announced, says Snyder.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "‘Frozen II’ is now the highest grossing animated movie of all time",
+			"content": "The film has garnered $1.32 billion since its release in November.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "Moana Animated Series Is Coming to Disney+ in 2023",
+			"content": "A Disney+ series that will continue the adventures of Moana is now being developed.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "Godzilla vs Kong Release Date Moves Up Two Months!FAKE: THE MOON HAS DISAPPEARED",
+			"content": "After Warner Bros. and Legendary Entertainment struck a deal to keep Godzilla vs Kong as a day-and-date theatrical and HBO Max release on May 21",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "'The Boss Baby' sequel release delayed to September 2021",
+			"content": "Universal Pictures and DreamWorks Animation are delaying the release of The Boss Baby sequel.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "A Tom and Jerry movie for release in theaters next year",
+			"content": "Tom and Jerry have been trying to kill each other for 80 years -- and now, they'll continue that tradition in a new movie scheduled for release in theaters in 2021.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "Minions beats Toy Story 3 as second highest grossing animation",
+			"content": "'Minions' is officially the second-highest grossing animated movie of all time after opening to USD 20.1 million in China.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "‘Godzilla Vs. Kong’ Jumps Up To March In HBO Max & Theatrical Debut",
+			"content": "Godzilla vs. Kong in theaters and on HBO Max, will be releasing the movie on March 26 instead of May 21.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "New ‘Star Wars’ Movie",
+			"content": "from Patty Jenkins Announced: ‘Rogue Squadron’ for Christmas 2023",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "'Coming 2 America' sequel to be released on Amazon in March",
+			"content": "Amazon Studios has acquired worldwide rights to the sequel to the iconic comedy 'Coming to America,' which will be available on Prime Video on March 5, 2021.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "The Incredibles 2 is coming to Netflix!",
+			"content": "The Incredibles 2 is coming to Netflix across multiple Netflix regions in 2019.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "Space-Jam will premiere on HBO-MAX",
+			"content": "It's day-and-date release pushed up from May 21 to March 26.",
+			"theme": "films",
+			"fake": false
+		},
+		{
+			"title": "The Netflix original series ‘Disenchantment’ returned for a third season!",
+			"content": "the Netflix animated, action-adventure comedy first premiered in 2018 ",
+			"theme": "films",
+			"fake": false
+		},{
+			"title": "Cyberpunk 2077 released!",
+			"content": "One of the best upcoming games has been finaly released.",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "New Spider-man game",
+			"content": "The new Spider-man game is out, but is it good?",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Zelda Breath of the Wild 2 announced ",
+			"content": "Nintendo released a trailer of Zelda BOTW 2, and it's awesome",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Sims 4 is getting another expansion",
+			"content": "This time it's about paranormal activity, so expect some haunted houses!",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Star wars: Battlefront 2 servers crashed",
+			"content": "The servers crashed due to the rise in popularity of the game",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Steam winter sale ends soon",
+			"content": "Quick grab some game on cheap price!",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "The most downlowded mobile game of 2020",
+			"content": "The most downloaded mobile game of 2020 was Among Us - surprised?",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Pokemon GO one of the most grossing games of 2020",
+			"content": "Despite COVID-19 the game made 2 billion in revenue",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "A lot of Playstation 5 games announced",
+			"content": "Which one will you play first?",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "God of War 2 in development",
+			"content": "What changes will there be?",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "More than 2 billion tweets about gaming in 2020",
+			"content": "That's a new record for gaming - what will this bring?",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "Gaming PC sales sky high due to quarantine",
+			"content": "2020 was the best year for PC gaming, with many new users",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "EA now not the only company to make Star Wars games",
+			"content": "This might mean that new and cool Star Wars games are on the way!",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "League of Legends new character announced",
+			"content": "Viego the Ruined King will be added to League of Legends soon",
+			"theme": "gaming",
+			"fake": false
+		},
+		{
+			"title": "New HALO game delayed",
+			"content": "It looked bad, so they delayed it.",
+			"theme": "gaming",
+			"fake": false
+		},{
+			"title": "Lil Pump has made new song!",
+			"content": "The new song is titled Adidas Gang",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Grammys delayed due Covid-19",
+			"content": "Due to Covid-19 pandemic, grammy awards are delayed!",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "New James Bond music is top  class.",
+			"content": "Song titled NO.TIME.TO.DIE brings new light into Jame bond films!.",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "All I want for christmas - best song of generation?",
+			"content": "Will there ever be end to it?",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Dr. Dre in Hospital!",
+			"content": "What happened and should you be woried?",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "New Ed Sheeran album released",
+			"content": "What now he has to offer?",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "21 savage let's Twitch streamers use his music",
+			"content": "Despite the oppritunity to make a lot of money, he chose to let people use it",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Drake declared the best artist of 2020",
+			"content": "Out of millions of musicians, Drake stands on top",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Dua Lipa releases new song",
+			"content": "The new song Dancing In The Dark is getting good reviews",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Spotify Wrapped 2020 is out",
+			"content": "What was your most listened to artist?",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Billie Eilish new book announced",
+			"content": "It will feature never before seen Photos",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Lil Nas X's old town road becomes most certified song in history",
+			"content": "The song hit platinum status 14 times, the first to do so in History",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "Arianna Grande engaged with Dalton Gomez",
+			"content": "The pop star announced the engagment in the sweetest way possible",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "The Weeknd did plastic surgery",
+			"content": "It looks so bad....",
+			"theme": "music",
+			"fake": false
+		},
+		{
+			"title": "BTS new album 'BE'",
+			"content": "The new album has a song for every mood",
+			"theme": "music",
+			"fake": false
 		}
 	],
 	"fake_news": [
