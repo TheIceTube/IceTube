@@ -13,8 +13,8 @@
 			"fake": false
 		},
 		{
-			"title": "New President rules",
-			"content": "New Statement from president came out!",
+			"title": "",
+			"content": "",
 			"theme": "politics",
 			"fake": false
 		},
@@ -49,25 +49,25 @@
 			"fake": false
 		},
 		{
-			"title": "Minecraft 2 confirmed!",
-			"content": "Markus Person confirmed that Minecraft 2 already in development",
+			"title": "",
+			"content": "",
 			"theme": "gaming",
 			"fake": false
 		},
 		{
-			"title": "New Fallout game to be released!",
-			"content": "Will franchise rise again after the 76 massive fail?",
+			"title": "",
+			"content": "",
 			"theme": "gaming",
 			"fake": false
 		},
 		{
-			"title": "Club Penguin 2 in making! ",
+			"title": "",
 			"content": "Creators confirm, its real!",
 			"theme": "gaming",
 			"fake": false
 		},
 		{
-			"title": "New Minecraft update soon.",
+			"title": "",
 			"content": "What changes will there be?",
 			"theme": "gaming",
 			"fake": false
@@ -201,8 +201,158 @@
 			"fake": true
 		},
 		{
-			"title": "FAKE: Fake",
-			"content": "FakeNews",
+			"title": "FAKE: THE MOON HAS DISAPPEARED",
+			"content": "The moon is no longer in the sky, find out why",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: THE NBA HAS DISBANDED",
+			"content": "After finding a cockroach on the field, the NBA disbaneded",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: HUMANS FOUND ON SATURN",
+			"content": "Some guy from Florida found on Saturn with telescope",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: USA changed currency to EURO",
+			"content": "THEY DIDNT EVEN AKS EUROPE IF THEY CAN DO IT",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: YOUTUBE CHANGES NAME TO - VIDEOS",
+			"content": "Youtube is now called Videos, weird right?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Time Travel™ discovered in Area 51",
+			"content": "After the Area 51 raid, someone found Time Travel",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: TikTok banned in the EU",
+			"content": "Following USA, the EU decided to ban TikTok",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Free Wi-Fi all over the world!",
+			"content": "Get free Wi-Fi everywhere, it's just 19.99!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Cartoons are now BANNED in Germany",
+			"content": "For no reason every type of cartoon banned in Germany",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Chocolate is actually healthy?",
+			"content": "Scientists say Chocolate is healthier than vegetables",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Birds have gone extinct!",
+			"content": "Maybe the new bird update didn't work as intended, no more birds!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: UFO crash landed in Amsterdam",
+			"content": "Aliens? Some crazy guy from Rotterdam? Who knows!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Roblox will be deleted from the internet",
+			"content": "The roblox engine doesn't work anymore, so the devs decided to delete it",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Man woke up on Saturn and survived",
+			"content": "Super interesting story, even better ending",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Water to Wine transfer device",
+			"content": "Scientists made a device that makes Water into Wine",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: All video games now free",
+			"content": "Every persons dream has come true?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: New jetpack backpack",
+			"content": "This new product lets you FLY to school, Buy it here.",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Math banned from schools in the Netherlands",
+			"content": "Politicians figured noone needs math anyways",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Cave man music won Grammy",
+			"content": "Music from ages ago won a award for being amazing",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: New USA president is real life Bat-Man",
+			"content": "New conspiracy theory of the President being Bat-Man",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: France and UK colonize Mars",
+			"content": "Is this history all over again?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: History was wrong: dinosaurs still exist",
+			"content": "Secret underground society of dinosaurs have made contact with humans",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: New EASY cure to Covid-19",
+			"content": "Click here to find out. What is it.",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: New iPhone 13 revealed",
+			"content": "Apple revealed the new iPhone 13 - only 3000$!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Fortnite live action announced",
+			"content": "2021 is the year of Live Action Fortnite tournament",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "FAKE: Masks don't work",
+			"content": "Do masks work? Do they???? Maybe?!",
 			"theme": "FakeNews",
 			"fake": true
 		}
