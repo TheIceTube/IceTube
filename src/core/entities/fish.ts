@@ -60,7 +60,7 @@ export class Fish {
 
 		if (this.exists === false) return;
 
-		const size = convertRange(this.spawnY, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
+		let size = convertRange(this.spawnY, { min: 0, max: GAME.element.height }, { min: 0, max: 2 });
 		const posY: number = convertRange(
 			this.y,
 			{ min: 0, max: GAME.element.height },
@@ -70,9 +70,15 @@ export class Fish {
 		ctx.save();
 		ctx.translate(this.x, posY);
 		ctx.scale(size, size);
+		ctx.rotate(this.rot);
 		ctx.drawImage(fish, -(this.width / 2), -(this.height / 2), this.width, this.height);
 		ctx.restore();
 	}
+
+	private spawnGravity = 0.5;
+	private spawnSpeedX = Math.random() * 4 - 2;
+	private spawnSpeedY = -20;
+	private rot = 0;
 
 	/**
 	 * Update billboard state
@@ -86,14 +92,17 @@ export class Fish {
 		// If not collected
 		if (!this.collected) {
 
+			// Rotate
+			let rotPeriod = (this.frame > 100) ? 5 : 60;
+			this.rot = lerpAnim(this.rot, -0.8, 0.8, this.frame, rotPeriod, 0.05);
+
 			// Spawn animation
-			if (this.frame < 50) {
-				const posY: number = convertRange(
-					this.spawnY - 512,
-					{ min: 0, max: GAME.element.height },
-					{ min: GAME.element.height / 5, max: GAME.element.height }
-				);
-				this.y = lerp(this.y, posY, 0.05);
+			if (this.frame < 60)
+			{
+				this.y += this.spawnSpeedY;
+				this.x += this.spawnSpeedX;
+				this.spawnSpeedY+= this.spawnGravity;
+
 				this.width = lerp(this.width, this.spriteWidth, 0.05);
 				this.height = lerp(this.height, this.spriteHeight, 0.05);
 			}
@@ -138,5 +147,15 @@ export class Fish {
 				fishCounter.className = '';
 			}, 10);
 		}
+
 	}
+}
+
+function lerpAnim (value: number, from: number, to: number, frame: number, period: number, t: number = 0.1): number
+{
+	let v0 = value;
+	let isSecondHalf = (frame % period) < (period / 2);
+	let v1 = isSecondHalf ? from : to;
+
+	return lerp(v0, v1, t);
 }
