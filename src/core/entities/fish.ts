@@ -36,6 +36,11 @@ export class Fish {
 
 	public spawnY: number;
 
+	private spawnGravity = 0.5;
+	private spawnSpeedX = Math.random() * 4 - 2;
+	private spawnSpeedY = -20;
+	private rot = 0;
+
 	/**
 	 * Billboard initialization
 	 */
@@ -75,11 +80,6 @@ export class Fish {
 		ctx.drawImage(fish, -(this.width / 2), -(this.height / 2), this.width, this.height);
 		ctx.restore();
 	}
-
-	private spawnGravity = 0.5;
-	private spawnSpeedX = Math.random() * 4 - 2;
-	private spawnSpeedY = -20;
-	private rot = 0;
 
 	/**
 	 * Update billboard state

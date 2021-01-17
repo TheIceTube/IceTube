@@ -1,7 +1,8 @@
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
 import { numberWithCommas } from './utils';
-import { playClickSound, playClick2Sound, playPaperSound, startMusic } from './audio';
+import { gameRestart } from './logic';
+import { playClickSound, playClick2Sound, playPaperSound, startMusic, restartMusic } from './audio';
 
 // Get state
 const GAME: GameState = State();
@@ -12,10 +13,11 @@ const tutorial = document.getElementById('tutorial');
 const selectedNews = document.getElementById('selected');
 const blackScreen = document.getElementById('black-screen');
 const relevanceBar = document.getElementById('relevance-bar');
-const startButton = document.getElementById('start-button');
 const startMenu = document.getElementById('start-menu');
 
-const nextButton = document.getElementById('next-button');
+const startButton = document.getElementById('start-button') as HTMLButtonElement;
+const nextButton = document.getElementById('next-button') as HTMLButtonElement;
+const restartButton = document.getElementById('restart-button') as HTMLButtonElement;
 const comics = document.getElementById('comics');
 
 // Post modal
@@ -31,11 +33,14 @@ const filmsButton = document.getElementById('films');
 const musicButton = document.getElementById('music');
 const sportButton = document.getElementById('sport');
 
+// Setup 
 blackScreen.classList.remove('visible');
 
+// Start menu
 startButton.addEventListener('click', () => {
-	playClickSound();
 	blackScreen.classList.add('visible');
+	startButton.disabled = true;
+	playClickSound();
 
 	setTimeout(() => {
 		startMusic();
@@ -45,24 +50,42 @@ startButton.addEventListener('click', () => {
 	}, 1000);
 });
 
+// Comics skip 
 nextButton.addEventListener('click', () => {
+	blackScreen.classList.add('visible');
+	nextButton.disabled = true;
 	playPaperSound();
 	playClickSound();
+
+	setTimeout(() => {
+		blackScreen.classList.remove('visible');
+		comics.classList.remove('visible');
+		GAME.paused = false;
+	}, 1000);
+});
+
+// Restart button
+restartButton.addEventListener('click', () => {
 	blackScreen.classList.add('visible');
+	restartButton.disabled = true;
+	playClickSound();
 
 	setTimeout(() => {
 		blackScreen.classList.remove('visible');
 		comics.classList.remove('visible');
 
+		gameRestart();
+		restartMusic();
+		document.getElementById('end-screen').style.transform = 'translate(500%)';
+		
+
 		GAME.paused = false;
 	}, 1000);
 });
 
-// Setup 
-blackScreen.classList.add();
-
 // Update GUI elements
 requestInterval(() => {
+
 	// Fish counter
 	counter.innerText = numberWithCommas(GAME.fish);
 
@@ -193,7 +216,6 @@ export function showPostModal(): void {
  */
 export function hidePostModals(): void {
 	GAME.paused = false;
-
 	postButton.disabled = true;
 	postModal.classList.remove('visible');
 	postOverlay.classList.remove('visible');

@@ -14,7 +14,6 @@ const ctx = stage.getContext('2d');
 
 // State initialization
 State({
-	finished: true,
 	paused: true,
 	element: stage,
 	ctx: ctx,

@@ -1,5 +1,5 @@
 // Game logic
-import './logic';
+import { spawnPenguins } from './logic';
 
 // Dependencies
 import Stats from 'stats.js';
@@ -24,15 +24,7 @@ const characters = new Characters();
 GAME.penguins.push(characters);
 
 // Spawn penguins
-for (let i = 0; i < 10; i++) {
-	const x = randomInteger(0, GAME.element.width);
-	const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
-	const penguin = new Penguin(x, y);
-	GAME.penguins.push(penguin);
-}
-
-// Sort penguins
-insertionSort(GAME.penguins, 'y');
+spawnPenguins(10);
 
 // Main loop
 function loop() {
@@ -63,23 +55,5 @@ function loop() {
 	window.requestAnimationFrame(loop);
 }
 
-//starts the game
-// document.getElementById('start-button').onclick = () => {
-// 	startMusic();
-// 	GAME.paused = false;
-// 	document.getElementById('start-menu').remove();
-// };s
-
+// Start loop
 loop();
-
-//reload button on screen
-document.getElementById('end-button').onclick = () => {
-	location.reload();
-};
-
-// document.getElementById('next').addEventListener('click', () => {
-	
-// 	setTimeout(() => {
-
-// 	}, 1000);
-// });

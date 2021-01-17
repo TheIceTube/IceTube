@@ -2,34 +2,33 @@ import { randomInteger, preloadImage, convertRange, insertionSort } from '../uti
 
 /**
  * HOW TO USE:
- * 
+ *
  * 1. Get canvas to draw the rain on
  * 2. new FallersRain(canvas, true) (true for resize)
  * Now the rain will be drawn on the canvas every frame
- * 
+ *
  * If canvas has an ID, then the FallerRain will automatically stop its loop when the canvas is removed from the DOM.
  * Otherwise use fallersRain.finish() to stop the animation loop
- * 
+ *
  */
 
 /// @ts-ignore
 import fishImage from '../../sprites/fish.png';
 
-interface Faller
-{
-    x: number;
-    y: number;
-    // Larger the depth: lesser the speed, lesser the scale
-    depth: number;
-    // Image of that index will be used from `images` array
-    imageIndex: number;
-    // Current rotation
-    rot: number;
-    // Angular speed
-    rotSpeed: number;
-    // Image width and height
-    width: number;
-    height: number;
+interface Faller {
+	x: number;
+	y: number;
+	// Larger the depth: lesser the speed, lesser the scale
+	depth: number;
+	// Image of that index will be used from `images` array
+	imageIndex: number;
+	// Current rotation
+	rot: number;
+	// Angular speed
+	rotSpeed: number;
+	// Image width and height
+	width: number;
+	height: number;
 }
 
 enum FALLER_CFG 
@@ -41,17 +40,15 @@ enum FALLER_CFG
     TopDownScaleDiff = 0.3,
     MaxRotSpeed = 0.010,
     MinRotSpeed = 0.004,
-    TotalFallers = 25,
+    TotalFallers = 100,
 }
 
-function randomFloat (min: number, max: number): number
-{
-    return Math.random() * (max - min) + min;
+function randomFloat(min: number, max: number): number {
+	return Math.random() * (max - min) + min;
 }
 
-function unitRangeToRange (value: number, min: number, max: number): number
-{
-    return convertRange(value, { min: 0, max: 1 }, { min: min, max: max });
+function unitRangeToRange(value: number, min: number, max: number): number {
+	return convertRange(value, { min: 0, max: 1 }, { min: min, max: max });
 }
 
 export default class FallersRain
@@ -123,8 +120,8 @@ export default class FallersRain
 
         let canvas = this.ctx.canvas;
 
-        let maxX = canvas.width - imageWidth - 1;
-        let minX = 0;
+        let maxX = canvas.width;
+        let minX = -imageWidth;
         let maxY = canvas.height - imageHeight - 1;
         let minY = -imageHeight;
 

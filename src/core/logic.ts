@@ -2,7 +2,7 @@ import { State, GameState } from './state';
 import { Penguin } from './entities/penguin';
 import { Characters } from './entities/characters';
 import { requestInterval } from './timers';
-import { randomInteger, insertionSort, randomFromArray } from './utils';
+import { randomInteger, insertionSort, randomFromArray, shuffle } from './utils';
 import { playClickSound, playMoveSound, playPaperSound, playSadSound, playSirenSound } from './audio';
 import { hidePostModals, showPostModal } from './gui';
 import { gameOver } from './gameOver';
@@ -36,9 +36,9 @@ requestInterval(() => {
 	if (GAME.relevance < 0.5) {
 		const penguinsAmount = GAME.penguins.length - 1;
 
-		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.05);
-		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.1);
-		
+		// Callculate how much penguins we should despawn
+		let toDespawn = Math.ceil(GAME.maximumPenguins * 0.1);
+		if (GAME.relevance < 0.2) toDespawn = Math.ceil(GAME.maximumPenguins * 0.2);
 		if (toDespawn > penguinsAmount) toDespawn = penguinsAmount;
 
 		for (let i = 0; i < toDespawn; i++) {
@@ -49,7 +49,7 @@ requestInterval(() => {
 			if (penguin.type === 'characters' || penguin.state !== 'walking') {
 				i -= 1;
 				continue;
-			}	
+			}
 
 			penguin.despawn();
 		}
@@ -67,67 +67,70 @@ requestInterval(() =>
 ////////////////////////////////////////////////////////////////////////////////////
 
 // Request news block
-const newsInterval = requestInterval(() => {
-	const index = GAME.newsIndex;
-	const current = GAME.news[index];
+const newsInterval = requestInterval(
+	() => {
+		const index = GAME.newsIndex;
+		const current = GAME.news[index];
 
-    // Move sound
-    playMoveSound();
+		// Move sound
+		playMoveSound();
 
-	const blockOld = news.querySelector('.old');
-	if (blockOld) blockOld.remove();
+		const blockOld = news.querySelector('.old');
+		if (blockOld) blockOld.remove();
 
-	const blockOne = news.querySelector('.block.one');
-	if (blockOne) {
-		blockOne.classList.remove('one');
-		blockOne.classList.add('old');
-	}
+		const blockOne = news.querySelector('.block.one');
+		if (blockOne) {
+			blockOne.classList.remove('one');
+			blockOne.classList.add('old');
+		}
 
-	const blockTwo = news.querySelector('.block.two');
-	if (blockTwo) {
-		blockTwo.classList.add('one');
-		blockTwo.classList.remove('two');
-	}
+		const blockTwo = news.querySelector('.block.two');
+		if (blockTwo) {
+			blockTwo.classList.add('one');
+			blockTwo.classList.remove('two');
+		}
 
-	const blockThree = news.querySelector('.block.three');
-	if (blockThree) {
-		blockThree.classList.add('two');
-		blockThree.classList.remove('three');
-	}
+		const blockThree = news.querySelector('.block.three');
+		if (blockThree) {
+			blockThree.classList.add('two');
+			blockThree.classList.remove('three');
+		}
 
-	// Create next post
-	const blockNew = document.createElement('div');
-	blockNew.className = 'block new';
-	blockNew.setAttribute('news-index', `${index}`);
+		// Create next post
+		const blockNew = document.createElement('div');
+		blockNew.className = 'block new';
+		blockNew.setAttribute('news-index', `${index}`);
 
-	const title = document.createElement('h3');
-	title.innerText = current.title;
+		const title = document.createElement('h3');
+		title.innerText = current.title;
 
-	const content = document.createElement('p');
-	content.innerText = current.content;
+		const content = document.createElement('p');
+		content.innerText = current.content;
 
-	// Build element
-	blockNew.appendChild(title);
-	blockNew.appendChild(content);
-	news.appendChild(blockNew);
+		// Build element
+		blockNew.appendChild(title);
+		blockNew.appendChild(content);
+		news.appendChild(blockNew);
 
-	// Make new block
-	window.requestAnimationFrame(() => {
-		blockNew.className = 'block three';
-		blockNew.onclick = () => {
-			GAME.selectedNewsIndex = index;
-			showPostModal();
-			playClickSound();
-		};
-	});
+		// Make new block
+		window.requestAnimationFrame(() => {
+			blockNew.className = 'block three';
+			blockNew.onclick = () => {
+				GAME.selectedNewsIndex = index;
+				showPostModal();
+				playClickSound();
+			};
+		});
 
-	GAME.newsIndex += 1;
-    if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
-    
-	// Update interval
-	const nextDelay = Math.floor(5000 - (100 * GAME.tempo));
-	newsInterval(nextDelay > 500 ? nextDelay : 500)
-}, played ? 2500 : 7500);
+		GAME.newsIndex += 1;
+		if (GAME.newsIndex >= GAME.news.length) GAME.newsIndex = 0;
+
+		// Update interval
+		const nextDelay = Math.floor(5000 - 100 * GAME.tempo);
+		newsInterval(nextDelay > 500 ? nextDelay : 500);
+	},
+	played ? 2500 : 7500
+);
 
 ////////////////////////////////////////////////////////////////////////////////////
 
@@ -147,15 +150,14 @@ postButton.addEventListener('click', () => {
 
 	// Penguin Animation
 	const characters = GAME.penguins.find(entity => entity.type === 'characters') as Characters;
-	characters.state = 'speaking';
-	characters.speakFrame = 0;
+	characters.speak();
 
-    // Click sound
+	// Click sound
 	playClickSound();
 	playPaperSound();
-    
-    // Close modal
-    hidePostModals();
+
+	// Close modal
+	hidePostModals();
 
 	// If fake post
 	if (current.fake) {
@@ -167,14 +169,14 @@ postButton.addEventListener('click', () => {
 			penguin.setMood('angry');
 		});
 
-		GAME.relevance -= 0.5;
+		GAME.relevance -= 0.75;
 		if (GAME.relevance < 0) GAME.relevance = 0;
 		return;
 	}
 
 	// If wrong theme
 	if (current.theme !== selectedTheme.id) {
-        playSadSound();
+		playSadSound();
 
 		GAME.penguins.forEach(penguin => {
 			if (penguin.type !== 'penguin') return;
@@ -188,7 +190,7 @@ postButton.addEventListener('click', () => {
 	}
 
 	// Calculate amount of penguins to spawn
-	let toSpawn = Math.ceil(penguinsAmount * 0.5);
+	let toSpawn = Math.ceil(penguinsAmount * 0.4);
 	if (GAME.relevance > 1.5) toSpawn += 1;
 	if (penguinsAmount < 25) toSpawn += 1;
 
@@ -196,29 +198,62 @@ postButton.addEventListener('click', () => {
 	if (penguinsAmount > 1000) return;
 
 	// Spawn penguins
-	for (let i = 0; i < toSpawn; i++) {
-		const x = randomInteger(0, GAME.element.width);
-		const y = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
-		const penguin = new Penguin(x, y);
-		GAME.penguins.push(penguin);	
-	}
+	spawnPenguins(toSpawn);
 
 	// Sort penguins
 	insertionSort(GAME.penguins, 'y');
 
 	// Update maximum penguins value
-	const newPenguinsAmount = GAME.penguins.length - 1
+	const newPenguinsAmount = GAME.penguins.length - 1;
 	GAME.maximumPenguins = newPenguinsAmount;
 	if (newPenguinsAmount < GAME.maximumPenguins) GAME.maximumPenguins = newPenguinsAmount;
 
-    // Affect relevance
+	// Affect relevance
 	GAME.relevance += 0.5;
 	if (GAME.relevance > 2) GAME.relevance = 2;
-    if (GAME.relevance <= 0.75) GAME.relevance = 1;
+	if (GAME.relevance <= 0.75) GAME.relevance = 1;
 });
 
 ////////////////////////////////////////////////////////////////////////////////////
 
-export function gameRestart() {
-    
+/**
+ * Restart game state
+ */
+export function gameRestart(): void {
+	GAME.paused = true;
+
+	GAME.mouseX = 0;
+	GAME.mouseY = 0;
+	GAME.mouseDown = false;
+
+	GAME.entities = [];
+	GAME.penguins = [
+		new Characters()
+	];
+
+	GAME.fish = 0;
+	GAME.tempo = 1;
+	GAME.relevance = 1.25;
+	GAME.maximumPenguins = 10;
+
+	GAME.news = shuffle(GAME.news);
+	GAME.selectedNewsIndex = 0;
+	GAME.newsIndex = 0;
+
+	spawnPenguins(10);
+}
+
+/**
+ * Spawn penguins
+ * @param amount Amount of penguins to spawn
+ */
+export function spawnPenguins(amount: number = 1) {
+	for (let i = 0; i < amount; i++) {
+		const x: number = randomInteger(0, GAME.element.width);
+		const y: number = randomInteger(GAME.element.height / 3, GAME.element.height - 64);
+		const penguin: Penguin = new Penguin(x, y);
+		GAME.penguins.push(penguin);
+	}
+
+	insertionSort(GAME.penguins, 'y');
 }

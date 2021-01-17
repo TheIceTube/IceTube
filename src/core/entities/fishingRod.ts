@@ -22,8 +22,6 @@ export class FishingRod {
 	public readonly spriteHeight = 92;
 	public readonly spriteWidth = 92;
 
-	public collected: boolean;
-
 	public exists: boolean;
 	public frame: number;
 
@@ -34,7 +32,6 @@ export class FishingRod {
 		this.x = GAME.element.width / 2;
 		this.y = GAME.element.height - 500;
 		this.exists = true;
-		console.log('fishing rod created');
 	}
 
 	update() {

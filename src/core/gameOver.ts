@@ -27,17 +27,23 @@ export async function gameOver ()
     GAME.paused = true;
     makeVisibleGameOver();
 
-    const response = await fetch(SERVER_PING);
-    const data = await response.text();
-
-    if (data === 'pong')
-    {
-        showLeaderboard();
+    try {
+        const response = await fetch(SERVER_PING);
+        const data = await response.text();
+        if (data === 'pong')
+        {
+            showLeaderboard();
+        }
+        else
+        {
+            showEndPicture();
+        }
     }
-    else
-    {
+    catch {
         showEndPicture();
     }
+
+    
 
 }
 

@@ -123,7 +123,16 @@ export function startMusic(): void {
  */
 export function stopMusic(): void {
     music.pause();
-    music.currentTime = 0
+    music.currentTime = 0;
+}
+
+/**
+ * Paper sound
+ */
+export function restartMusic(): void {
+    music.pause();
+    music.currentTime = 0;
+    music.play();
 }
 
 /**
