@@ -1,7 +1,7 @@
+import { gameRestart } from './logic';
 import { State, GameState } from './state';
 import { requestInterval } from './timers';
 import { numberWithCommas } from './utils';
-import { gameRestart } from './logic';
 import { playClickSound, playClick2Sound, playPaperSound, startMusic, restartMusic } from './audio';
 
 // Get state
@@ -14,6 +14,8 @@ const selectedNews = document.getElementById('selected');
 const blackScreen = document.getElementById('black-screen');
 const relevanceBar = document.getElementById('relevance-bar');
 const startMenu = document.getElementById('start-menu');
+const endMenu = document.getElementById('end-menu');
+const endOverlay = document.getElementById('end-overlay');
 
 const startButton = document.getElementById('start-button') as HTMLButtonElement;
 const nextButton = document.getElementById('next-button') as HTMLButtonElement;
@@ -67,18 +69,18 @@ nextButton.addEventListener('click', () => {
 // Restart button
 restartButton.addEventListener('click', () => {
 	blackScreen.classList.add('visible');
+	endMenu.classList.remove('visible');
 	restartButton.disabled = true;
 	playClickSound();
 
 	setTimeout(() => {
 		blackScreen.classList.remove('visible');
+		endOverlay.classList.remove('visible');
 		comics.classList.remove('visible');
-
+		restartButton.disabled = false;
+		
 		gameRestart();
 		restartMusic();
-		document.getElementById('end-screen').style.transform = 'translate(500%)';
-		
-
 		GAME.paused = false;
 	}, 1000);
 });
@@ -164,7 +166,7 @@ musicButton.addEventListener('click', () => {
 	musicButton.classList.contains('active') ? musicButton.classList.remove('active') : musicButton.classList.add('active');
 });
 
-// Sports theme selection
+// Sport theme selection
 sportButton.addEventListener('click', () => {
 	unpressThemeButtons();
 	playClickSound();
@@ -220,23 +222,4 @@ export function hidePostModals(): void {
 	postModal.classList.remove('visible');
 	postOverlay.classList.remove('visible');
 	unpressThemeButtons();
-}
-
-
-
-(window as any).skipStartMenu = () =>
-{
-    playClickSound();
-    blackScreen.classList.add('visible');
-    startMusic();
-    startMenu.remove();
-    blackScreen.classList.remove('visible');
-    comics.classList.add('visible');
-    playPaperSound();
-    playClickSound();
-    blackScreen.classList.add('visible');
-    blackScreen.classList.remove('visible');
-    comics.classList.remove('visible');
-
-    GAME.paused = false;
 }

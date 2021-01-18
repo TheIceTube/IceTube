@@ -37,6 +37,7 @@ export interface GameState {
 	tempo: number;
 	relevance: number;
 	maximumPenguins: number;
+	serverAvailable: boolean;
 
 	news: NewsBlock[];
 	newsIndex: number;

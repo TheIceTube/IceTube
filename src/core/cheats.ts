@@ -28,19 +28,23 @@ globalScope.setTempo = (tempo: number) => {
 
 /** 
  * Rave mode
- * Type "ravee()" in DevTools console to activate it
+ * Type "rave()" in DevTools console to activate it
  */
 globalScope.rave = () => {
     playCaramelldansen();
     document.getElementById('stage').style.animation = 'party 0.32s infinite ease-in-out';
+    document.getElementById('score-uploading').remove();
     globalScope.rave = true;
     GAME.tempo = 5;
-    
+
     return 'Rave mode ON!';
 }
 
-globalScope.рыбалОчка = () =>
+/**
+ * Fishing mode
+ * Type "fishing()" in DevTools console to activate it
+ */
+globalScope.fishing = () =>
 {
-    // THE FISHING ROD
     GAME.entities.push(new FishingRod());
 }

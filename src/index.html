@@ -37,30 +37,33 @@
                 <p>by Penguins for Penguins</p>
                 <button id="start-button" class="cool-button">Start</button>
             </div>
+            
             <canvas id="start-menu-canvas"></canvas>
         </div>
 
         <!-- End Screen menu -->
-        <div id="end-screen">
-            <h1>GAME OVER</h1>
-            <h3 style="display: none;">Gathered fishes: <div id='final-fish-count'></div></h3>
-            <div id="leaderboard">
+        <div id="end-menu">
+            <div id="gathered-fish">Gathered Fish: 0</div>
 
-                <div id="leaderboard-table">
+            <div class="leaderboard">
+                <label>Leaderboard:</label>
+                <div id="leaderboard-table"></div>
+
+                <div id="score-uploading">
+                    <label>Upload your highscore:</label>
+                    <div id="score-yours">
+                        <input id="leaderboard-username" maxLength="12" minlength="1" placeholder="Enter your name" class="action"></input>
+                        <button id="leaderboard-submit-button" class="action" disabled>Submit</button>
+                    </div>
                 </div>
-
-                <label>Your score will be</label>
-                <div id="score-yours" class="score-entry yours">
-
-                    <div class="score-rank">44</div>
-                    <input maxLength='12' placeholder="enter your name" class="score-name"></input>
-                    <div class="score-score">234</div>
-                </div>
-
-                <button id="submit-score-button" disabled class="cool-button">Submit</button>
             </div>
+
+            <img src="./sprites/end-screen.png">
             <button id="restart-button" class="cool-button">Restart</button>
         </div>
+
+        <!-- Overlay -->
+        <div id="end-overlay"></div>
 
         <!-- Pause menu -->
         <div id="tutorial">
@@ -103,7 +106,7 @@
 
         <!-- Create post modal -->
         <div id="post-modal">
-            <h1>NEW POST!</h1>
+            <h1>PUBLISHING</h1>
 
             <label for="selected">Selected Event</label>
             <div id="selected"></div>

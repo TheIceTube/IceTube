@@ -5,14 +5,18 @@ import { requestInterval } from './timers';
 import { randomInteger, insertionSort, randomFromArray, shuffle } from './utils';
 import { playClickSound, playMoveSound, playPaperSound, playSadSound, playSirenSound } from './audio';
 import { hidePostModals, showPostModal } from './gui';
-import { gameOver } from './gameOver';
+import { showLeaderboard } from './leaderboard';
 
 // Get state
 const GAME: GameState = State();
 
 // Elements
 const news = document.getElementById('news');
+const endMenu = document.getElementById('end-menu');
+const endOverlay = document.getElementById('end-overlay');
+const gatheredFish = document.getElementById('gathered-fish');
 const postButton = document.getElementById('post-button') as HTMLButtonElement;
+const leaderboardSubmitButton = document.getElementById('leaderboard-submit-button') as HTMLButtonElement;
 
 // Check if user played this game
 const played: boolean = localStorage.getItem('played') === 'true' ? true : false;
@@ -57,10 +61,19 @@ requestInterval(() => {
 }, 1000);
 
 // Game Over Check
-requestInterval(() =>
-{
-	if (true || (GAME.penguins.length - 1) <= 0) {
-		gameOver();
+requestInterval(() => {
+	const penguinAmounts: number = GAME.penguins.length - 1;
+	
+	if (penguinAmounts <= 0) {
+		hidePostModals();
+		gatheredFish.innerText = `Gathered Fish: ${GAME.fish}`;
+		endMenu.classList.add('visible');
+		endOverlay.classList.add('visible');
+		showLeaderboard();
+
+		leaderboardSubmitButton.disabled = false;
+
+		GAME.paused = true;
 	}
 }, 1000);
 
@@ -217,7 +230,6 @@ postButton.addEventListener('click', () => {
  * Restart game state
  */
 export function gameRestart(): void {
-
 	// Reset games state
 	GAME.paused = true;
 
@@ -226,9 +238,7 @@ export function gameRestart(): void {
 	GAME.mouseDown = false;
 
 	GAME.entities = [];
-	GAME.penguins = [
-		new Characters()
-	];
+	GAME.penguins = [new Characters()];
 
 	GAME.fish = 0;
 	GAME.tempo = 1;

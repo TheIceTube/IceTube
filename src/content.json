@@ -1,81 +1,78 @@
 {
 	"real_news": [
 		{
-			"title": "Classroom without walls in nature!",
-			"content": "Feel fresh air while learning.",
-			"theme": "educational",
-			"fake": false
-		},{
 			"title": "Why crocodiles have changed so little!",
 			"content": "Learn why crocidels havent evolved for centuries.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Scientist discover new galaxy!",
 			"content": "Telescope captures new images of the new galaxy.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Scientist discover new Comet!",
 			"content": "It is very bright and fast",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Hubble observes young Supernova",
 			"content": "Find out why the star exploded.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Create your own garden at home",
 			"content": "Create true BIO food.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "First time black hole captured on film",
 			"content": "New discovery from scientists.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Why there are craters on moon?",
 			"content": "Find out how they are made.",
 			"theme": "education",
 			"fake": false
-		},{
-			"title": "Learn to solve rubiks cube",
-			"content": "Solve it in less then 2 minutes.",
-			"theme": "education",
-			"fake": false
-		},{
+		},
+		{
 			"title": "New species of bats discoverd",
-			"content": "Where and who are they.",
+			"content": "Where and who are they?",
 			"theme": "education",
 			"fake": false
-		}, {
+		},
+		{
 			"title": "SpaceX launches humanas to the ISS",
 			"content": "How did they got there?",
 			"theme": "education",
 			"fake": false
-		}, {
+		},
+		{
 			"title": "New miniral Kernowite discovered in UK",
 			"content": "It look super coool.",
 			"theme": "education",
 			"fake": false
-		}, {
+		},
+		{
 			"title": "Why you should dring tea.",
 			"content": "Benefits of tea.",
 			"theme": "education",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Why volcanos erupt?",
 			"content": "Find out here.",
 			"theme": "education",
 			"fake": false
-		},{
-			"title": "Why volcanos erupt?",
-			"content": "Find out here.",
-			"theme": "education",
-			"fake": false
-		},{
+		},
+		{
 			"title": "U.S. Elections!",
 			"content": "In a week we will know who will be the new president of the United States!",
 			"theme": "politics",
@@ -146,7 +143,8 @@
 			"content": "Why is it happening?",
 			"theme": "politics",
 			"fake": false
-		},{
+		},
+		{
 			"title": "New NBA Champions!",
 			"content": "The Los Angeles Lakers defeated the Miami Heat 4-1, to become the 2020 NBA Champions ",
 			"theme": "sport",
@@ -165,20 +163,8 @@
 			"fake": false
 		},
 		{
-			"title": "Cristiano Ronaldo leaves Real Madrid to sign with Juventus",
-			"content": "The reigning Ballon d'Or winner will end his nine-year spell at Real Madrid with a move to Turin following a reported rift with Real Madrid president Florentino Perez over a new contract.",
-			"theme": "sport",
-			"fake": false
-		},
-		{
 			"title": "Lionel Messi won 2019 Ballon d'Or",
 			"content": "Barcelona captain earned his sixth, thus making history by surpassing Cristiano Ronaldo (5)",
-			"theme": "sport",
-			"fake": false
-		},
-		{
-			"title": "Concacaf Confirms Men's Olympic Qualifying to Take Place in Guadalajara",
-			"content": "Concacaf's men's Olympic qualifying tournament officially has a home, with the confederation confirming Thursday that it will take place in Guadalajara, Mexico, from March 18-30.",
 			"theme": "sport",
 			"fake": false
 		},
@@ -191,12 +177,6 @@
 		{
 			"title": "Francisco Lindor's trade to the Mets",
 			"content": "The deal between the Big Money Mets and this offseason’s best trade candidate did not exactly jolt the market.",
-			"theme": "sport",
-			"fake": false
-		},
-		{
-			"title": "James Harden traded to the Nets!",
-			"content": "Brooklyn's newest superstar recorded a triple-double in his first outing with Brooklyn, albeit without Kyrie Irving around to share possession.",
 			"theme": "sport",
 			"fake": false
 		},
@@ -225,25 +205,20 @@
 			"fake": false
 		},
 		{
-			"title": "Quarantining tennis players voice 'unequal practice' frustrations",
-			"content": "Instead of training for up to five hours a day as they prepare for the Australian Open, 72 players find themselves unable to leave their hotel rooms under quarantine rules -- and a number of them are vocally expressing their frustrations.",
-			"theme": "sport",
-			"fake": false
-		},
-		{
 			"title": "After 30 league games without a win, Schalke stops the rot with 4-0 victory",
 			"content": "Having last won a German Bundesliga game just under a year ago, Schalke ended that dismal record in some style on Saturday",
 			"theme": "sport",
 			"fake": false
-		},{
+		},
+		{
 			"title": "'Avengers: Endgame' Become No. 1 Grossing Film of All Time",
 			"content": "Through Friday, Avengers: Endgame's global gross was $2.7892 billion, $500,000 behind Avatar's $2.7897 billion.",
 			"theme": "films",
 			"fake": false
 		},
 		{
-			"title": "‘Black Panther’ Is Now The #3 All-Time Movie In U.S. Box Office History",
-			"content": "Black Panther finished Friday with a domestic total of $659.3 million, just shy of the $659.5 million grossed by Titanic.",
+			"title": "‘Black Panther’ Is Now The #3 All-Time Movie In Box Office History",
+			"content": "Black Panther finished Friday with a domestic total of $659.3 million.",
 			"theme": "films",
 			"fake": false
 		},
@@ -266,8 +241,8 @@
 			"fake": false
 		},
 		{
-			"title": "Godzilla vs Kong Release Date Moves Up Two Months!FAKE: THE MOON HAS DISAPPEARED",
-			"content": "After Warner Bros. and Legendary Entertainment struck a deal to keep Godzilla vs Kong as a day-and-date theatrical and HBO Max release on May 21",
+			"title": "Godzilla vs Kong Release Date Moves Up Two Months!",
+			"content": "HBO Max release on May 21",
 			"theme": "films",
 			"fake": false
 		},
@@ -279,19 +254,13 @@
 		},
 		{
 			"title": "A Tom and Jerry movie for release in theaters next year",
-			"content": "Tom and Jerry have been trying to kill each other for 80 years -- and now, they'll continue that tradition in a new movie scheduled for release in theaters in 2021.",
+			"content": "New movie scheduled for release in theaters in 2021.",
 			"theme": "films",
 			"fake": false
 		},
 		{
 			"title": "Minions beats Toy Story 3 as second highest grossing animation",
-			"content": "'Minions' is officially the second-highest grossing animated movie of all time after opening to USD 20.1 million in China.",
-			"theme": "films",
-			"fake": false
-		},
-		{
-			"title": "‘Godzilla Vs. Kong’ Jumps Up To March In HBO Max & Theatrical Debut",
-			"content": "Godzilla vs. Kong in theaters and on HBO Max, will be releasing the movie on March 26 instead of May 21.",
+			"content": "'Minions' is officially the second-highest grossing animated movie of all time.",
 			"theme": "films",
 			"fake": false
 		},
@@ -303,7 +272,7 @@
 		},
 		{
 			"title": "'Coming 2 America' sequel to be released on Amazon in March",
-			"content": "Amazon Studios has acquired worldwide rights to the sequel to the iconic comedy 'Coming to America,' which will be available on Prime Video on March 5, 2021.",
+			"content": "Amazon Studios has acquired worldwide rights to the sequel to the iconic comedy 'Coming to America'.",
 			"theme": "films",
 			"fake": false
 		},
@@ -324,7 +293,8 @@
 			"content": "the Netflix animated, action-adventure comedy first premiered in 2018 ",
 			"theme": "films",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Cyberpunk 2077 released!",
 			"content": "One of the best upcoming games has been finaly released.",
 			"theme": "gaming",
@@ -413,7 +383,8 @@
 			"content": "It looked bad, so they delayed it.",
 			"theme": "gaming",
 			"fake": false
-		},{
+		},
+		{
 			"title": "Lil Pump has made new song!",
 			"content": "The new song is titled Adidas Gang",
 			"theme": "music",
@@ -505,161 +476,161 @@
 		}
 	],
 	"fake_news": [
-        {
-            "title": "School is cancelled FOREVER",
-            "content": "The president decided that fun is more important than education",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Stop drinking water",
-            "content": "Scientists have found that all the water once was in the dinasaurs!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Earn 5000 $ a day",
-            "content": "With EARN MONEY application you can become a millionaire!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "The moon has disappeared",
-            "content": "The moon is no longer in the sky, find out why",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "The NBA has disbanded",
-            "content": "After finding a cockroach on the field, the NBA disbaneded",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Humans found on saturn",
-            "content": "Some guy from Florida found on Saturn with telescope",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "UFO crash landed in Amsterdam",
-            "content": "Aliens? Some crazy guy from Rotterdam? Who knows!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Water to Wine transfer device",
-            "content": "Scientists made a device that makes Water into Wine",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "All video games now are free",
-            "content": "Every persons dream has come true?",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Math banned from schools in the Netherlands",
-            "content": "Politicians figured noone needs math anyways",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Cave man music won Grammy",
-            "content": "Music from ages ago won a award for being amazing",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "New USA president is real life Bat-Man",
-            "content": "New conspiracy theory of the President being Bat-Man",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "France and UK colonize Mars",
-            "content": "Is this history all over again?",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "History was wrong: dinosaurs still exist",
-            "content": "Secret underground society of dinosaurs have made contact with humans",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "New EASY cure to Covid-19",
-            "content": "Click here to find out. What is it.",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "New iPhone 13 revealed",
-            "content": "Apple revealed the new iPhone 13 - only 3000$!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Masks don't work",
-            "content": "Do masks work? Do they???? Maybe?!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "UK becomes monarchy again!",
-            "content": "Queen take control of the country",
-            "theme": "FakeNews",
-            "fake": true
+		{
+			"title": "School is cancelled FOREVER",
+			"content": "The president decided that fun is more important than education",
+			"theme": "FakeNews",
+			"fake": true
 		},
-        {
-            "title": "Youtube changes name to - videos",
-            "content": "Youtube is now called Videos, weird right?",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Time Travel discovered in Area 51",
-            "content": "After the Area 51 raid, someone found Time Travel",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "TikTok banned in the EU",
-            "content": "Following USA, the EU decided to ban TikTok",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Free Wi-Fi all over the world!",
-            "content": "Get free Wi-Fi everywhere, it's just 19.99!",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Cartoons are now BANNED in Germany",
-            "content": "For no reason every type of cartoon banned in Germany",
-            "theme": "FakeNews",
-            "fake": true
-        },
-        {
-            "title": "Chocolate is actually healthy?",
-            "content": "Scientists say Chocolate is healthier than vegetables",
-            "theme": "FakeNews",
-            "fake": true
+		{
+			"title": "Stop drinking water",
+			"content": "Scientists have found that all the water once was in the dinasaurs!",
+			"theme": "FakeNews",
+			"fake": true
 		},
-        {
-            "title": "This method can cure any wound!",
-            "content": "Press to find out about it.",
-            "theme": "FakeNews",
-            "fake": true
+		{
+			"title": "Earn 5000 $ a day",
+			"content": "With EARN MONEY application you can become a millionaire!",
+			"theme": "FakeNews",
+			"fake": true
 		},
-        {
-            "title": "Free way to get iphone fast",
-            "content": "Find out about it here.",
-            "theme": "FakeNews",
-            "fake": true
+		{
+			"title": "The moon has disappeared",
+			"content": "The moon is no longer in the sky, find out why",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "The NBA has disbanded",
+			"content": "After finding a cockroach on the field, the NBA disbaneded",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Humans found on saturn",
+			"content": "Some guy from Florida found on Saturn with telescope",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "UFO crash landed in Amsterdam",
+			"content": "Aliens? Some crazy guy from Rotterdam? Who knows!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Water to Wine transfer device",
+			"content": "Scientists made a device that makes Water into Wine",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "All video games now are free",
+			"content": "Every persons dream has come true?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Math banned from schools in the Netherlands",
+			"content": "Politicians figured noone needs math anyways",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Cave man music won Grammy",
+			"content": "Music from ages ago won a award for being amazing",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "New USA president is real life Bat-Man",
+			"content": "New conspiracy theory of the President being Bat-Man",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "France and UK colonize Mars",
+			"content": "Is this history all over again?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "History was wrong: dinosaurs still exist",
+			"content": "Secret underground society of dinosaurs have made contact with humans",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "New EASY cure to Covid-19",
+			"content": "Click here to find out. What is it.",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "New iPhone 13 revealed",
+			"content": "Apple revealed the new iPhone 13 - only 3000$!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Masks don't work",
+			"content": "Do masks work? Do they???? Maybe?!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "UK becomes monarchy again!",
+			"content": "Queen take control of the country",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Youtube changes name to - videos",
+			"content": "Youtube is now called Videos, weird right?",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Time Travel discovered in Area 51",
+			"content": "After the Area 51 raid, someone found Time Travel",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "TikTok banned in the EU",
+			"content": "Following USA, the EU decided to ban TikTok",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Free Wi-Fi all over the world!",
+			"content": "Get free Wi-Fi everywhere, it's just 19.99!",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Cartoons are now BANNED in Germany",
+			"content": "For no reason every type of cartoon banned in Germany",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Chocolate is actually healthy?",
+			"content": "Scientists say Chocolate is healthier than vegetables",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "This method can cure any wound!",
+			"content": "Press to find out about it.",
+			"theme": "FakeNews",
+			"fake": true
+		},
+		{
+			"title": "Free way to get iphone fast",
+			"content": "Find out about it here.",
+			"theme": "FakeNews",
+			"fake": true
 		}
-    ]
+	]
 }

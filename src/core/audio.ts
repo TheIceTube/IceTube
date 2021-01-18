@@ -1,6 +1,4 @@
-import { requestInterval, requestTimeout } from './timers';
-
-// Sounds
+import { requestTimeout } from './timers';
 
 /// @ts-ignore
 import musicSound from '../sounds/music.mp3';

@@ -3,7 +3,6 @@ import { spawnPenguins } from './logic';
 
 // Dependencies
 import Stats from 'stats.js';
-import { startMusic } from './audio';
 import { State, GameState } from './state';
 
 // Entities

@@ -25,8 +25,8 @@ export class FishingRod {
 	public exists: boolean;
 	public frame: number;
 
-	private x;
-	private y;
+	private x: number;
+	private y: number;
 
 	constructor() {
 		this.x = GAME.element.width / 2;
@@ -34,11 +34,11 @@ export class FishingRod {
 		this.exists = true;
 	}
 
-	update() {
+	public update(): void {
 		console.log('rod update');
 	}
 
-	draw() {
+	public draw(): void {
 		let ctx = GAME.ctx;
 
 		let x1 = GAME.element.width / 2;
