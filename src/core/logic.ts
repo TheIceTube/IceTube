@@ -241,13 +241,9 @@ export function gameRestart(): void {
 	GAME.penguins = [new Characters()];
 
 	GAME.fish = 0;
-	GAME.tempo = 1;
+	GAME.tempo = 1.1;
 	GAME.relevance = 1.25;
 	GAME.maximumPenguins = 10;
-
-	GAME.news = shuffle(GAME.news);
-	GAME.selectedNewsIndex = 0;
-	GAME.newsIndex = 0;
 
 	// Spawn new penguins
 	spawnPenguins(10);
