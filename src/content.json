@@ -2,18 +2,18 @@
 	"real_news": [
 		{
 			"title": "Why crocodiles have changed so little!",
-			"content": "Learn why crocidels havent evolved for centuries.",
+			"content": "Learn why crocodiles haven't evolved for centuries.",
 			"theme": "education",
 			"fake": false
 		},
 		{
-			"title": "Scientist discover new galaxy!",
+			"title": "Scientists discover new galaxy!",
 			"content": "Telescope captures new images of the new galaxy.",
 			"theme": "education",
 			"fake": false
 		},
 		{
-			"title": "Scientist discover new Comet!",
+			"title": "Scientists discover new Comet!",
 			"content": "It is very bright and fast",
 			"theme": "education",
 			"fake": false
@@ -55,13 +55,13 @@
 			"fake": false
 		},
 		{
-			"title": "New miniral Kernowite discovered in UK",
+			"title": "New mineral Kernowite discovered in UK",
 			"content": "It look super coool.",
 			"theme": "education",
 			"fake": false
 		},
 		{
-			"title": "Why you should dring tea.",
+			"title": "Why you should drink tea.",
 			"content": "Benefits of tea.",
 			"theme": "education",
 			"fake": false
@@ -80,7 +80,7 @@
 		},
 		{
 			"title": "President elected",
-			"content": "After recent president election, the winner take position",
+			"content": "After recent president election, the winner takes position",
 			"theme": "politics",
 			"fake": false
 		},
@@ -139,7 +139,7 @@
 			"fake": false
 		},
 		{
-			"title": "Second assoult on USA Capitol might happen",
+			"title": "Second assult on USA Capitol might happen",
 			"content": "Why is it happening?",
 			"theme": "politics",
 			"fake": false
@@ -176,12 +176,12 @@
 		},
 		{
 			"title": "Francisco Lindor's trade to the Mets",
-			"content": "The deal between the Big Money Mets and this offseason’s best trade candidate did not exactly jolt the market.",
+			"content": "How will this affect the famous baseball player's reputation?.",
 			"theme": "sport",
 			"fake": false
 		},
 		{
-			"title": "Kevin Durant to sign contract with Brooklyn Nets",
+			"title": "Kevin Durant to sign contract with a basketball club Brooklyn Nets",
 			"content": "The announcement was shared on the Instagram account for The Boardroom, Durant's new series for ESPN's streaming service, ESPN+.",
 			"theme": "sport",
 			"fake": false
@@ -194,7 +194,7 @@
 		},
 		{
 			"title": "Michelle Wie West's retirement thoughts changed by having a baby girl",
-			"content": "",
+			"content": "Why did famous female golf player change her mind?",
 			"theme": "sport",
 			"fake": false
 		},
@@ -484,7 +484,7 @@
 		},
 		{
 			"title": "Stop drinking water",
-			"content": "Scientists have found that all the water once was in the dinasaurs!",
+			"content": "Scientists have found that all the water once was in the dinosaurs!",
 			"theme": "FakeNews",
 			"fake": true
 		},

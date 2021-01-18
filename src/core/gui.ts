@@ -16,6 +16,7 @@ const relevanceBar = document.getElementById('relevance-bar');
 const startMenu = document.getElementById('start-menu');
 const endMenu = document.getElementById('end-menu');
 const endOverlay = document.getElementById('end-overlay');
+const helpText = document.getElementById('help-text');
 
 const startButton = document.getElementById('start-button') as HTMLButtonElement;
 const nextButton = document.getElementById('next-button') as HTMLButtonElement;
@@ -60,6 +61,7 @@ nextButton.addEventListener('click', () => {
 	playClickSound();
 
 	setTimeout(() => {
+		helpText.style.display = 'block';
 		blackScreen.classList.remove('visible');
 		comics.classList.remove('visible');
 		GAME.paused = false;
@@ -69,6 +71,7 @@ nextButton.addEventListener('click', () => {
 // Restart button
 restartButton.addEventListener('click', () => {
 	blackScreen.classList.add('visible');
+	comics.classList.remove('visible');
 	endMenu.classList.remove('visible');
 	restartButton.disabled = true;
 	playClickSound();
@@ -78,7 +81,7 @@ restartButton.addEventListener('click', () => {
 		endOverlay.classList.remove('visible');
 		comics.classList.remove('visible');
 		restartButton.disabled = false;
-		
+
 		gameRestart();
 		restartMusic();
 		GAME.paused = false;
@@ -123,6 +126,7 @@ window.addEventListener('keydown', event => {
 			GAME.paused = true;
 			playPaperSound();
 			tutorial.classList.add('visible');
+			helpText.remove();
 		}
 	}
 });

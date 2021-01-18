@@ -11,6 +11,8 @@
 
 <body>
     <main>
+        <!-- Help message -->
+        <p id="help-text" style="display: none">Press <b>ESCAPE</b> for help!</p>
 
         <!-- Black screen -->
         <div id="black-screen" class="visible"></div>
@@ -37,18 +39,16 @@
                 <p>by Penguins for Penguins</p>
                 <button id="start-button" class="cool-button">Start</button>
             </div>
-            
+
             <canvas id="start-menu-canvas"></canvas>
         </div>
 
         <!-- End Screen menu -->
         <div id="end-menu">
             <div id="gathered-fish">Gathered Fish: 0</div>
-
             <div class="leaderboard">
                 <label>Leaderboard:</label>
                 <div id="leaderboard-table"></div>
-
                 <div id="score-uploading">
                     <label>Upload your highscore:</label>
                     <div id="score-yours">
@@ -57,7 +57,6 @@
                     </div>
                 </div>
             </div>
-
             <img src="./sprites/end-screen.png">
             <button id="restart-button" class="cool-button">Restart</button>
         </div>
@@ -72,6 +71,7 @@
             <img src="./sprites/tutorial/events.png" style="right: 32px; top: 16px">
             <img src="./sprites/tutorial/themes.png" style="left: calc(50% - 450px); bottom: -128px; width: 900px;">
             <img src="./sprites/tutorial/moods.png" style="left: 64px; top: 25%;">
+            <p class="jokes">We have some cheats! Type <b>fishing()</b>, <b>junkie()</b> or <b>rave()</b> in DevTools Console!</p>
         </div>
 
         <!-- Relevance meter -->
@@ -87,14 +87,14 @@
                 <p>Welcome to our lovely game! Our team spent nights to make this game better 😄</p>
             </div>
             <div class="block info two">
-                <h3>How to play?</h3>
-                <p>Create posts by choosing a topic based on the latest news.
-                    Press <b>ESCAPE</b> for help
-                </p>
+                <h3>Rule your own mass media!</h3>
+                <p>Now its your time to tell the arctic about world!</p>
             </div>
             <div class="block info three">
-                <h3>Whats next?</h3>
-                <p>The game starts when you make your first post! Wait, in a few seconds the news will start to appear</p>
+                <h3>How to play?</h3>
+                <p>Publish news by choosing a topic here!
+                    Press <b>ESCAPE</b> for help!
+                </p>
             </div>
         </div>
 

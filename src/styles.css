@@ -259,6 +259,22 @@ label {
 	transform: scale(1) rotate(0deg);
 }
 
+#tutorial .jokes {
+	display: none;
+}
+
+#tutorial.visible .jokes {
+	position: absolute;
+	text-align: right;
+	font-size: 10px;
+	display: block;
+	width: 180px;
+	bottom: 8px;
+	right: 8px;
+	margin: 0;
+	padding: 0;
+}
+
 #theme {
 	display: flex;
 	overflow: hidden;
@@ -695,4 +711,16 @@ label {
 
 #score-uploading.visible {
 	display: block;
+}
+
+#help-text {
+	z-index: 99999999;
+	position: fixed;
+	top: 16px;
+	left: 16px;
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	letter-spacing: 1px;
+	font-style: italic;
 }
